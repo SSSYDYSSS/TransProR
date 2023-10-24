@@ -43,7 +43,7 @@ jobs:
         shell: bash -l {0}
         run: |
           conda init bash
-          conda create --name TransPro python=3.10 --yes
+          conda create --name TransPro python="3.10" --yes
           conda activate TransPro
           # Optional: Install any necessary Python dependencies
 
