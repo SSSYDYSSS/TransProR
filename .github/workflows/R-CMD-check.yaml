@@ -40,9 +40,11 @@ jobs:
 
       # Create and activate a conda environment
       - name: Create and Activate Conda Environment
+        shell: bash -l {0}
         run: |
-          conda create --name TransPro python=3.10
-          echo "conda activate TransPro" >> $GITHUB_ENV
+          conda init bash
+          conda create --name TransPro python=3.10 --yes
+          conda activate TransPro
           # Optional: Install any necessary Python dependencies
 
       - uses: r-lib/actions/setup-pandoc@v2
