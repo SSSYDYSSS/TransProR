@@ -1,6 +1,4 @@
----
----
----
+------------------------------------------------------------------------
 
 # TransProR
 
@@ -12,10 +10,20 @@ The goal of TransProR is to ...
 
 ## Installation
 
+You can install the released version of TransProR from CRAN with:
+
+``` r
+install.packages("TransProR")
+```
+
 You can install the development version of TransProR like so:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+install.packages("devtools")
+devtools::install_github("SSSYDYSSS/TransProR")
+
+install.packages("remotes")
+devtools::install_github("SSSYDYSSS/TransProR")
 ```
 
 ## System Requirements
@@ -27,16 +35,23 @@ You can install the development version of TransProR like so:
 This package requires several Python libraries to function properly. The following are the main dependencies:
 
 -   TransProPy
--   scipy
--   my_python_module
 
 Please ensure these Python libraries are installed in your environment before you proceed with using this package. You can quickly install them using the command below:
 
-``` bash
-pip3 install TransProPy scipy my_python_module
-```
+### Installation and Environment Setup
 
-If you're using a specific Python environment management system (like conda, pyenv, or virtualenv), make sure to activate your environment first before running the above command.
+To run this project, we recommend using `conda`, a popular Python environment and package manager. Please follow the steps below to set up your environment:
+
+### Creating and Activating the Environment
+
+First, if you have not installed `conda` yet, please visit the [Miniconda](https://docs.conda.io/en/latest/miniconda.html) website and follow the instructions for installation. Once you have `conda` installed, you can create a new environment named "TransPro" that includes all the dependencies required to run this project.
+
+Run the following command in your command line to create a new environment:
+
+``` bash
+conda create --name TransPro python=3.10 # or higher version if preferred.
+pip3 install TransProPy 
+```
 
 This version helps guide users through the installation process more smoothly, taking into account various common scenarios they might encounter. It suggests considering the environment management system and potential system-specific quirks, improving the overall user experience.
 
@@ -53,5 +68,4 @@ library(TransProR)
 
 ## Code of Conduct
 
-Please note that the TransProR project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
-"# TransProR" 
+Please note that the TransProR project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms. "\# TransProR"
