@@ -36,7 +36,7 @@ jobs:
         uses: conda-incubator/setup-miniconda@v2 # set Miniconda
         with:
           auto-update-conda: true  # Optionally update conda itself
-          python-version: 3.10
+          python-version: '3.10'
 
       # Create and activate a conda environment
       - name: Create and Activate Conda Environment
