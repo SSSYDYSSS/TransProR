@@ -1,7 +1,5 @@
-------------------------------------------------------------------------
-
 # TransProR
-
+[![R-CMD-check](https://github.com/SSSYDYSSS/TransProR/workflows/R-CMD-check/badge.svg)](https://github.com/SSSYDYSSS/TransProR/actions)
 <!-- badges: start -->
 
 <!-- badges: end -->
