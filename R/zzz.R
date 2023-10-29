@@ -43,4 +43,14 @@
 
   # Additional setup or checks related to the 'TransPro' environment can be added here if necessary.
   # This is also the place where package maintainers might add other environment-related configurations.
+
+  ascii_art_path <- system.file("extdata", "ascii_art.txt", package = "TransProR")
+  ascii_art_lines <- readLines(ascii_art_path)
+
+  # 将字符串向量连接成一个长字符串，保留换行符
+  ascii_art <- paste(ascii_art_lines, collapse = "\n")
+
+  # 使用 packageStartupMessage 而不是 cat
+  packageStartupMessage(ascii_art)
+
 }

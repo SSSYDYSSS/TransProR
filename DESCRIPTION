@@ -13,7 +13,10 @@ Description: More about what it does (maybe more than one line)
 Imports: 
     magrittr,
     reticulate,
-    stats
+    stats,
+    data.table,
+    dplyr,
+    rlang
 License: MIT + file LICENSE
 Encoding: UTF-8
 URL: https://github.com/SSSYDYSSS/TransProRBook
