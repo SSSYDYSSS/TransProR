@@ -32,7 +32,7 @@ SelectDiffGene <- function(variables) {
     stop("An error occurred while calling 'load_data': ", e$message)
   })
 
-  # 根据result的结果进行三包的筛选，最后取并集，gutoff可以适当的高一点
+  # 根据result的结果进行三包的筛选，最后取并集，gutoff可以适当的高一点,此外再加一个Wilcoxon秩和检验。
 
 
   return(result)
