@@ -26,14 +26,17 @@
 #'
 #' @examples
 #' \dontrun{
-#' result_exp1 <- GetTcgaExp(
+#' result_exp1 <- get_tcga_exp(
 #'   counts_file_path = "./download_data/TCGA-SKCM.htseq_counts.tsv",
 #'   gene_probes_file_path = "./download_data/TCGA_gencode.v22.annotation.gene.probeMap",
 #'   phenotype_file_path = "./download_data/TCGA-skcm.GDC_phenotype.tsv",
 #'   output_file_path = './generated_data1/skcm.exp.rds'
 #' )
 #' }
-GetTcgaExp <- function(counts_file_path, gene_probes_file_path, phenotype_file_path, output_file_path) {
+get_tcga_exp <- function(counts_file_path,
+                         gene_probes_file_path,
+                         phenotype_file_path,
+                         output_file_path) {
   # Load expression matrix
   count_data <- data.table::fread(counts_file_path, header = TRUE, sep = '\t', data.table = FALSE)
 

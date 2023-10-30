@@ -16,7 +16,8 @@ Imports:
     stats,
     data.table,
     dplyr,
-    rlang
+    rlang,
+    tibble
 License: MIT + file LICENSE
 Encoding: UTF-8
 URL: https://github.com/SSSYDYSSS/TransProRBook

@@ -47,10 +47,10 @@
   ascii_art_path <- system.file("extdata", "ascii_art.txt", package = "TransProR")
   ascii_art_lines <- readLines(ascii_art_path)
 
-  # 将字符串向量连接成一个长字符串，保留换行符
+  # Combine the vector of strings into one long string, preserving newlines.
   ascii_art <- paste(ascii_art_lines, collapse = "\n")
 
-  # 使用 packageStartupMessage 而不是 cat
+  # Use packageStartupMessage instead of cat for displaying the message.
   packageStartupMessage(ascii_art)
 
 }

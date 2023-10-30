@@ -1,16 +1,18 @@
 #' Log transformation decision and application on data
 #'
-#' This function evaluates the need for a log transformation based on a set of criteria and applies a log2 transformation if necessary.
+#' This function evaluates the need for a log transformation based on a set of criteria
+#' and applies a log2 transformation if necessary.
+#'
+#' @author Dongyue Yu
 #' @param data A numeric matrix or data frame.
 #' @return The original data or the data transformed with log2.
 #' @importFrom stats quantile
 #' @export
-#' @author Dongyue Yu
 #' @examples
 #' \dontrun{
-#' TransformedData <- LogTransform(data = your_data)
+#' TransformedData <- log_transform(data = your_data)
 #' }
-LogTransform <- function(data) {
+log_transform <- function(data) {
   # Calculate quantiles
   qx <- as.numeric(quantile(data, c(0., 0.25, 0.5, 0.75, 0.99, 1.0), na.rm=TRUE))
 

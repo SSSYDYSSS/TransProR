@@ -11,9 +11,9 @@
 #' @importFrom reticulate import
 #' @examples
 #' \dontrun{
-#' DiffGene <- SelectDiffGene(data = your_data)
+#' DiffGene <- select_diffgene(data = your_data)
 #' }
-SelectDiffGene <- function(variables) {
+select_diffgene <- function(variables) {
   # Specify the python environment (conda):
   # reticulate::use_condaenv("TransPro")
   # note: It has already been specified in the zzz.R file.
