@@ -7,7 +7,7 @@ date: "`r Sys.Date()`"
 output:
   prettydoc::html_pretty:
     toc: false
-    theme: HPSTR
+    theme: hpstr
     highlight: github
   pdf_document:
     toc: true

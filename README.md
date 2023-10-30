@@ -4,7 +4,7 @@
 
 <!-- badges: end -->
 
-The goal of TransProR is to ...
+Analysis and visualization of multi-omics data. In ongoing development: multi-modal fusion, sparse learning, and spatio-temporal effects...
 
 ## Installation
 
