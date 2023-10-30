@@ -1,0 +1,30 @@
+---
+title: "TransProR: Analysis and visualization of multi-omics data. In ongoing development: multi-modal fusion, sparse learning, and spatio-temporal effects..."
+author: "Dongyue Yu\\
+
+        Ph.d candiadate at Nankai University "
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    toc: false
+    theme: HPSTR
+    highlight: github
+  pdf_document:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{TransProR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+# Vignette
+
+Please go to <https://sssydysss.github.io/TransProRBook/> for the full vignette.
+
+# Need helps?
+
+If you have questions/issues, please visit [TransProR GITHUB](https://sssydysss.github.io/TransProRBook/) first. Your problems are mostly documented.
+
+## Bug Reporting
+
+If you believe you have identified a bug, please submit a reproducible example via the [GitHub issue tracker](https://github.com/SSSYDYSSS/TransProR/issues). Alternatively, you can reach out to the author, SSSYDYSSS, at [yudongyue\@mail.nankai.edu.cn](mailto:yudongyue@mail.nankai.edu.cn).
