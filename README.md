@@ -18,10 +18,10 @@ You can install the development version of TransProR like so:
 
 ``` r
 install.packages("devtools")
-devtools::install_github("SSSYDYSSS/TransProR")
+devtools::install_github("SSSYDYSSS/TransProR", build_vignettes = TRUE)
 
 install.packages("remotes")
-devtools::install_github("SSSYDYSSS/TransProR")
+remotes::install_github("SSSYDYSSS/TransProR", build_vignettes = TRUE)
 ```
 
 ## System Requirements
