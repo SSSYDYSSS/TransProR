@@ -18,7 +18,7 @@ usethis::use_code_of_conduct(contact = "yudongyue@mail.nankai.edu.cn")
 
 # vignette
 usethis::use_vignette("a_example_workflow") # optional
-devtools::install(build_vignettes = TRUE)
+devtools::install(build_vignettes = TRUE) # optional
 
 ## a website
 # Run once to configure your package to use pkgdown

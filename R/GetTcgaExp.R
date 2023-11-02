@@ -95,7 +95,7 @@ get_tcga_exp <- function(counts_file_path,
   normal_common_samples <- intersect(rownames(normal_samples), colnames(count_data_final))
 
   # Extract corresponding expression matrix
-  normal_expression_data <- count_data_final[, normal_common_samples]
+  normal_expression_data <- count_data_final[, normal_common_samples, drop = FALSE]
 
   # Save results
   tumor_output_path <- gsub("\\.rds$", "_tumor.rds", output_file_path)
