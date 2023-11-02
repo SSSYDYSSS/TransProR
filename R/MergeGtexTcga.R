@@ -32,15 +32,20 @@
 merge_gtex_tcga <- function(gtex_data_path,
                             tcga_exp_path,
                             output_path = "./merged_gtex_tcga_data.rds") {
+
   # Load the GTEx data
   gtex_data <- readRDS(gtex_data_path)
+  cat("Number of GTEx samples:", ncol(gtex_data), "\n")
 
-  # Load the SKCM data (Assuming this is a standard data.frame)
+  # Load the TCGA data
   tcga.exp <- readRDS(tcga_exp_path)
+  cat("Number of TCGA samples:", ncol(tcga.exp), "\n")
 
   # Merge the datasets, ensuring both have genes as row names
   all_data <- merge(gtex_data, tcga.exp, by = "row.names", all = TRUE)
   all_data <- tibble::column_to_rownames(all_data, var = "Row.names")  # Set the row names
+
+  cat("Number of samples after merging:", ncol(all_data), "\n")
 
   # Save the merged dataset
   saveRDS(all_data, file = output_path)
