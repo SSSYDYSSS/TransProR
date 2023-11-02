@@ -75,6 +75,9 @@ get_gtex_exp <- function(organ_specific,
     stop("No samples found for the specified organ.")
   }
 
+  # Print the number of samples found for the specified organ
+  cat("Number of samples for", organ_specific, ":", nrow(specific_samples), "\n")
+
   # Ensure processing only for samples present in both expression and phenotype data through intersection
   valid_sample_names <- intersect(rownames(specific_samples), colnames(gtex.count.pro)) # merge_phe_count_gtex
   gtex_data <- gtex.count.pro[, c("gene", valid_sample_names)]  # Extract data for relevant samples
