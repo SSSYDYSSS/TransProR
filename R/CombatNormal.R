@@ -15,6 +15,10 @@
 #' @param TCGA_normal_data_path The path to the tumor data stored in an RDS file.
 #' @param gtex_data_path The path to the GTEX data stored in an RDS file.
 #' @param CombatNormal_output_path A character string specifying the path where the output RDS file will be saved.
+#' @param auto_mode Logical. If set to TRUE, the function will not prompt the user for input and
+#'                  will instead use the values provided in default_input. Default is FALSE.
+#' @param default_input Character string. When auto_mode is TRUE, this parameter specifies the default
+#'                      TGCA's normal tissue types to be retained. It should be provided as a comma-separated string (e.g., "11,12").
 #'
 #' @return A data.frame with corrected values after the ComBat_seq adjustment. Note that this function also saves the
 #'        combat_count_df data as an RDS file at the specified output path.
@@ -25,14 +29,18 @@
 #'
 #' @examples
 #' \dontrun{
-#' corrected_data <- process_tumor_gtex_data("path_to_tumor_data.rds", "path_to_gtex_data.rds")
+#' corrected_data <- Combat_Normal("TCGA_normal_data_path",
+#'     "gtex_data_path",
+#'     "CombatNormal_output_path",
+#'     auto_mode = T,
+#'     default_input = "11,12")
 #' }
 #'
 #' @seealso \code{\link[sva]{ComBat_seq}}
 #' @importFrom sva ComBat_seq
 #' @importFrom tibble column_to_rownames
 #' @export
-Combat_Normal <- function(TCGA_normal_data_path, gtex_data_path, CombatNormal_output_path) {
+Combat_Normal <- function(TCGA_normal_data_path, gtex_data_path, CombatNormal_output_path, auto_mode = FALSE, default_input = "11,12") {
 
   # Load the tumor and GTEX data
   TCGA_normal_data <- readRDS(TCGA_normal_data_path)
@@ -48,9 +56,13 @@ Combat_Normal <- function(TCGA_normal_data_path, gtex_data_path, CombatNormal_ou
   normal_hist_table <- table(NormalHistologicalTypes)
   print(normal_hist_table)
 
-  # Ask the user for input
-  cat("Please input the tumor types you wish to retain, separated by commas (e.g., 11,12): ")
-  selected_types <- strsplit(readline(), ",")[[1]]
+  # Ask the user for input or use default input in auto_mode
+  if(auto_mode) {
+    selected_types <- strsplit(default_input, ",")[[1]]
+  } else {
+    cat("Please input the tumor types you wish to retain, separated by commas (e.g., 11,12): ")
+    selected_types <- strsplit(readline(), ",")[[1]]
+  }
 
   # Filter the tumor data based on user's input
   normal <- normal_data[, NormalHistologicalTypes %in% selected_types]

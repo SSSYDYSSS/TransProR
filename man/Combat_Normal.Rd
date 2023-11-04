@@ -4,7 +4,13 @@
 \alias{Combat_Normal}
 \title{Process and Correct Batch Effects in TGCA's normal tissue and GTEX Data}
 \usage{
-Combat_Normal(TCGA_normal_data_path, gtex_data_path, CombatNormal_output_path)
+Combat_Normal(
+  TCGA_normal_data_path,
+  gtex_data_path,
+  CombatNormal_output_path,
+  auto_mode = FALSE,
+  default_input = "11,12"
+)
 }
 \arguments{
 \item{TCGA_normal_data_path}{The path to the tumor data stored in an RDS file.}
@@ -12,6 +18,12 @@ Combat_Normal(TCGA_normal_data_path, gtex_data_path, CombatNormal_output_path)
 \item{gtex_data_path}{The path to the GTEX data stored in an RDS file.}
 
 \item{CombatNormal_output_path}{A character string specifying the path where the output RDS file will be saved.}
+
+\item{auto_mode}{Logical. If set to TRUE, the function will not prompt the user for input and
+will instead use the values provided in default_input. Default is FALSE.}
+
+\item{default_input}{Character string. When auto_mode is TRUE, this parameter specifies the default
+TGCA's normal tissue types to be retained. It should be provided as a comma-separated string (e.g., "11,12").}
 }
 \value{
 A data.frame with corrected values after the ComBat_seq adjustment. Note that this function also saves the
@@ -36,7 +48,11 @@ The function requires the sva package to be installed and loaded externally.
 }
 \examples{
 \dontrun{
-corrected_data <- process_tumor_gtex_data("path_to_tumor_data.rds", "path_to_gtex_data.rds")
+corrected_data <- Combat_Normal("TCGA_normal_data_path",
+    "gtex_data_path",
+    "CombatNormal_output_path",
+    auto_mode = T,
+    default_input = "11,12")
 }
 
 }

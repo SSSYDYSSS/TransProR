@@ -13,6 +13,10 @@
 #'
 #' @param tumor_data_path The path to the tumor data stored in an RDS file.
 #' @param CombatTumor_output_path A character string specifying the path where the output RDS file will be saved.
+#' @param auto_mode Logical. If set to TRUE, the function will not prompt the user for input and
+#'                  will instead use the values provided in default_input. Default is FALSE.
+#' @param default_input Character string. When auto_mode is TRUE, this parameter specifies the default
+#'                      tumor types to be retained. It should be provided as a comma-separated string (e.g., "01,06").
 #'
 #' @return A data.frame with corrected values after the ComBat_seq adjustment. Note that this function also saves the
 #'         combat_count_df data as an RDS file at the specified output path.
@@ -23,13 +27,18 @@
 #'
 #' @examples
 #' \dontrun{
-#' corrected_data <- process_tumor_data("path_to_data.rds")
+#' corrected_data <- combat_tumor(
+#'     "tumor_data_path",
+#'     "CombatTumor_output_path",
+#'     auto_mode = FALSE,
+#'     default_input = "01,06"
+#'     )
 #' }
 #'
 #' @seealso \code{\link[sva]{ComBat_seq}}
 #' @importFrom sva ComBat_seq
 #' @export
-combat_tumor <- function(tumor_data_path, CombatTumor_output_path) {
+combat_tumor <- function(tumor_data_path, CombatTumor_output_path, auto_mode = FALSE, default_input = "01,06") {
 
   # Load the tumor data
   tumor_data <- readRDS(tumor_data_path)
@@ -41,9 +50,13 @@ combat_tumor <- function(tumor_data_path, CombatTumor_output_path) {
   # Display the table to the user
   print(tumor_hist_table)
 
-  # Ask the user for input
-  cat("Please input the tumor types you wish to retain, separated by commas (e.g., 01,06): ")
-  selected_types <- strsplit(readline(), ",")[[1]]
+  # Ask the user for input or use default input in auto_mode
+  if(auto_mode) {
+    selected_types <- strsplit(default_input, ",")[[1]]
+  } else {
+    cat("Please input the tumor types you wish to retain, separated by commas (e.g., 01,06): ")
+    selected_types <- strsplit(readline(), ",")[[1]]
+  }
 
   # Filter the tumor data based on user's input
   tumor <- tumor_data[, TumorHistologicalTypes %in% selected_types]
