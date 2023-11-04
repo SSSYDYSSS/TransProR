@@ -16,7 +16,8 @@ Imports:
     data.table,
     dplyr,
     rlang,
-    tibble
+    tibble,
+    sva
 Suggests:
     prettydoc,
     knitr, 
