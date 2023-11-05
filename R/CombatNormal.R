@@ -42,11 +42,11 @@
 #' @export
 Combat_Normal <- function(TCGA_normal_data_path, gtex_data_path, CombatNormal_output_path, auto_mode = FALSE, default_input = "11,12") {
 
-  # Load the tumor and GTEX data
+  # Load the TGCA's normal tissue data and GTEX data
   TCGA_normal_data <- readRDS(TCGA_normal_data_path)
   gtex_data <- readRDS(gtex_data_path)
 
-  # Extract histological types for the tumor samples
+  # Extract histological types for the TGCA's normal tissue data's samples
   NormalHistologicalTypes <- substring(colnames(TCGA_normal_data), 14, 15)
 
   # Filter only the normal samples
@@ -60,41 +60,48 @@ Combat_Normal <- function(TCGA_normal_data_path, gtex_data_path, CombatNormal_ou
   if(auto_mode) {
     selected_types <- strsplit(default_input, ",")[[1]]
   } else {
-    cat("Please input the tumor types you wish to retain, separated by commas (e.g., 11,12): ")
+    cat("Please input the normal tissue types you wish to retain or 'skip' to only use GTEX data: ")
     selected_types <- strsplit(readline(), ",")[[1]]
   }
 
-  # Filter the tumor data based on user's input
-  normal <- normal_data[, NormalHistologicalTypes %in% selected_types]
+  # If the user didn't select 'skip'
+  if (!is.element("skip", selected_types)) {
+    # Filter the tumor data based on user's input
+    normal <- normal_data[, NormalHistologicalTypes %in% selected_types]
 
-  # Combine GTEX and selected TCGA data
-  # Merge the datasets, ensuring both have genes as row names
-  combined_data <- merge(normal, gtex_data, by = "row.names")
-  combined_data <- tibble::column_to_rownames(combined_data, var = "Row.names")  # Set the row names
+    # Combine GTEX and selected TCGA data
+    # Merge the datasets, ensuring both have genes as row names
+    combined_data <- merge(normal, gtex_data, by = "row.names")
+    combined_data <- tibble::column_to_rownames(combined_data, var = "Row.names")  # Set the row names
 
-  # Create group vector (All samples as same group)
-  combined_group <- rep("all_group", ncol(combined_data))
+    # Create group vector (All samples as same group)
+    combined_group <- rep("all_group", ncol(combined_data))
 
-  # Create batch vector for selected normal TCGA samples
-  tcga_batches <- match(NormalHistologicalTypes[NormalHistologicalTypes %in% selected_types], selected_types)
+    # Create batch vector for selected normal TCGA samples
+    tcga_batches <- match(NormalHistologicalTypes[NormalHistologicalTypes %in% selected_types], selected_types)
 
-  # Combine the batch vector for TCGA samples with GTEX batch
-  combined_batch <- c(tcga_batches, rep("GTEX", ncol(gtex_data)))
+    # Combine the batch vector for TCGA samples with GTEX batch
+    combined_batch <- c(tcga_batches, rep("GTEX", ncol(gtex_data)))
 
-  # Modify the tumor values
-  combined_data_count <- 2^(combined_data) - 1
-  combined_data_count <- apply(combined_data_count, 2, as.integer)
-  rownames(combined_data_count) <- rownames(combined_data)
+    # Modify the tumor values
+    combined_data_count <- 2^(combined_data) - 1
+    combined_data_count <- apply(combined_data_count, 2, as.integer)
+    rownames(combined_data_count) <- rownames(combined_data)
 
-  # Correct for batch effects using ComBat_seq
-  combat_count <- sva::ComBat_seq(as.matrix(combined_data_count),
-                                  batch = combined_batch,
-                                  group = combined_group)
+    # Correct for batch effects using ComBat_seq
+    combat_count <- sva::ComBat_seq(as.matrix(combined_data_count),
+                                    batch = combined_batch,
+                                    group = combined_group)
 
-  # Convert matrix to data frame
-  combat_count_df <- as.data.frame(combat_count)
+    # Convert matrix to data frame
+    combat_count_df <- as.data.frame(combat_count)
 
-  saveRDS(combat_count_df, file = CombatNormal_output_path)
-
-  return(combat_count_df)
+    saveRDS(combat_count_df, file = CombatNormal_output_path)
+    return(combat_count_df)
+  } else {
+    combat_count_df <- 2^(gtex_data) - 1
+    combat_count_df <- apply(combat_count_df, 2, as.integer)
+    saveRDS(combat_count_df, file = CombatNormal_output_path)
+    return(combat_count_df)
+  }
 }

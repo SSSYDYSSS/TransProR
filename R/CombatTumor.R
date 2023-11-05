@@ -61,24 +61,29 @@ combat_tumor <- function(tumor_data_path, CombatTumor_output_path, auto_mode = F
   # Filter the tumor data based on user's input
   tumor <- tumor_data[, TumorHistologicalTypes %in% selected_types]
 
-  # Create group vector
-  selected_group = rep("all_group", length(which(TumorHistologicalTypes %in% selected_types)))
-
-  # Create batch vector based on group vector
-  selected_batch = match(TumorHistologicalTypes[TumorHistologicalTypes %in% selected_types], selected_types)
-
   # Modify the tumor values
   tumor1 <- 2^(tumor) - 1
   tumor1 <- apply(tumor1, 2, as.integer)
   rownames(tumor1) <- rownames(tumor)
 
-  # Correct for batch effects using ComBat_seq
-  combat_count <- sva::ComBat_seq(as.matrix(tumor1),
-                                  batch = selected_batch,
-                                  group = selected_group)
+  # If only one sample type is chosen, skip batch correction and return modified tumor data
+  if(length(selected_types) == 1) {
+    combat_count_df <- tumor1
+  } else {
+    # Create group vector
+    selected_group = rep("all_group", length(which(TumorHistologicalTypes %in% selected_types)))
 
-  # Convert matrix to data frame
-  combat_count_df <- as.data.frame(combat_count)
+    # Create batch vector based on group vector
+    selected_batch = match(TumorHistologicalTypes[TumorHistologicalTypes %in% selected_types], selected_types)
+
+    # Correct for batch effects using ComBat_seq
+    combat_count <- sva::ComBat_seq(as.matrix(tumor1),
+                                    batch = selected_batch,
+                                    group = selected_group)
+
+    # Convert matrix to data frame
+    combat_count_df <- as.data.frame(combat_count)
+  }
 
   saveRDS(combat_count_df, file = CombatTumor_output_path)
 
