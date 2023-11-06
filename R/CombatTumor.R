@@ -68,7 +68,7 @@ combat_tumor <- function(tumor_data_path, CombatTumor_output_path, auto_mode = F
 
   # If only one sample type is chosen, skip batch correction and return modified tumor data
   if(length(selected_types) == 1) {
-    combat_count_df <- tumor1
+    combat_count_df <- as.data.frame(tumor1)
   } else {
     # Create group vector
     selected_group = rep("all_group", length(which(TumorHistologicalTypes %in% selected_types)))

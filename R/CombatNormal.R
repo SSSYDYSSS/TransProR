@@ -99,8 +99,10 @@ Combat_Normal <- function(TCGA_normal_data_path, gtex_data_path, CombatNormal_ou
     saveRDS(combat_count_df, file = CombatNormal_output_path)
     return(combat_count_df)
   } else {
-    combat_count_df <- 2^(gtex_data) - 1
-    combat_count_df <- apply(combat_count_df, 2, as.integer)
+    combat_count_matrix <- 2^(gtex_data) - 1
+    combat_count_matrix <- apply(combat_count_matrix, 2, as.integer)
+    rownames(combat_count_matrix) <- rownames(gtex_data)
+    combat_count_df <- as.data.frame(combat_count_matrix)
     saveRDS(combat_count_df, file = CombatNormal_output_path)
     return(combat_count_df)
   }
