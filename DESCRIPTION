@@ -17,7 +17,12 @@ Imports:
     dplyr,
     rlang,
     tibble,
-    sva
+    sva,
+    DESeq2,
+    edgeR,
+    limma,
+    ggplot2,
+    ggVennDiagram
 Suggests:
     prettydoc,
     knitr, 
