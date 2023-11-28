@@ -46,7 +46,7 @@ Wilcoxon_analyze <- function(tumor_file,
   group <- c(rep('tumor', ncol(tumor)), rep('normal', ncol(normal)))
   group <- factor(group, levels = c("normal", "tumor"))
   group_table <- table(group)
-  print(change_table)
+  print(group_table)
 
   # EdgeR TMM normalization
   y <- edgeR::DGEList(counts = all_count_exp, group = group)

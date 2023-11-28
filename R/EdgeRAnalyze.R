@@ -43,7 +43,7 @@ edgeR_analyze <- function(tumor_file, normal_file, output_file, logFC_threshold 
   group <- c(rep('tumor', ncol(tumor)), rep('normal', ncol(normal)))
   group <- factor(group, levels = c("normal", "tumor"))
   group_table <- table(group)
-  print(change_table)
+  print(group_table)
 
   # Create DGEList object for gene expression data and group information
   d <- edgeR::DGEList(counts = all_count_exp, group = group)

@@ -34,7 +34,7 @@ DESeq2_analyze <- function(tumor_file, normal_file, output_file, logFC = 2.5, p_
   # Create group factor
   group <- factor(c(rep('tumor', ncol(tumor)), rep('normal', ncol(normal))), levels = c("normal", "tumor"))
   group_table <- table(group)
-  print(change_table)
+  print(group_table)
 
   # Prepare DESeq2 dataset
   colData <- data.frame(row.names = colnames(all_count_exp), group = group) # Create a dataframe to store the grouping information of samples, with the row names as sample names and the column names as group information.
