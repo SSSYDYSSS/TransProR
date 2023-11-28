@@ -46,6 +46,7 @@ Wilcoxon_analyze <- function(tumor_file,
   group <- c(rep('tumor', ncol(tumor)), rep('normal', ncol(normal)))
   group <- factor(group, levels = c("normal", "tumor"))
   group_table <- table(group)
+  cat("Group Table:\n")
   print(group_table)
 
   # EdgeR TMM normalization
@@ -82,6 +83,7 @@ Wilcoxon_analyze <- function(tumor_file,
   outRst <- dplyr::mutate(outRst, change = ifelse(k1, "down", ifelse(k2, "up", "stable")))
 
   change_table <- table(outRst$change)
+  cat("Change Table:\n")
   print(change_table)
 
   # Save results

@@ -34,6 +34,7 @@ DESeq2_analyze <- function(tumor_file, normal_file, output_file, logFC = 2.5, p_
   # Create group factor
   group <- factor(c(rep('tumor', ncol(tumor)), rep('normal', ncol(normal))), levels = c("normal", "tumor"))
   group_table <- table(group)
+  cat("Group Table:\n")
   print(group_table)
 
   # Prepare DESeq2 dataset
@@ -60,6 +61,7 @@ DESeq2_analyze <- function(tumor_file, normal_file, output_file, logFC = 2.5, p_
 
   # Output table of gene expression changes
   change_table <- table(DEG$change)
+  cat("Change Table:\n")
   print(change_table)
 
   # Save results

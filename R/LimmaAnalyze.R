@@ -43,6 +43,7 @@ limma_analyze <- function(tumor_file, normal_file, output_file, logFC_threshold 
   group <- c(rep('tumor', ncol(tumor)), rep('normal', ncol(normal)))
   group <- factor(group, levels = c("normal", "tumor"))
   group_table <- table(group)
+  cat("Group Table:\n")
   print(group_table)
 
   # Create matrix
@@ -61,7 +62,7 @@ limma_analyze <- function(tumor_file, normal_file, output_file, logFC_threshold 
   # Normalize the data using the TMM method
   dge <- edgeR::calcNormFactors(dge)
   # Use voom method for normalization:Quantile Normalization
-  v <- limma::voom(dge, design, plot = TRUE, normalize = "quantile")
+  v <- limma::voom(dge, design, plot = FALSE, normalize = "quantile")
 
   # Fit the linear model
   fit <- limma::lmFit(v, design)
@@ -84,6 +85,7 @@ limma_analyze <- function(tumor_file, normal_file, output_file, logFC_threshold 
   DEG_limma_voom <- dplyr::mutate(DEG_limma_voom, change = ifelse(k1, "down", ifelse(k2, "up", "stable")))
 
   change_table <- table(DEG_limma_voom$change)
+  cat("Change Table:\n")
   print(change_table)
 
   # Save results to the specified output file
