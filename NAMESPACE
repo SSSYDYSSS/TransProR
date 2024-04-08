@@ -2,6 +2,7 @@
 
 export("%>%")
 export(Combat_Normal)
+export(Contrast_Venn)
 export(DESeq2_analyze)
 export(Wilcoxon_analyze)
 export(combat_tumor)

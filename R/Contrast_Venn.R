@@ -14,8 +14,20 @@
 #' @return A ggplot object representing the Venn Diagram.
 #' @examples
 #' \dontrun{
-#' all_degs_venn112 <- list(DESeq2 = deg_filter(DEG_deseq2), edgeR = deg_filter(DEG_edgeR), limma = deg_filter(DEG_limma_voom), Wilcoxon_test = deg_filter(outRst), AutoFeatureSelection = AutoFeatureSelection)
-#' edge_colors <- c(alpha("#1b64bb", 0.5), alpha("#13828e", 0.5), alpha("#337c3a", 0.5), alpha("#9e9d39", 0.5), alpha("#0288d1", 0.5))
+#' all_degs_venn112 <- list(
+#' DESeq2 = deg_filter(DEG_deseq2),
+#' edgeR = deg_filter(DEG_edgeR),
+#' limma = deg_filter(DEG_limma_voom),
+#' Wilcoxon_test = deg_filter(outRst),
+#' AutoFeatureSelection = AutoFeatureSelection
+#' )
+#' edge_colors <- c(
+#' alpha("#1b64bb", 0.5),
+#' alpha("#13828e", 0.5),
+#' alpha("#337c3a", 0.5),
+#' alpha("#9e9d39", 0.5),
+#' alpha("#0288d1", 0.5)
+#' )
 #' name_color <- alpha(c("#1b64bb","#13828e","#337c3a","#9e9d39","#0288d1"), 0.8)
 #' fill_colors <- c("#e3f2fa", "#0288d1")
 #' Contrast_Venn(all_degs_venn, edge_colors, name_color, fill_colors)
@@ -31,7 +43,7 @@ Contrast_Venn <- function(all_degs_venn,
   # Draw Venn Diagram
   ggVennDiagram::ggVennDiagram(all_degs_venn,
                 set_size = 5, # Font size for set names
-                set_color = edge_color,
+                set_color = name_color,
                 label_alpha = 0, # Transparency of the background box for counts/percentages, default is white
                 label_size = label_size, # Font size for counts/percentages
                 edge_size = edge_size # Thickness of the edges
