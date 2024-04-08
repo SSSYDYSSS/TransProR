@@ -4,7 +4,8 @@
 
 <!-- badges: end -->
 
-Analysis and visualization of multi-omics data. In ongoing development: multi-modal fusion, sparse learning, and spatio-temporal effects...
+
+Analysis and visualization of transcriptomic data are currently in progress. Future directions include multi-modal fusion, sparse learning, and the investigation of spatio-temporal effects.
 
 ## Installation
 

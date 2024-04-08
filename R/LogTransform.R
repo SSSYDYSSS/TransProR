@@ -23,8 +23,8 @@ log_transform <- function(data) {
 
   # Apply log transformation based on conditions
   if (LogC) {
-    data[which(data <= 0)] <- NaN
-    result <- log2(data)
+    # Apply +1 to all values before log2 transformation
+    result <- log2(data + 1)
     print("log2 transform finished")
   } else {
     result <- data
