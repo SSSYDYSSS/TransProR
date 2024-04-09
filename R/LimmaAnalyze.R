@@ -89,7 +89,8 @@ limma_analyze <- function(tumor_file, normal_file, output_file, logFC_threshold 
   print(change_table)
 
   # Save results to the specified output file
-  save(DEG_limma_voom, file = output_file)
+  #save(DEG_limma_voom, file = output_file)
+  saveRDS(DEG_limma_voom, file = output_file)
 
   return(DEG_limma_voom)
 }

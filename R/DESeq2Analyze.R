@@ -65,8 +65,8 @@ DESeq2_analyze <- function(tumor_file, normal_file, output_file, logFC = 2.5, p_
   print(change_table)
 
   # Save results
-  save(DEG, file = output_file)
-
+  #save(DEG, file = output_file)
+  saveRDS(DEG, file = output_file)
   # Return results
   return(DEG)
 }

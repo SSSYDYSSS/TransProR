@@ -87,7 +87,7 @@ Wilcoxon_analyze <- function(tumor_file,
   print(change_table)
 
   # Save results
-  save(outRst, file = output_file)
+  saveRDS(outRst, file = output_file)
 
   return(outRst)
 }

@@ -89,7 +89,7 @@ edgeR_analyze <- function(tumor_file, normal_file, output_file, logFC_threshold 
   print(change_table)
 
   # Save results to the specified output file
-  save(DEG_edgeR, file = output_file)
+  saveRDS(DEG_edgeR, file = output_file)
 
   return(DEG_edgeR)
 }
