@@ -1,5 +1,5 @@
 ---
-title: "TransProR: Analysis and visualization of multi-omics data. In ongoing development: multi-modal fusion, sparse learning, and spatio-temporal effects..."
+title: "TransProR: Analysis and visualization of transcriptomic data are currently in progress. Future directions include multi-modal fusion, sparse learning, and the investigation of spatio-temporal effects."
 author: "Dongyue Yu\\
 
         Ph.d candiadate at Nankai University "
@@ -28,3 +28,4 @@ If you have questions/issues, please visit [TransProR GITHUB](https://sssydysss.
 ## Bug Reporting
 
 If you believe you have identified a bug, please submit a reproducible example via the [GitHub issue tracker](https://github.com/SSSYDYSSS/TransProR/issues). Alternatively, you can reach out to the author, SSSYDYSSS, at [yudongyue\@mail.nankai.edu.cn](mailto:yudongyue@mail.nankai.edu.cn).
+
