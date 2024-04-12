@@ -70,8 +70,8 @@ Wilcoxon_analyze <- function(tumor_file,
   conditionsLevel <- levels(group)
   dataCon1 <- count_norm[, which(group == conditionsLevel[1])]
   dataCon2 <- count_norm[, which(group == conditionsLevel[2])]
-  small_number <- .Machine$double.eps
-  foldChanges <- log2((rowMeans(dataCon2) + small_number) / (rowMeans(dataCon1) + small_number))
+  #small_number <- .Machine$double.eps
+  foldChanges <- log2((rowMeans(dataCon2) + 0.0001) / (rowMeans(dataCon1) + 0.0001))
   #foldChanges <- log2(rowMeans(dataCon2) / rowMeans(dataCon1))
 
   # Output results based on FDR threshold
