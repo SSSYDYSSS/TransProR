@@ -4,7 +4,7 @@
 
 <!-- badges: end -->
 
-<img src="vignettes/image/TransProR_rlogo.png" alt="TransProR Logo" width="200" height="250" align="right">
+<img src="vignettes/image/TransProR_rlogo.png" alt="TransProR Logo" width="210" height="250" align="right">
 Analysis and visualization of transcriptomic data are currently in progress. Future directions include multi-modal fusion, sparse learning, and the investigation of spatio-temporal effects.
 
 ## Installation
