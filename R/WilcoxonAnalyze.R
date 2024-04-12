@@ -70,8 +70,9 @@ Wilcoxon_analyze <- function(tumor_file,
   conditionsLevel <- levels(group)
   dataCon1 <- count_norm[, which(group == conditionsLevel[1])]
   dataCon2 <- count_norm[, which(group == conditionsLevel[2])]
-  #small_number <- .Machine$double.eps
-  foldChanges <- log2((rowMeans(dataCon2) + 0.0001) / (rowMeans(dataCon1) + 0.0001))
+  # The addition of a pseudo-count allows for robust statistical analysis of genes with low expression levels, while mitigating computational issues caused by zero expression values.
+  # It prevents the occurrence of negative infinity (-Inf) when the numerator is zero, and positive infinity (Inf) when the denominator is zero.
+  foldChanges <- log2((rowMeans(dataCon2) + 0.005) / (rowMeans(dataCon1) + 0.005))
   #foldChanges <- log2(rowMeans(dataCon2) / rowMeans(dataCon1))
 
   # Output results based on FDR threshold
