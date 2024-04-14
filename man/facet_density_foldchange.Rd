@@ -17,7 +17,8 @@ facet_density_foldchange(
   point_alpha = 0.1,
   line_size = 1.6,
   cor_method = "pearson",
-  cor_label_pos = c("left", 0.97)
+  cor_label_pos = c("left", 0.97),
+  cor_vjust = NULL
 )
 }
 \arguments{
@@ -46,6 +47,8 @@ facet_density_foldchange(
 \item{cor_method}{Method to calculate correlation ("pearson" or "spearman").}
 
 \item{cor_label_pos}{Vector of length 2 indicating the position of the correlation label (x and y).}
+
+\item{cor_vjust}{Vertical justification for correlation label, default is NULL.}
 }
 \value{
 A ggplot object representing the high-density region plot.

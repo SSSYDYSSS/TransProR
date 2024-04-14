@@ -17,6 +17,7 @@
 #' @param line_size Size of the regression line.
 #' @param cor_method Method to calculate correlation ("pearson" or "spearman").
 #' @param cor_label_pos Vector of length 2 indicating the position of the correlation label (x and y).
+#' @param cor_vjust Vertical justification for correlation label, default is NULL.
 #' @return A ggplot object representing the high-density region plot.
 #' @importFrom ggplot2 ggplot aes_string geom_point geom_smooth scale_fill_manual scale_color_manual facet_wrap theme margin
 #' @importFrom ggdensity geom_hdr geom_hdr_rug
@@ -54,7 +55,8 @@ facet_density_foldchange <- function(data,
                                      point_alpha = 0.1,
                                      line_size = 1.6,
                                      cor_method = "pearson",
-                                     cor_label_pos = c("left", 0.97)) {
+                                     cor_label_pos = c("left", 0.97),
+                                     cor_vjust = NULL) {
   # Begin constructing the ggplot
   plot <- ggplot2::ggplot(data, ggplot2::aes_string(x = x_var, y = y_var, fill = group_var))
 
@@ -75,8 +77,15 @@ facet_density_foldchange <- function(data,
   # Add regression line and correlation label
   plot <- plot +
     ggplot2::geom_smooth(ggplot2::aes_string(x = x_var, y = y_var, color = group_var),
-                         method = 'lm', level = 0.95, size = line_size) +
-    ggpubr::stat_cor(ggplot2::aes_string(color = group_var), method = cor_method, label.x.npc = cor_label_pos[1], label.y.npc = cor_label_pos[2])
+                         method = 'lm', level = 0.95, size = line_size)
+
+  # Add regression line and correlation label
+  if (is.null(cor_vjust)) {
+    plot <- plot + ggpubr::stat_cor(ggplot2::aes_string(color = group_var), method = cor_method, label.x.npc = cor_label_pos[1], label.y.npc = cor_label_pos[2])
+  } else {
+    plot <- plot + ggpubr::stat_cor(ggplot2::aes_string(color = group_var), method = cor_method, label.x.npc = cor_label_pos[1], label.y.npc = cor_label_pos[2], vjust = cor_vjust)
+  }
+
 
   # Customize scales and facet wrapping
   plot <- plot +
