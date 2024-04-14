@@ -22,6 +22,7 @@
 #' @importFrom ggpubr stat_cor
 #' @importFrom hrbrthemes theme_ipsum
 #' @importFrom grid unit
+#' @importFrom stats as.formula
 #' @examples
 #' \dontrun{
 #' pal1 = c("#3949ab","#1e88e5","#039be5","#00897b","#43a047","#7cb342"),
@@ -78,7 +79,7 @@ facet_density_foldchange <- function(data,
   plot <- plot +
     ggplot2::scale_fill_manual(values = palette) +
     ggplot2::scale_color_manual(values = palette) +
-    ggplot2::facet_wrap(ggplot2::aes_string(group_var), scales = "free_x") +
+    ggplot2::facet_wrap(stats::as.formula(paste0("~ ", group_var)), scales = "free_x") +
     hrbrthemes::theme_ipsum() +
     ggplot2::theme(plot.margin = ggplot2::margin(10, 10, 10, 10),
                    plot.background = ggplot2::element_rect(fill = "white", color = "white"),
