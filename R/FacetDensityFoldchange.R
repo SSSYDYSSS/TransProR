@@ -8,6 +8,7 @@
 #' @param x_var Name of the x-axis variable as a string.
 #' @param y_var Name of the y-axis variable as a string.
 #' @param group_var Name of the grouping variable for color mapping as a string.
+#' @param facet_var Name of the faceting variable.
 #' @param palette Color palette for the plot as a character vector.
 #' @param show_points Logical, if TRUE adds scatter points to the plot.
 #' @param show_density Logical, if TRUE adds filled density contours to the plot.
@@ -29,7 +30,8 @@
 #' facet_density_foldchange(data = combined_df,
 #'                              x_var = "logFC_1",
 #'                              y_var = "logFC_2",
-#'                              group_var = "name",
+#'                              group_var = "change/name"
+#'                              facet_var = "name"
 #'                              palette = pal1,
 #'                              show_points = TRUE,
 #'                              show_density = TRUE,
@@ -44,6 +46,7 @@ facet_density_foldchange <- function(data,
                                      x_var,
                                      y_var,
                                      group_var,
+                                     facet_var,
                                      palette,
                                      show_points = FALSE,
                                      show_density = TRUE,
@@ -79,7 +82,7 @@ facet_density_foldchange <- function(data,
   plot <- plot +
     ggplot2::scale_fill_manual(values = palette) +
     ggplot2::scale_color_manual(values = palette) +
-    ggplot2::facet_wrap(stats::as.formula(paste0("~ ", group_var)), scales = "free_x") +
+    ggplot2::facet_wrap(stats::as.formula(paste0("~ ", facet_var)), scales = "free_x") +
     hrbrthemes::theme_ipsum() +
     ggplot2::theme(plot.margin = ggplot2::margin(10, 10, 10, 10),
                    plot.background = ggplot2::element_rect(fill = "white", color = "white"),

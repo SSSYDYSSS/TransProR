@@ -9,6 +9,7 @@ facet_density_foldchange(
   x_var,
   y_var,
   group_var,
+  facet_var,
   palette,
   show_points = FALSE,
   show_density = TRUE,
@@ -27,6 +28,8 @@ facet_density_foldchange(
 \item{y_var}{Name of the y-axis variable as a string.}
 
 \item{group_var}{Name of the grouping variable for color mapping as a string.}
+
+\item{facet_var}{Name of the faceting variable.}
 
 \item{palette}{Color palette for the plot as a character vector.}
 
@@ -58,7 +61,8 @@ pal1 = c("#3949ab","#1e88e5","#039be5","#00897b","#43a047","#7cb342"),
 facet_density_foldchange(data = combined_df,
                              x_var = "logFC_1",
                              y_var = "logFC_2",
-                             group_var = "name",
+                             group_var = "change/name"
+                             facet_var = "name"
                              palette = pal1,
                              show_points = TRUE,
                              show_density = TRUE,
