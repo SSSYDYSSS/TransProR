@@ -76,7 +76,7 @@ facet_density_foldchange <- function(data,
   plot <- plot +
     ggplot2::geom_smooth(ggplot2::aes_string(x = x_var, y = y_var, color = group_var),
                          method = 'lm', level = 0.95, size = line_size) +
-    ggpubr::stat_cor(method = cor_method, label.x.npc = cor_label_pos[1], label.y.npc = cor_label_pos[2])
+    ggpubr::stat_cor(ggplot2::aes_string(color = group_var), method = cor_method, label.x.npc = cor_label_pos[1], label.y.npc = cor_label_pos[2])
 
   # Customize scales and facet wrapping
   plot <- plot +
