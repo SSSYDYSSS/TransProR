@@ -22,7 +22,10 @@ Imports:
     edgeR,
     limma,
     ggplot2,
-    ggVennDiagram
+    ggVennDiagram,
+    ggdensity,
+    ggpubr,
+    hrbrthemes
 Suggests:
     prettydoc,
     knitr, 
