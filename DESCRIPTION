@@ -1,9 +1,9 @@
 Package: TransProR
 Type: Package
-Title: Analysis and visualization of multi-omics data 
+Title: Analysis and visualization of multi-omics data
 Version: 0.0.1
 Authors@R: c(
-       person("Dongyue", "Yu",     email = "yudongyue@mail.nankai.edu.cn", role = c("aut", "cre", "cph"), 
+       person("Dongyue", "Yu",     email = "yudongyue@mail.nankai.edu.cn", role = c("aut", "cre", "cph"),
             comment = c(ORCID = "0000-0002-7041-2073")),
        person("Ruizhu", "Huang",       email = "ruizhuRH@gmail.com",      role = "ctb")
        )
@@ -11,7 +11,6 @@ Maintainer: Dongyue Yu <yudongyue@mail.nankai.edu.cn>
 Description: Analysis and visualization of multi-omics data. In ongoing development: multi-modal fusion, sparse learning, and spatio-temporal effects...
 Imports: 
     magrittr,
-    reticulate,
     stats,
     data.table,
     dplyr,
@@ -30,14 +29,13 @@ Imports:
     grid
 Suggests:
     prettydoc,
-    knitr, 
+    knitr,
     rmarkdown
 VignetteBuilder: knitr
 License: MIT + file LICENSE
 Encoding: UTF-8
 URL: https://github.com/SSSYDYSSS/TransProRBook
 BugReports: https://github.com/SSSYDYSSS/TransProR
-SystemRequirements: Python (>= 3.10). Several Python packages are required: TransProPy, numpy, scipy, pandas, and others. See the package's README for installation instructions.
 LazyData: true
 RoxygenNote: 7.3.1
 Depends: 
