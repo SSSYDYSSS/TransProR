@@ -57,9 +57,9 @@ new_ggraph <- function(BP_dataframe, BP_ids, KEGG_dataframe, KEGG_ids,
     ggplot2::theme(legend.position = "none") +
     ggraph::scale_edge_colour_brewer(palette= "Dark2") +
     ggplot2::scale_color_brewer(palette = "Dark2") +
-    ggraph::geom_node_text(aes(x = 1.058 * .data$x, y = 1.058 * .data$y, label = .data$node.short_name, angle = -((ggraph::node_angle(.data$x, .data$y) + 90) %% 180) + 60, filter = .data$leaf, color = .data$node.branch), size = 4, hjust = 'outward') +
+    ggraph::geom_node_text(aes(x = 1.058 * .data$x, y = 1.058 * .data$y, label = .data$node.short_name, angle = -((-ggraph::node_angle(.data$x, .data$y) + 90) %% 180) + 60, filter = .data$leaf, color = .data$node.branch), size = 4, hjust = 'outward') +
     ggraph::geom_node_text(aes(label = .data$node.short_name, filter = !.data$leaf & (.data$node.level == "type"), color = .data$node.branch), fontface = "bold", size = 8, family = "sans") +
-    ggraph::geom_node_text(aes(label = .data$node.short_name, filter = !.data$leaf & (.data$node.level == "pathway"), color = .data$node.branch, angle = -((ggraph::node_angle(.data$x, .data$y) + 90) %% 180) + 36), fontface = "bold", size = 4.5, family = "sans") +
+    ggraph::geom_node_text(aes(label = .data$node.short_name, filter = !.data$leaf & (.data$node.level == "pathway"), color = .data$node.branch, angle = -((-ggraph::node_angle(.data$x, .data$y) + 90) %% 180) + 36), fontface = "bold", size = 4.5, family = "sans") +
     ggplot2::theme(panel.background = ggplot2::element_rect(fill = NA)) +
     ggplot2::coord_cartesian(xlim = c(-1.3, 1.3), ylim = c(-1.3, 1.3))
 
