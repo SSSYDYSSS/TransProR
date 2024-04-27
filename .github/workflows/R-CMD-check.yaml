@@ -38,12 +38,6 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-      - name: Install devtools package
-        run: Rscript -e 'install.packages("devtools")'
-
-      - name: Install ccgraph using devtools
-        run: Rscript -e 'devtools::install_github("gaospecial/ccgraph")'
-
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck
