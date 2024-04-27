@@ -53,7 +53,7 @@ new_ggraph <- function(BP_dataframe, BP_ids, KEGG_dataframe, KEGG_ids,
   plot <- ggraph::ggraph(graph_ggraph, layout = 'dendrogram', circular = TRUE) +
     ggraph::geom_edge_diagonal(aes(color = .data$node1.node.branch, filter = .data$node1.node.level != "combination", alpha = .data$node1.node.level), edge_width = 1) +
     ggraph::geom_node_point(aes(size = .data$node.size, color = .data$node.branch, filter = .data$node.level != "combination"), alpha = 0.45) +
-    ggplot2::scale_size(range = c(15, 80)) +
+    ggplot2::scale_size(range = c(15, 90)) +
     ggplot2::theme(legend.position = "none") +
     ggraph::scale_edge_colour_brewer(palette= "Dark2") +
     ggplot2::scale_color_brewer(palette = "Dark2") +
