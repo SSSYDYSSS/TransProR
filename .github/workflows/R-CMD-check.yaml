@@ -44,6 +44,12 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
+      - name: Install remotes package
+        run: Rscript -e 'if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")'
+
+      - name: Install ccgraph from GitHub
+        run: Rscript -e 'remotes::install_github("gaospecial/ccgraph")'
+
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
