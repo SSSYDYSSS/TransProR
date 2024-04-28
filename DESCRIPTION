@@ -25,6 +25,7 @@ Imports:
     ggdensity,
     ggpubr,
     ggtree,
+    ccgraph,
     hrbrthemes,
     grid,
     ggraph,
@@ -33,8 +34,6 @@ Suggests:
     prettydoc,
     knitr,
     rmarkdown
-Remotes:
-  gaospecial/ccgraph
 VignetteBuilder: knitr
 License: MIT + file LICENSE
 Encoding: UTF-8
