@@ -18,7 +18,6 @@
 #' @param DO_ids IDs for Disease Ontology.
 #' @importFrom tidygraph tbl_graph
 #' @importFrom ggraph ggraph geom_edge_diagonal geom_node_point geom_node_text scale_edge_colour_brewer node_angle
-#' @importFrom ccgraph gather_graph_node gather_graph_edge
 #' @importFrom ggplot2 theme element_rect scale_size scale_color_brewer coord_cartesian
 #' @return A ggraph object representing the pathway gene map visualization.
 #' @export
@@ -44,8 +43,8 @@ new_ggraph <- function(BP_dataframe, BP_ids, KEGG_dataframe, KEGG_ids,
 
   # Prepare the data for graph creation using ccgraph
   index_ggraph <- c("type", "pathway", "gene")  # columns other than the lowest level
-  nodes_ggraph <- ccgraph::gather_graph_node(new_dataframe, index = index_ggraph, root = "combination")
-  edges_ggraph <- ccgraph::gather_graph_edge(new_dataframe, index = index_ggraph, root = "combination")
+  nodes_ggraph <- gather_graph_node(new_dataframe, index = index_ggraph, root = "combination")
+  edges_ggraph <- gather_graph_edge(new_dataframe, index = index_ggraph, root = "combination")
 
   # Create and plot the graph using tidygraph and ggraph
   graph_ggraph <- tidygraph::tbl_graph(nodes = nodes_ggraph, edges = edges_ggraph)

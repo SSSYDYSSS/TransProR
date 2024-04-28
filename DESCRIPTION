@@ -25,11 +25,11 @@ Imports:
     ggdensity,
     ggpubr,
     ggtree,
-    ccgraph,
     hrbrthemes,
     grid,
     ggraph,
-    tidygraph
+    tidygraph,
+    tidyr
 Suggests:
     prettydoc,
     knitr,
