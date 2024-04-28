@@ -44,7 +44,6 @@ jobs:
             any::rcmdcheck
             gaospecial/ccgraph
 
-
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
