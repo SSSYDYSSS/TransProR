@@ -34,6 +34,8 @@ Suggests:
     prettydoc,
     knitr,
     rmarkdown
+Remotes:
+  gaospecial/ccgraph
 VignetteBuilder: knitr
 License: MIT + file LICENSE
 Encoding: UTF-8
