@@ -27,7 +27,6 @@ Imports:
     ggtree,
     hrbrthemes,
     grid,
-    ccgraph,
     ggraph,
     tidygraph
 Suggests:
