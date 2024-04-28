@@ -31,7 +31,7 @@ gather_graph_node <- function(df, index = NULL, value = utils::tail(colnames(df)
                          node.count = dplyr::n(), .groups = 'drop') %>%
         dplyr::mutate(node.short_name = as.character(.data[[dots[length(dots)]]]),
                       node.branch = as.character(.data[[dots[1]]])) %>%
-        tidyr::unite(df, "node.name", all_of(dots), sep = "/")
+        tidyr::unite(col = "node.name", all_of(dots), sep = "/")
     })
 
     nodes <- dplyr::bind_rows(nodes_list) %>%
