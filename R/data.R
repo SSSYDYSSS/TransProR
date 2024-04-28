@@ -1,4 +1,3 @@
-# data文件中的DATA的注释文件，可以都注释在这个文件中，虽然在DESCRIPTION中标注LazyData: true，
-# 使得数据最开始不会被读取，而是在真正运用的时候自动去读，这一自动过程就需要这部分文件来保证。
-#
-#
+# The annotation file for the DATA in the data directory can all be commented in this file. Although LazyData: true is marked in the DESCRIPTION,
+# it ensures that the data is not read initially but is automatically read when it is actually used. This automatic process requires this part of the file to ensure it.
+

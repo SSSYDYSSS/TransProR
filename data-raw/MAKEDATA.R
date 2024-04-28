@@ -1,5 +1,5 @@
-# 包要使用的数据,且用户能探查：
-usethis::use_data(x)# 会产生文件在data/x.Rda
+# Data that the package will use, and is explorable by users:
+usethis::use_data(x) # This will create a file at data/x.Rda
 
-# 包要使用的数据,且用户不能探查，内部数据：
-usethis::use_data(y, internal = TRUE)# 会产生文件在r/sysdata.rda，注意，此数据无需文档，也无需导出，用户不可见。
+# Data that the package will use, and is not explorable by users, internal data:
+usethis::use_data(y, internal = TRUE) # This will create a file at R/sysdata.rda. Note, this data does not require documentation, nor does it need to be exported, it is not visible to users.
