@@ -36,6 +36,8 @@ extract_descriptions_counts <- function(df, descriptions, color) {
 
 
 
+
+
 #' Combine and Visualize Data with Circular Bar Chart
 #'
 #' This function combines multiple data frames, arranges them, and visualizes the combined data
