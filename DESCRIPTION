@@ -29,7 +29,11 @@ Imports:
     grid,
     ggraph,
     tidygraph,
-    tidyr
+    tidyr,
+    stringr,
+    geomtextpath,
+    ggalt,
+    ggnewscale
 Suggests:
     prettydoc,
     knitr,
