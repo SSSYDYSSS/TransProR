@@ -27,11 +27,11 @@
 #' @export
 enrich_polar_bubble <- function(final_combined_df_with_id_and_position, pal, highlight_ids) {
   # Extract unique levels of point_position and prepend 0
-  levels <- c(0, sort(unique(.data$point_position)))
+  levels <- c(0, sort(unique(final_combined_df_with_id_and_position$point_position)))
   max_level_plus_five <- max(levels) + 5
-  max_id_plus_one <- max(.data$id) + 1
+  max_id_plus_one <- max(final_combined_df_with_id_and_position$id) + 1
 
-  gg <- ggplot2::ggplot(data = .data,
+  gg <- ggplot2::ggplot(data = final_combined_df_with_id_and_position,
                         ggplot2::aes(x = .data$id, y = .data$Count, group = .data$method, fill = .data$method, color = .data$method)) +
     ggplot2::geom_hline(yintercept = levels, color = "grey85") +
     ggplot2::geom_hline(yintercept = max_level_plus_five, color = "grey15") +
@@ -41,8 +41,8 @@ enrich_polar_bubble <- function(final_combined_df_with_id_and_position, pal, hig
     ggplot2::geom_segment(data = tibble::tibble(x = 1:max_id_plus_one, y = max(levels), yend = max_level_plus_five),
                           ggplot2::aes(x = .data$x, xend = .data$x, y = .data$y, yend = .data$yend),
                           inherit.aes = FALSE, color = "grey15") +
-    geomtextpath::geom_textpath(ggplot2::aes(x = .data$id, y = max_level_plus_five + 5, label = .data$Description, angle = 55),
-                                inherit.aes = FALSE, hjust = 0, size = 5.5, color = .data$test_color) +
+    geomtextpath::geom_textpath(ggplot2::aes(x = final_combined_df_with_id_and_position$id, y = max_level_plus_five + 5, label = final_combined_df_with_id_and_position$Description, angle = 55),
+                                inherit.aes = FALSE, hjust = 0, size = 5.5, color = final_combined_df_with_id_and_position$test_color) +
     ggplot2::geom_point(ggplot2::aes(x = .data$id, y = .data$point_position, size = .data$Count),
                         shape = 21, alpha = 0.6) +
     ggalt::stat_xspline(geom = "line", spline_shape = 0.25, linewidth = 0.75, alpha = 0.4) +
@@ -60,7 +60,7 @@ enrich_polar_bubble <- function(final_combined_df_with_id_and_position, pal, hig
     ggplot2::theme_void() +
     ggplot2::theme(plot.background = ggplot2::element_rect(fill = "white", color = NA)) +
     ggnewscale::new_scale_fill() +
-    ggplot2::geom_rect(data = dplyr::filter(.data, .data$id %in% highlight_ids),
+    ggplot2::geom_rect(data = dplyr::filter(final_combined_df_with_id_and_position, .data$id %in% highlight_ids),
                        ggplot2::aes(xmin = .data$id - 0.5, xmax = .data$id + 0.5, ymin = 0, ymax = max_level_plus_five, fill = .data$test_color),
                        alpha = 0.1, inherit.aes = FALSE) +
     ggplot2::scale_fill_identity()  # Use colors specified in 'test_color'
