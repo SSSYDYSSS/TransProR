@@ -33,7 +33,8 @@ Imports:
     stringr,
     geomtextpath,
     ggalt,
-    ggnewscale
+    ggnewscale,
+    ggtreeExtra
 Suggests:
     prettydoc,
     knitr,
