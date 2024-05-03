@@ -4,7 +4,7 @@
 #' data as colored tiles to the plot. It allows for dynamic coloring of the genes and includes
 #' adjustments for alpha transparency based on the expression value.
 #'
-#' @importFrom ggplot2 aes geom_tile scale_fill_manual scale_alpha_continuous guide_legend
+#' @importFrom ggplot2 aes scale_fill_manual scale_alpha_continuous guide_legend
 #' @importFrom ggtreeExtra geom_fruit
 #' @param p A ggtree plot object to which the data will be added.
 #' @param data A data frame containing gene expression data with columns for Samples, Genes, and Values.
@@ -32,7 +32,7 @@ create_base_plot <- function(p, data, gene_colors, gene_label="Gene") {
   p <- p +
     ggtreeExtra::geom_fruit(
       data=data,
-      geom=ggplot2::geom_tile(),
+      geom="geom_tile",
       mapping=ggplot2::aes(y=.data$Sample, alpha=.data$value, x=.data$Gene, fill=.data$Gene),
       offset=0.001,
       pwidth=2
@@ -54,7 +54,7 @@ create_base_plot <- function(p, data, gene_colors, gene_label="Gene") {
 #' This function adds a boxplot layer to an existing ggtree plot object using ggtreeExtra's geom_fruit for boxplots.
 #' It is primarily used to display statistical summaries of the data related to gene expressions or other metrics.
 #'
-#' @importFrom ggplot2 aes geom_boxplot
+#' @importFrom ggplot2 aes
 #' @importFrom ggtreeExtra geom_fruit
 #' @param p An existing ggtree plot object.
 #' @param data A data frame containing the data to be plotted. Expected to have columns for 'Sample' and 'value'.
@@ -79,7 +79,7 @@ add_boxplot <- function(p, data, fill_color="#f28131", alpha=0.6, offset=0.22, p
 
   p + ggtreeExtra::geom_fruit(
     data=data,
-    geom=ggplot2::geom_boxplot(),
+    geom="geom_boxplot",
     mapping=ggplot2::aes(y=.data$Sample, x=.data$value),
     fill=fill_color,
     alpha=alpha,
@@ -102,7 +102,7 @@ add_boxplot <- function(p, data, fill_color="#f28131", alpha=0.6, offset=0.22, p
 #' and alpha transparency. This is useful when you want to add additional data layers without interfering with
 #' the existing scales in the plot. It utilizes the ggnewscale package to reset scales for new layers.
 #'
-#' @importFrom ggplot2 aes geom_tile scale_fill_manual guide_legend
+#' @importFrom ggplot2 aes scale_fill_manual guide_legend
 #' @importFrom ggnewscale new_scale
 #' @importFrom ggtreeExtra geom_fruit
 #' @param p An existing ggtree plot object.
@@ -131,7 +131,7 @@ add_new_tile_layer <- function(p, data, gene_colors, gene_label, alpha_value=c(0
   p + ggnewscale::new_scale("alpha") + ggnewscale::new_scale("fill") +
     ggtreeExtra::geom_fruit(
       data=data,
-      geom=ggplot2::geom_tile(),
+      geom="geom_tile",
       mapping=ggplot2::aes(y=.data$Sample, alpha=.data$value, x=.data$Gene, fill=.data$Gene),
       offset=offset,
       pwidth=pwidth
