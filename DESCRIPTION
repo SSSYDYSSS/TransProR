@@ -39,6 +39,8 @@ Suggests:
     prettydoc,
     knitr,
     rmarkdown
+Remotes:
+    github::xiangpin/ggtreeExtra
 VignetteBuilder: knitr
 License: MIT + file LICENSE
 Encoding: UTF-8

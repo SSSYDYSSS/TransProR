@@ -13,6 +13,7 @@ devtools::check()
 
 # Ensure that all dependencies are correctly installed, and generate the pak lock file.
 pak::pak()
+pak::pak("github::xiangpin/ggtreeExtra")
 pak::lockfile_create()# for github action
 file.rename("pkg.lock", ".github/pkg.lock")
 
