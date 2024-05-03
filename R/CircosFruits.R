@@ -25,6 +25,10 @@
 #' print(p)
 #' }
 create_base_plot <- function(p, data, gene_colors, gene_label="Gene") {
+  # Define local variables
+  Sample <- data$Sample
+  value <- data$value
+  Gene <- data$Gene
   if (!requireNamespace("ggtreeExtra", quietly = TRUE)) {
     stop("ggtreeExtra is required for using create_base_plot. Please install it.", call. = FALSE)
   }
@@ -73,6 +77,9 @@ create_base_plot <- function(p, data, gene_colors, gene_label="Gene") {
 #' print(p)
 #' }
 add_boxplot <- function(p, data, fill_color="#f28131", alpha=0.6, offset=0.22, pwidth=0.5) {
+  # Define local variables
+  Sample <- data$Sample
+  value <- data$value
   if (!requireNamespace("ggtreeExtra", quietly = TRUE)) {
     stop("ggtreeExtra is required for using create_base_plot. Please install it.", call. = FALSE)
   }
@@ -124,6 +131,10 @@ add_boxplot <- function(p, data, fill_color="#f28131", alpha=0.6, offset=0.22, p
 #' print(p)
 #' }
 add_new_tile_layer <- function(p, data, gene_colors, gene_label, alpha_value=c(0.3, 0.9), offset=0.02, pwidth=2) {
+  # Define local variables
+  Sample <- data$Sample
+  value <- data$value
+  Gene <- data$Gene
   if (!requireNamespace("ggtreeExtra", quietly = TRUE)) {
     stop("ggtreeExtra is required for using create_base_plot. Please install it.", call. = FALSE)
   }
