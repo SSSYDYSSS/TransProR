@@ -37,7 +37,7 @@ create_base_plot <- function(p, data, gene_colors, gene_label="Gene") {
     ggtreeExtra::geom_fruit(
       data=data,
       geom="geom_tile",
-      mapping=ggplot2::aes(y=.data$Sample, alpha=.data$value, x=.data$Gene, fill=.data$Gene),
+      mapping=ggplot2::aes(y=Sample, alpha=value, x=Gene, fill=Gene),
       offset=0.001,
       pwidth=2
     ) +
@@ -87,7 +87,7 @@ add_boxplot <- function(p, data, fill_color="#f28131", alpha=0.6, offset=0.22, p
   p + ggtreeExtra::geom_fruit(
     data=data,
     geom="geom_boxplot",
-    mapping=ggplot2::aes(y=.data$Sample, x=.data$value),
+    mapping=ggplot2::aes(y=Sample, x=value),
     fill=fill_color,
     alpha=alpha,
     offset=offset,
@@ -143,7 +143,7 @@ add_new_tile_layer <- function(p, data, gene_colors, gene_label, alpha_value=c(0
     ggtreeExtra::geom_fruit(
       data=data,
       geom="geom_tile",
-      mapping=ggplot2::aes(y=.data$Sample, alpha=.data$value, x=.data$Gene, fill=.data$Gene),
+      mapping=ggplot2::aes(y=Sample, alpha=value, x=Gene, fill=Gene),
       offset=offset,
       pwidth=pwidth
     ) +
