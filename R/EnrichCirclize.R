@@ -9,7 +9,6 @@
 #' @param nTop Integer, number of top pathways to select based on the p-value.
 #' @return A vector containing combined top upregulated and downregulated pathways.
 #' @importFrom Hmisc capitalize
-#' @importFrom dplyr filter arrange desc
 #' @export
 #' @examples
 #' \dontrun{
@@ -18,24 +17,28 @@
 #' }
 adjust_export_pathway <- function(fgseaRes, nTop = 10) {
   # Adjust pathway names
-  fgseaRes$pathway <- sapply(fgseaRes$pathway, function(term) {
-    term <- unlist(strsplit(term, split="_", fixed=TRUE))[-1]
-    term <- Hmisc::capitalize(tolower(term))
-    paste(term, collapse=" ")
-  })
+  fgseaRes$pathway <- as.character(fgseaRes$pathway)
+  for(i in 1:nrow(fgseaRes)){
+    print(i)
+    term = fgseaRes$pathway[i]
+    ### 1. Split the string
+    term = unlist(strsplit(term, split="_", fixed=TRUE))[-1]
+    ### 2. Convert to lowercase, then capitalize the first letter
+    term = Hmisc::capitalize(tolower(term))
+    ### 3. Concatenate with spaces
+    term = paste(term, collapse=" ")
+    ### 4. Data export
+    fgseaRes$pathway[i] = term
+  }
 
   # Select top upregulated pathways
-  topPathwaysUp <- fgseaRes[fgseaRes$ES > 0, ]
-  topPathwaysUp <- topPathwaysUp[order(topPathwaysUp$pval, decreasing = TRUE), ]
-  topPathwaysUp <- topPathwaysUp[1:nTop, "pathway"]
+  topPathwaysUp <- fgseaRes[fgseaRes$ES > 0,][order(fgseaRes$pval[fgseaRes$ES > 0]), 'pathway'][1:nTop]
 
   # Select top downregulated pathways
-  topPathwaysDown <- fgseaRes[fgseaRes$ES < 0, ]
-  topPathwaysDown <- topPathwaysDown[order(topPathwaysDown$pval), ]
-  topPathwaysDown <- topPathwaysDown[1:nTop, "pathway"]
+  topPathwaysDown <- fgseaRes[fgseaRes$ES < 0,][order(fgseaRes$pval[fgseaRes$ES < 0]), 'pathway'][1:nTop]
 
-  # Combine top pathways
-  combinedPathways <- c(topPathwaysUp, rev(topPathwaysDown))
+  # Combine top pathways and convert any potential list to a vector
+  combinedPathways <- unlist(c(topPathwaysUp, rev(topPathwaysDown)), use.names = FALSE)
 
   return(combinedPathways)
 }
