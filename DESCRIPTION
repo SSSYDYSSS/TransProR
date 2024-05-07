@@ -34,7 +34,10 @@ Imports:
     geomtextpath,
     ggalt,
     ggnewscale,
-    ggtreeExtra
+    ggtreeExtra,
+    Hmisc,
+    circlize,
+    graphics
 Suggests:
     prettydoc,
     knitr,
