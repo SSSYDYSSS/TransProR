@@ -40,7 +40,7 @@ adjust_export_pathway <- function(fgseaRes, nTop = 10) {
   # Combine top pathways and convert any potential list to a vector
   combinedPathways <- unlist(c(topPathwaysUp, rev(topPathwaysDown)), use.names = FALSE)
 
-  return(combinedPathways)
+  return(list(combinedPathways = combinedPathways, fgseaRes = fgseaRes))
 }
 
 
