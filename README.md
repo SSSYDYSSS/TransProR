@@ -37,6 +37,12 @@ This is a basic example which shows you how to solve a common problem:
 library(TransProR)
 ## basic example code
 ```
+## Citation
+
+Yu Dongyue (2023). TransProR: Analysis and visualization of transcriptomic data are currently in progress. Future directions include multi-modal fusion, sparse learning, and the investigation of spatio-temporal effects.
+<https://github.com/SSSYDYSSS/TransProR>, 
+<https://sssydysss.github.io/TransProRBook/>.
+
 
 ## Code of Conduct
 
