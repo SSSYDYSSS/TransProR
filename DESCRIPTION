@@ -37,7 +37,10 @@ Imports:
     ggtreeExtra,
     Hmisc,
     circlize,
-    graphics
+    graphics,
+    spiralize,
+    ComplexHeatmap,
+    grDevices
 Suggests:
     prettydoc,
     knitr,
