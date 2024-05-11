@@ -173,7 +173,7 @@ spiral_newrle <- function(x, samples, values, colors, labels = FALSE) {
     if (i == length(values) || samples[i + 1] != current_sample) {
       if (labels) {
         label_position <- (cumulative_start + position_end) / 2
-        spiralize::spiral_text(label_position, 0.5, current_sample, facing = "curved_inside", letter_spacing = -0.5, nice_facing = TRUE)
+        spiralize::spiral_text(label_position, 0.5, current_sample, facing = "curved_inside", nice_facing = TRUE)
       }
       cumulative_start <- position_end  # Reset for next sample
       if (i < length(values)) {
