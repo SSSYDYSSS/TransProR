@@ -173,7 +173,7 @@ spiral_newrle <- function(x, samples, values, colors, labels = FALSE) {
     if (i == length(values) || samples[i + 1] != current_sample) {
       if (labels) {
         label_position <- (cumulative_start + position_end) / 2
-        spiralize::spiral_text(label_position, 0.5, current_sample, facing = "curved_inside", letter_spacing = -0.8, nice_facing = TRUE)
+        spiralize::spiral_text(label_position, 0.5, current_sample, facing = "curved_inside", letter_spacing = -0.5, nice_facing = TRUE)
       }
       cumulative_start <- position_end  # Reset for next sample
       if (i < length(values)) {
@@ -230,8 +230,8 @@ enrichment_spiral_plots <- function(results) {
   })
 
   # Set the maximum height for the legends and draw them
-  lgd <- ComplexHeatmap::packLegend(list = lgd_list, max_height = ggplot2::unit(8, "inch"))
-  ComplexHeatmap::draw(lgd, x = ggplot2::unit(1, "npc") + ggplot2::unit(7, "mm"), just = "left")
+  lgd <- ComplexHeatmap::packLegend(list = lgd_list, max_height = ggplot2::unit(7, "inch"))
+  ComplexHeatmap::draw(lgd, x = ggplot2::unit(1, "npc") + ggplot2::unit(1, "mm"), just = "left")
 }
 
 
