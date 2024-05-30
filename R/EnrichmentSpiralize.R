@@ -15,24 +15,26 @@
 #'   print(results)
 #' }
 extract_ntop_pathways <- function(ssgsea_kegg, nTop = 5) {
-  # 初始化一个空的数据框来存储结果
+  # Initialize an empty data frame to store the results
   results <- data.frame(Pathway = character(), Sample = character(), Value = numeric(), stringsAsFactors = FALSE)
 
-  # 遍历每个样本，从第一列开始
+  # Iterate through each sample, starting from the first column
   for (i in 1:ncol(ssgsea_kegg)) {
     sample_name <- colnames(ssgsea_kegg)[i]
-    # 为了避免因子类型的错误，确保数据是数值类型
+    # To avoid factor type errors, ensure the data is numeric
     column_data <- as.numeric(ssgsea_kegg[[i]])
-    # 用数值类型的数据创建一个新的数据框，用于排序和提取
+    # Create a new data frame with numeric data for sorting and extracting
     pathway_data <- data.frame(Pathway = rownames(ssgsea_kegg), Value = column_data, stringsAsFactors = FALSE)
-    # 按数值降序排序并取前nTop个
+    # Sort by value in descending order and take the top nTop entries
     top_paths <- utils::head(pathway_data[order(-pathway_data$Value),], nTop)
-    # 绑定到结果数据框
+    # Bind to the results data frame
     results <- rbind(results, data.frame(Pathway = top_paths$Pathway, Sample = sample_name, Value = top_paths$Value))
   }
 
   return(results)
 }
+
+
 
 
 
