@@ -4,7 +4,7 @@ Title: Analysis and visualization of multi-omics data
 Version: 0.0.1
 Authors@R: c(
        person("Dongyue", "Yu",     email = "yudongyue@mail.nankai.edu.cn", role = c("aut", "cre", "cph"),
-            comment = c(ORCID = "0000-0002-7041-2073")))
+            comment = c(ORCID = "0000-0002-7041-2073"))
        )
 Maintainer: Dongyue Yu <yudongyue@mail.nankai.edu.cn>
 Description: Analysis and visualization of multi-omics data. In ongoing development: multi-modal fusion, sparse learning, and spatio-temporal effects...
