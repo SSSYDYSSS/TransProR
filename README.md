@@ -27,7 +27,7 @@ remotes::install_github("SSSYDYSSS/TransProR", build_vignettes = TRUE)
 
 ## System Requirements
 
--   R (>= 4.3.1)
+-   R (>= 4.3.0)
 
 ## Example
 
