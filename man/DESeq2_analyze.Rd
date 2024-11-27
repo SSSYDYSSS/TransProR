@@ -37,6 +37,12 @@ The DESeq2 methodology is based on modeling count data using a negative binomial
 which allows for handling the variability observed in gene expression data, especially in
 small sample sizes. This approach is well-suited for RNA-Seq data analysis.
 }
+\examples{
+\dontrun{
+# Call the DESeq2_analyze function
+result_df <- DESeq2_analyze(tumor_file, normal_file, output_file = tempfile(fileext = ".rds"))
+}
+}
 \references{
 DESeq2:Differential gene expression analysis based on the negative binomial distribution.
 For more information, visit the page:

@@ -32,7 +32,6 @@ based on specified thresholds for p-values and log fold change. It allows for fl
 input of column names for p-values and log fold change.
 }
 \examples{
-\dontrun{
 # Create a sample data frame with p-values and log fold changes
 sample_data <- data.frame(
   adj.P.Val = c(0.03, 0.06, 0.02, 0.07),
@@ -43,6 +42,4 @@ sample_data <- data.frame(
 # Use the filter_diff_genes function to filter significant genes
 filtered_genes <- filter_diff_genes(sample_data)
 print(filtered_genes)
-}
-
 }

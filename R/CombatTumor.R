@@ -54,7 +54,7 @@ combat_tumor <- function(tumor_data_path, CombatTumor_output_path, auto_mode = F
   if(auto_mode) {
     selected_types <- strsplit(default_input, ",")[[1]]
   } else {
-    cat("Please input the tumor types you wish to retain, separated by commas (e.g., 01,06): ")
+    message("Please input the tumor types you wish to retain, separated by commas (e.g., 01,06): ")
     selected_types <- strsplit(readline(), ",")[[1]]
   }
 

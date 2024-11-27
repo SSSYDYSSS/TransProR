@@ -145,6 +145,7 @@ adjust_color_tone <- function(color, saturation_scale, luminance_scale) {
 #' @importFrom grid gpar
 #' @importFrom spiralize spiral_rect spiral_text
 #' @export
+#' @return No return value, called for side effects. This function generates a spiral plot and optionally adds labels.
 #' @examples
 #' \dontrun{
 #'   spiral_newrle(x = c("A", "A", "B", "C"),
@@ -204,6 +205,7 @@ spiral_newrle <- function(x, samples, values, colors, labels = FALSE) {
 #' @importFrom ComplexHeatmap packLegend Legend draw
 #' @importFrom ggplot2 unit
 #' @export
+#' @return No return value, called for side effects. This function generates spiral plots and adds legends based on sample and pathway information.
 #' @examples
 #' \dontrun{
 #'   # Assuming 'results' is already created and contains the necessary columns

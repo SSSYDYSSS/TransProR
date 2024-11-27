@@ -20,7 +20,7 @@ A data frame with columns "Symble" (gene symbol), "Description" (pathway descrip
 This function filters pathways that meet a count threshold and then counts the presence of specified genes in those pathways.
 }
 \examples{
-\dontrun{
+# Simulated gene list
 GO <- c("Gene1", "Gene2", "Gene3", "Gene4", "Gene5")
 # Simulated enrichment analysis data
 enrich_data <- data.frame(
@@ -33,5 +33,4 @@ enrich_data <- data.frame(
 # Example usage
 count_threshold <- 5
 result_df <- pathway_count(GO, count_threshold, enrich_data)
-}
 }

@@ -70,9 +70,9 @@ get_tcga_exp <- function(counts_file_path,
 
   # Check for 'Primary Tumor' or 'Metastatic' samples
   if (nrow(tumor_samples) == 0) {
-    cat("No 'Primary Tumor' or 'Metastatic' samples found.\n")
+    message("No 'Primary Tumor' or 'Metastatic' samples found.\n")
   } else {
-    cat("Number of 'Primary Tumor' or 'Metastatic' samples: ", nrow(tumor_samples), "\n")
+    message("Number of 'Primary Tumor' or 'Metastatic' samples: ", nrow(tumor_samples), "\n")
   }
 
   # Create a data frame for normal samples
@@ -80,9 +80,9 @@ get_tcga_exp <- function(counts_file_path,
     dplyr::filter(grepl("normal", .data$sample_type.samples, ignore.case = TRUE))
 
   if (nrow(normal_samples) == 0) {
-    cat("No 'normal' samples found.\n")
+    message("No 'normal' samples found.\n")
   } else {
-    cat("Number of 'normal' samples:", nrow(normal_samples), "\n")
+    message("Number of 'normal' samples:", nrow(normal_samples), "\n")
   }
 
   # Get the intersection of clinical information and expression matrix

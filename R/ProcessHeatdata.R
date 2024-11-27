@@ -18,7 +18,6 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' # Example heatmap data frame
 #' heatdata <- data.frame(
 #'   groupA_1 = c(1, 2, 3),
@@ -36,8 +35,7 @@
 #'
 #' # Selection 3: Calculate the average of columns per group based on a prefix
 #' processed_data3 <- process_heatdata(heatdata, selection = 3, prefix_length = 6)
-#' }
-#'
+
 process_heatdata <- function(heatdata,
                              selection = 1,
                              custom_names = NULL,

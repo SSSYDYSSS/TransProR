@@ -18,5 +18,6 @@ pak::lockfile_create()# for github action
 file.rename("pkg.lock", ".github/pkg.lock")
 
 
-
+# NEWS.md
+usethis::use_news_md() #生成一个标准模板。
 

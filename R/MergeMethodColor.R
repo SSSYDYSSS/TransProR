@@ -10,14 +10,12 @@
 #' @return A single data frame merged from the list, with each originally provided data frame now having a 'method' and a 'test_color' column.
 #' @importFrom dplyr bind_rows
 #' @examples
-#' \dontrun{
 #'   df1 <- data.frame(Description = c("A", "B"), Count = c(10, 20))
 #'   df2 <- data.frame(Description = c("C", "D"), Count = c(30, 40))
 #'   df_list <- list(df1, df2)
 #'   method_name <- "Method1"
 #'   color_list <- c("Red", "Blue")
-#'   merge_method_color(df_list, method_name, color_list)
-#' }
+#'   combined_df_test <- merge_method_color(df_list, method_name, color_list)
 #' @export
 merge_method_color <- function(df_list, method_name, color_list) {
   # Validate the length of color list matches the length of data frame list

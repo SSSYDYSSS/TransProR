@@ -20,7 +20,6 @@ A data frame with columns "Symble" (gene symbol), "Description" (pathway descrip
 This function identifies genes present in selected pathways based on gene enrichment analysis results.
 }
 \examples{
-\dontrun{
 GO <- c("Gene1", "Gene2", "Gene3", "Gene4", "Gene5")
 # Simulated enrichment analysis data
 enrich_data <- data.frame(
@@ -32,6 +31,5 @@ enrich_data <- data.frame(
 )
 
 # Example usage
-result <- pathway_description(GO, selected_pathways_names, enrich_data)
-}
+result <- pathway_description(GO, selected_pathways_names="Apoptosis", enrich_data)
 }

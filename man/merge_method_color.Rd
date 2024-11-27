@@ -22,12 +22,10 @@ It adds a 'method' column and a 'test_color' column to each data frame, then mer
 It ensures that the color list length matches the list of data frames.
 }
 \examples{
-\dontrun{
   df1 <- data.frame(Description = c("A", "B"), Count = c(10, 20))
   df2 <- data.frame(Description = c("C", "D"), Count = c(30, 40))
   df_list <- list(df1, df2)
   method_name <- "Method1"
   color_list <- c("Red", "Blue")
-  merge_method_color(df_list, method_name, color_list)
-}
+  combined_df_test <- merge_method_color(df_list, method_name, color_list)
 }

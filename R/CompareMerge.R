@@ -34,7 +34,7 @@ compare_merge <- function(df1, df2, by_gene, compare_col, suffixes, df_name) {
     merged_df[[col2]] <- NULL
   } else {
     # Handle non-identical case
-    cat("The columns", col1, "and", col2, "are not identical.\n")
+    message("The columns", col1, "and", col2, "are not identical.\n")
   }
 
   # Assign the specified name for identification

@@ -19,6 +19,11 @@
 #' @param logFC Threshold for log fold change.
 #' @param p_value Threshold for p-value.
 #' @return A data frame of differential expression results.
+#' @examples
+#' \dontrun{
+#' # Call the DESeq2_analyze function
+#' result_df <- DESeq2_analyze(tumor_file, normal_file, output_file = tempfile(fileext = ".rds"))
+#' }
 #' @references
 #' DESeq2:Differential gene expression analysis based on the negative binomial distribution.
 #' For more information, visit the page:
@@ -34,7 +39,7 @@ DESeq2_analyze <- function(tumor_file, normal_file, output_file, logFC = 2.5, p_
   # Create group factor
   group <- factor(c(rep('tumor', ncol(tumor)), rep('normal', ncol(normal))), levels = c("normal", "tumor"))
   group_table <- table(group)
-  cat("Group Table:\n")
+  message("Group Table:\n")
   print(group_table)
 
   # Prepare DESeq2 dataset
@@ -61,7 +66,7 @@ DESeq2_analyze <- function(tumor_file, normal_file, output_file, logFC = 2.5, p_
 
   # Output table of gene expression changes
   change_table <- table(DEG$change)
-  cat("Change Table:\n")
+  message("Change Table:\n")
   print(change_table)
 
   # Save results

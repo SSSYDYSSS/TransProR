@@ -43,7 +43,7 @@ edgeR_analyze <- function(tumor_file, normal_file, output_file, logFC_threshold 
   group <- c(rep('tumor', ncol(tumor)), rep('normal', ncol(normal)))
   group <- factor(group, levels = c("normal", "tumor"))
   group_table <- table(group)
-  cat("Group Table:\n")
+  message("Group Table:\n")
   print(group_table)
 
   # Create DGEList object for gene expression data and group information
@@ -85,7 +85,7 @@ edgeR_analyze <- function(tumor_file, normal_file, output_file, logFC_threshold 
   DEG_edgeR <- dplyr::mutate(DEG_edgeR, change = ifelse(k1, "down", ifelse(k2, "up", "stable")))
 
   change_table <- table(DEG_edgeR$change)
-  cat("Change Table:\n")
+  message("Change Table:\n")
   print(change_table)
 
   # Save results to the specified output file

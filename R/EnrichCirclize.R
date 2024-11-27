@@ -105,7 +105,9 @@ selectPathways <- function(pathways, max_words = 10, num_select = 10) {
 #' @param just_positions List of two vectors, each specifying the horizontal and vertical justification for the legends.
 #' @param text_alignments List of two character strings specifying text alignments for the legends ('left' or 'right').
 #' @param font_size Numeric value specifying the font size for the legend labels.
+#' @return Invisible. This function is called for its side effects of drawing legends on a plot.
 #' @importFrom grid pushViewport viewport grid.roundrect grid.text upViewport unit
+#' @export
 #' @examples
 #' \dontrun{
 #'   labels <- c("Label1", "Label2", "Label3", "Label4", "Label5", "Label6")

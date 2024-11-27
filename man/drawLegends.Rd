@@ -32,6 +32,9 @@ drawLegends(
 
 \item{font_size}{Numeric value specifying the font size for the legend labels.}
 }
+\value{
+Invisible. This function is called for its side effects of drawing legends on a plot.
+}
 \description{
 This function creates two sets of legends, one on the left and one on the right side of a plot.
 It displays color-coded legends with labels corresponding to different data categories.

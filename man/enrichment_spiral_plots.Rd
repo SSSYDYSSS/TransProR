@@ -9,6 +9,9 @@ enrichment_spiral_plots(results)
 \arguments{
 \item{results}{A data frame containing 'Pathway', 'Sample', 'Value', 'PathwayColor', and 'SampleColor' columns.}
 }
+\value{
+No return value, called for side effects. This function generates spiral plots and adds legends based on sample and pathway information.
+}
 \description{
 This function initializes a spiral plot, adds tracks for pathways and samples,
 and generates legends based on the sample and pathway information in the provided data frame.

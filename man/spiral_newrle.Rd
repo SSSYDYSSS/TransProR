@@ -17,6 +17,9 @@ spiral_newrle(x, samples, values, colors, labels = FALSE)
 
 \item{labels}{Logical, whether to add labels to each segment.}
 }
+\value{
+No return value, called for side effects. This function generates a spiral plot and optionally adds labels.
+}
 \description{
 This function creates a spiral plot for visualizing sequential data in a compact and visually appealing way.
 It uses run-length encoding to represent the lengths and colors of sequences in the spiral.

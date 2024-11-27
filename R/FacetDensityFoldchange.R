@@ -27,7 +27,7 @@
 #' @importFrom stats as.formula
 #' @examples
 #' \dontrun{
-#' pal1 = c("#3949ab","#1e88e5","#039be5","#00897b","#43a047","#7cb342"),
+#' pal1 = c("#3949ab","#1e88e5","#039be5","#00897b","#43a047","#7cb342")
 #' facet_density_foldchange(data = combined_df,
 #'                              x_var = "logFC_1",
 #'                              y_var = "logFC_2",

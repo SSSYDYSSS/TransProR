@@ -15,7 +15,6 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' # Create a sample data frame with p-values and log fold changes
 #' sample_data <- data.frame(
 #'   adj.P.Val = c(0.03, 0.06, 0.02, 0.07),
@@ -26,8 +25,6 @@
 #' # Use the filter_diff_genes function to filter significant genes
 #' filtered_genes <- filter_diff_genes(sample_data)
 #' print(filtered_genes)
-#' }
-#'
 filter_diff_genes <- function(data, p_val_col = "adj.P.Val", log_fc_col = "logFC",
                               p_val_threshold = 0.05, log_fc_threshold = 1.0) {
 

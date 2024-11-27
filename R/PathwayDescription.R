@@ -11,7 +11,6 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' GO <- c("Gene1", "Gene2", "Gene3", "Gene4", "Gene5")
 #' # Simulated enrichment analysis data
 #' enrich_data <- data.frame(
@@ -23,8 +22,7 @@
 #' )
 #'
 #' # Example usage
-#' result <- pathway_description(GO, selected_pathways_names, enrich_data)
-#' }
+#' result <- pathway_description(GO, selected_pathways_names="Apoptosis", enrich_data)
 pathway_description <- function(GO, selected_pathways_names, enrich_data) {
   # Filter selected pathways
   selected_pathways <- dplyr::filter(enrich_data, .data$Description %in% selected_pathways_names)

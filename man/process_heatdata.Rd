@@ -37,7 +37,6 @@ It allows customization of column names, selection of specific columns per group
 or averaging columns based on a common prefix.
 }
 \examples{
-\dontrun{
 # Example heatmap data frame
 heatdata <- data.frame(
   groupA_1 = c(1, 2, 3),
@@ -55,6 +54,4 @@ processed_data2 <- process_heatdata(heatdata, selection = 2, num_names_per_group
 
 # Selection 3: Calculate the average of columns per group based on a prefix
 processed_data3 <- process_heatdata(heatdata, selection = 3, prefix_length = 6)
-}
-
 }
