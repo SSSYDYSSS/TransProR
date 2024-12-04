@@ -24,21 +24,26 @@
 #' @importFrom ggdensity geom_hdr geom_hdr_rug
 #' @importFrom ggpubr stat_cor
 #' @examples
-#' \dontrun{
-#' merge_density_foldchange(data = combined_df,
-#'                     x_var = "logFC_1",
-#'                     y_var = "logFC_2",
-#'                     group_var = "name",
-#'                     palette = c("#3949ab","#1e88e5","#039be5","#00897b","#43a047","#7cb342"),
-#'                     show_points = TRUE,
-#'                     point_size = 2.5,
-#'                     point_alpha = 0.2,
-#'                     x_lim = c(0, 20),
-#'                     y_lim = c(0, 20),
-#'                     cor_method = "pearson",
-#'                     line_size = 1.6,
-#'                     cor_label_pos = c("left", 0.97))
-#' }
+#' combined_df_file <- system.file("extdata", "combined_df.rds", package = "TransProR")
+#' combined_df <- readRDS(combined_df_file)
+#' pal1 = c("#3949ab","#1e88e5","#039be5","#00897b","#43a047","#7cb342")
+#'
+#' all_density_foldchange_name1 <- merge_density_foldchange(
+#'   data = combined_df,
+#'   x_var = "log2FoldChange_1",
+#'   y_var = "log2FoldChange_2",
+#'   group_var = "name",
+#'   palette = pal1,
+#'   show_points = FALSE,
+#'   point_size = 2.5,
+#'   point_alpha = 0.1,
+#'   x_lim = c(0, 20),
+#'   y_lim = c(0, 20),
+#'   cor_method = "pearson",
+#'   line_size = 1.6,
+#'   cor_label_pos = c("left", "top")
+#' )
+#'
 #' @export
 merge_density_foldchange <- function(data, x_var, y_var, group_var,
                                    palette = c("#3949ab","#1e88e5","#039be5","#00897b","#43a047","#7cb342"),

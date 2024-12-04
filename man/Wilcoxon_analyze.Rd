@@ -28,18 +28,29 @@ A data frame of differential expression results.
 }
 \description{
 This function performs differential gene expression analysis using Wilcoxon rank-sum tests.
-It reads tumor and normal expression data, performs TMM normalization using edgeR, and uses Wilcoxon rank-sum tests to identify differentially expressed genes.
+It reads tumor and normal expression data, performs TMM normalization using 'edgeR', and uses Wilcoxon rank-sum tests to identify differentially expressed genes.
 }
 \examples{
-\dontrun{
-Wilcoxon_analyze(
-  "path/to/tumor_file.rds",
-  "path/to/normal_file.rds",
-  "path/to/output_file",
-  2.5,
-  0.05
+# Define file paths for tumor and normal data from the data folder
+tumor_file <- system.file("extdata",
+                          "removebatch_SKCM_Skin_TCGA_exp_tumor_test.rds",
+                          package = "TransProR")
+normal_file <- system.file("extdata",
+                           "removebatch_SKCM_Skin_Normal_TCGA_GTEX_count_test.rds",
+                           package = "TransProR")
+output_file <- file.path(tempdir(), "Wilcoxon_rank_sum_testoutRst.rds")
+
+# Run the Wilcoxon rank sum test
+outRst <- Wilcoxon_analyze(
+  tumor_file = tumor_file,
+  normal_file = normal_file,
+  output_file = output_file,
+  logFC_threshold = 2.5,
+  fdr_threshold = 0.01
 )
-}
+
+# View the top 5 rows of the result
+head(outRst, 5)
 }
 \references{
 Li, Y., Ge, X., Peng, F., Li, W., & Li, J. J. (2022). Exaggerated False Positives by Popular

@@ -3,11 +3,11 @@
 \name{gather_graph_node}
 \alias{gather_graph_node}
 \title{Gather graph nodes from a data frame
-Please note that this function is from the ccgraph package and has not been altered in functionality,
+Please note that this function is from the 'ggraph' package and has not been altered in functionality,
 but it has been optimized and iterated.
-It is not original content of TransProR.
-However, since ccgraph caused frequent GitHub Action errors during the creation of TransProR,
-the author directly referenced the involved functions in TransProR.
+It is not original content of 'TransProR'.
+However, since 'ggraph' caused frequent GitHub Action errors during the creation of 'TransProR',
+the author directly referenced the involved functions in 'TransProR'.
 This is not the author's original creation. All users please be aware!}
 \usage{
 gather_graph_node(
@@ -31,16 +31,23 @@ a tibble of graph nodes
 }
 \description{
 Gather graph nodes from a data frame
-Please note that this function is from the ccgraph package and has not been altered in functionality,
+Please note that this function is from the 'ggraph' package and has not been altered in functionality,
 but it has been optimized and iterated.
-It is not original content of TransProR.
-However, since ccgraph caused frequent GitHub Action errors during the creation of TransProR,
-the author directly referenced the involved functions in TransProR.
+It is not original content of 'TransProR'.
+However, since 'ggraph' caused frequent GitHub Action errors during the creation of 'TransProR',
+the author directly referenced the involved functions in 'TransProR'.
 This is not the author's original creation. All users please be aware!
 }
 \examples{
-\dontrun{
- data(OTU)
- nodes <- gather_graph_node(OTU, index = c("p", "c", "o"))
-}
+# Example taxonomic hierarchy data frame (OTU table)
+OTU <- tibble::tibble(
+  p = c("Firmicutes", "Firmicutes", "Bacteroidetes", "Bacteroidetes", "Proteobacteria"),
+  c = c("Bacilli", "Clostridia", "Bacteroidia", "Bacteroidia", "Gammaproteobacteria"),
+  o = c("Lactobacillales", "Clostridiales", "Bacteroidales", "Bacteroidales", "Enterobacterales"),
+  abundance = c(100, 150, 200, 50, 300) # Numeric values for node size
+)
+
+# Gathering graph nodes by specifying hierarchical taxonomic levels
+nodes <- gather_graph_node(OTU, index = c("p", "c", "o"))
+
 }

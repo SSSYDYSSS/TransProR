@@ -18,7 +18,7 @@
 #' @param cor_method Method to calculate correlation ("pearson" or "spearman").
 #' @param cor_label_pos Vector of length 2 indicating the position of the correlation label (x and y).
 #' @param cor_vjust Vertical justification for correlation label, default is NULL.
-#' @return A ggplot object representing the high-density region plot.
+#' @return A `ggplot` object representing the high-density region plot.
 #' @importFrom ggplot2 ggplot aes_string geom_point geom_smooth scale_fill_manual scale_color_manual facet_wrap theme margin
 #' @importFrom ggdensity geom_hdr geom_hdr_rug
 #' @importFrom ggpubr stat_cor
@@ -26,22 +26,25 @@
 #' @importFrom grid unit
 #' @importFrom stats as.formula
 #' @examples
-#' \dontrun{
-#' pal1 = c("#3949ab","#1e88e5","#039be5","#00897b","#43a047","#7cb342")
-#' facet_density_foldchange(data = combined_df,
-#'                              x_var = "logFC_1",
-#'                              y_var = "logFC_2",
-#'                              group_var = "change/name",
-#'                              facet_var = "name",
-#'                              palette = pal1,
-#'                              show_points = TRUE,
-#'                              show_density = TRUE,
-#'                              point_size = 2.5,
-#'                              point_alpha = 0.1,
-#'                              line_size = 1.6,
-#'                              cor_method = "pearson",
-#'                              cor_label_pos = c("left", 0.97))
-#' }
+#' combined_df_file <- system.file("extdata", "combined_df.rds", package = "TransProR")
+#' combined_df <- readRDS(combined_df_file)
+#' pal2 = c("#2787e0","#1a9ae0","#1dabbf","#00897b","#43a047","#7cb342")
+#' all_facet_density_foldchange_name1 <- facet_density_foldchange(
+#'   data = combined_df,
+#'   x_var = "log2FoldChange_1",
+#'   y_var = "log2FoldChange_2",
+#'   group_var = "name",
+#'   facet_var = "name",
+#'   palette = pal2,
+#'   show_points = TRUE,
+#'   show_density = FALSE,
+#'   point_size = 2,
+#'   point_alpha = 0.1,
+#'   line_size = 1.6,
+#'   cor_method = "pearson",
+#'   cor_label_pos = c("left", "top"),
+#'   cor_vjust = 1
+#' )
 #' @export
 facet_density_foldchange <- function(data,
                                      x_var,
@@ -97,6 +100,6 @@ facet_density_foldchange <- function(data,
                    plot.background = ggplot2::element_rect(fill = "white", color = "white"),
                    panel.spacing = grid::unit(2, "mm"))
 
-  # Return the ggplot object
+  # Return the `ggplot` object
   return(plot)
 }

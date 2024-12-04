@@ -1,6 +1,6 @@
 #' Create a base plot with gene expression data on a phylogenetic tree
 #'
-#' This function creates a base plot using ggtree and ggtreeExtra libraries, adding gene expression
+#' This function creates a base plot using 'ggtree' and 'ggtreeExtra' libraries, adding gene expression
 #' data as colored tiles to the plot. It allows for dynamic coloring of the genes and includes
 #' adjustments for alpha transparency based on the expression value.
 #'
@@ -10,19 +10,32 @@
 #' @param data A data frame containing gene expression data with columns for Samples, Genes, and Values.
 #' @param gene_colors A named vector of colors for genes.
 #' @param gene_label A character string used as a label in the legend for the genes. Default is "Gene".
-#' @return A ggtree plot object with the gene expression data added.
+#' @return A `ggtree` plot object with the gene expression data added.
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' # Assuming 'tree' is a phylogenetic tree object and 'expression_data' is a dataframe
-#' # containing columns 'Sample', 'Gene', and 'Value' where 'Value' represents gene expression levels
-#' library(ggtree)
-#' p <- ggtree::ggtree(tree)
-#' gene_colors <- c("#491588", "#301b8d", "#1a237a", "#11479c",
-#'                  "#0a5797","#0b5f63","#074d41","#1f5e27","#366928","#827729")
+#' file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
+#' p <- readRDS(file_path)
+#'
+#' # Create gene expression data frame
+#' expression_data <- data.frame(
+#'   Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 5),
+#'   Gene = rep(paste0("Gene", 1:5), times = 4),
+#'   Value = runif(20, min = 0, max = 1)  # Randomly generate expression values between 0 and 1
+#' )
+#'
+#' # Define gene colors (named vector)
+#' gene_colors <- c(
+#'   Gene1 = "#491588",
+#'   Gene2 = "#301b8d",
+#'   Gene3 = "#1a237a",
+#'   Gene4 = "#11479c",
+#'   Gene5 = "#0a5797"
+#' )
+#'
+#' # Call create_base_plot function to add gene expression data
 #' p <- create_base_plot(p, expression_data, gene_colors)
-#' print(p)
 #' }
 create_base_plot <- function(p, data, gene_colors, gene_label="Gene") {
   # Define local variables
@@ -31,6 +44,10 @@ create_base_plot <- function(p, data, gene_colors, gene_label="Gene") {
   Gene <- data$Gene
   if (!requireNamespace("ggtreeExtra", quietly = TRUE)) {
     stop("ggtreeExtra is required for using create_base_plot. Please install it.", call. = FALSE)
+  }
+
+  if (!requireNamespace("ggplot2", quietly = TRUE)) {
+    stop("ggplot2 is required to use geom_tile. Please install it.", call. = FALSE)
   }
 
   p <- p +
@@ -53,9 +70,9 @@ create_base_plot <- function(p, data, gene_colors, gene_label="Gene") {
 
 
 
-#' Add a boxplot layer to a ggtree plot
+#' Add a boxplot layer to a `ggtree` plot
 #'
-#' This function adds a boxplot layer to an existing ggtree plot object using ggtreeExtra's geom_fruit for boxplots.
+#' This function adds a boxplot layer to an existing `ggtree` plot object using ggtreeExtra's geom_fruit for boxplots.
 #' It is primarily used to display statistical summaries of the data related to gene expressions or other metrics.
 #'
 #' @importFrom ggplot2 aes
@@ -66,15 +83,27 @@ create_base_plot <- function(p, data, gene_colors, gene_label="Gene") {
 #' @param alpha Numeric value for the transparency of the boxplots. Default is 0.6.
 #' @param offset Numeric value, the position of the boxplot on the x-axis relative to its gene name. Default is 0.22.
 #' @param pwidth Numeric value, the width of the boxplot. Default is 0.5.
-#' @return A ggtree plot object with the added boxplot layer.
+#' @return A `ggtree` plot object with the added boxplot layer.
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' # Assuming 'p' is an already created ggtree plot and 'data' is a dataframe
-#' # with required columns 'Sample' and 'value'
-#' p <- add_boxplot(p, data)
-#' print(p)
+#' file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
+#' p <- readRDS(file_path)
+#'
+#' # Create boxplot data frame
+#' boxplot_data <- data.frame(
+#'   Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 30),
+#'   value = c(
+#'     rnorm(30, mean = 5, sd = 1),   # Data for Species_A
+#'     rnorm(30, mean = 7, sd = 1.5), # Data for Species_B
+#'     rnorm(30, mean = 6, sd = 1.2), # Data for Species_C
+#'     rnorm(30, mean = 8, sd = 1.3)  # Data for Species_D
+#'   )
+#' )
+#'
+#' # Call add_boxplot function to add boxplot layer
+#' p_with_boxplot <- add_boxplot(p, boxplot_data)
 #' }
 add_boxplot <- function(p, data, fill_color="#f28131", alpha=0.6, offset=0.22, pwidth=0.5) {
   # Define local variables
@@ -82,6 +111,10 @@ add_boxplot <- function(p, data, fill_color="#f28131", alpha=0.6, offset=0.22, p
   value <- data$value
   if (!requireNamespace("ggtreeExtra", quietly = TRUE)) {
     stop("ggtreeExtra is required for using create_base_plot. Please install it.", call. = FALSE)
+  }
+
+  if (!requireNamespace("ggplot2", quietly = TRUE)) {
+    stop("ggplot2 is required to use geom_boxplot. Please install it.", call. = FALSE)
   }
 
   p + ggtreeExtra::geom_fruit(
@@ -103,11 +136,11 @@ add_boxplot <- function(p, data, fill_color="#f28131", alpha=0.6, offset=0.22, p
 
 
 
-#' Add a new tile layer with dynamic scales to a ggtree plot
+#' Add a new tile layer with dynamic scales to a `ggtree` plot
 #'
-#' This function adds a new tile layer to an existing ggtree plot object, allowing for separate scales for fill
+#' This function adds a new tile layer to an existing `ggtree` plot object, allowing for separate scales for fill
 #' and alpha transparency. This is useful when you want to add additional data layers without interfering with
-#' the existing scales in the plot. It utilizes the ggnewscale package to reset scales for new layers.
+#' the existing scales in the plot. It utilizes the 'ggnewscale' package to reset scales for new layers.
 #'
 #' @importFrom ggplot2 aes scale_fill_manual guide_legend
 #' @importFrom ggnewscale new_scale
@@ -119,16 +152,42 @@ add_boxplot <- function(p, data, fill_color="#f28131", alpha=0.6, offset=0.22, p
 #' @param alpha_value A numeric or named vector for setting the alpha scale based on values.
 #' @param offset Numeric value, the position of the tile on the x-axis relative to its gene name. Default is 0.02.
 #' @param pwidth Numeric value, the width of the tile. Default is 2.
-#' @return A ggtree plot object with the added tile layer and new scales.
+#' @return A `ggtree` plot object with the added tile layer and new scales.
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' # Assuming 'p' is an already created ggtree plot and 'data' is a dataframe
-#' # containing columns 'Sample', 'Gene', and 'value'
-#' gene_colors <- c("gene1" = "#491588", "gene2" = "#301b8d")
-#' p <- add_new_tile_layer(p, data, gene_colors, "Gene Label", c(0.3, 0.9))
-#' print(p)
+#' file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
+#' p <- readRDS(file_path)
+#'
+#' # Create new expression data
+#' new_expression_data <- data.frame(
+#'   Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 3),
+#'   Gene = rep(c("Gene6", "Gene7", "Gene8"), times = 4),
+#'   Value = runif(12, min = 0, max = 1)  # Randomly generate expression values between 0 and 1
+#' )
+#'
+#' # Define new gene colors
+#' new_gene_colors <- c(
+#'   Gene6 = "#0b5f63",
+#'   Gene7 = "#074d41",
+#'   Gene8 = "#1f5e27"
+#' )
+#'
+#' # Define gene label and alpha values
+#' gene_label <- "New Genes"
+#' alpha_value <- c(0.3, 0.9)
+#'
+#' # Add new tile layer
+#' p_with_new_layer <- add_new_tile_layer(
+#'   p,
+#'   new_expression_data,
+#'   new_gene_colors,
+#'   gene_label,
+#'   alpha_value,
+#'   offset = 0.02,
+#'   pwidth = 2
+#' )
 #' }
 add_new_tile_layer <- function(p, data, gene_colors, gene_label, alpha_value=c(0.3, 0.9), offset=0.02, pwidth=2) {
   # Define local variables
@@ -137,6 +196,10 @@ add_new_tile_layer <- function(p, data, gene_colors, gene_label, alpha_value=c(0
   Gene <- data$Gene
   if (!requireNamespace("ggtreeExtra", quietly = TRUE)) {
     stop("ggtreeExtra is required for using create_base_plot. Please install it.", call. = FALSE)
+  }
+
+  if (!requireNamespace("ggplot2", quietly = TRUE)) {
+    stop("ggplot2 is required to use geom_tile. Please install it.", call. = FALSE)
   }
 
   p + ggnewscale::new_scale("alpha") + ggnewscale::new_scale("fill") +
@@ -158,35 +221,84 @@ add_new_tile_layer <- function(p, data, gene_colors, gene_label, alpha_value=c(0
 
 
 
-#' Add multiple layers to a ggtree plot for visualizing gene expression and enrichment data
+#' Add multiple layers to a `ggtree` plot for visualizing gene expression and enrichment data
 #'
-#' This function sequentially adds multiple layers to a ggtree plot, including gene expression data, boxplots for statistical
+#' This function sequentially adds multiple layers to a `ggtree` plot, including gene expression data, boxplots for statistical
 #' summaries, and additional tile layers for pathway enrichment scores from SSGSEA and GSVA analyses. It utilizes separate
 #' functions for adding each type of layer and allows for the specification of gene colors as well as adjustments in aesthetics
 #' for each layer. The function is designed to work with specific data structures and assumes all functions for adding layers
 #' are defined and available.
 #'
-#' @param p A ggtree plot object to which the data and layers will be added.
-#' @param long_format_HeatdataDeseq A data frame containing gene expression data with columns for Samples, Genes, and Values.
-#' @param ssgsea_kegg_HeatdataDeseq A data frame containing SSGSEA analysis results with columns for Samples, Genes, and Values.
-#' @param gsva_kegg_HeatdataDeseq A data frame containing GSVA analysis results with columns for Samples, Genes, and Values.
+#' @param p A `ggtree` plot object to which the data and layers will be added.
+#' @param long_format_HeatdataDeseq A data frame containing gene expression data with columns for `Samples`, `Genes`, and `Values`.
+#' @param ssgsea_kegg_HeatdataDeseq A data frame containing SSGSEA analysis results with columns for `Samples`, `Genes`, and `Values`.
+#' @param gsva_kegg_HeatdataDeseq A data frame containing GSVA analysis results with columns for `Samples`, `Genes`, and `Values`.
 #' @param gene_colors A named vector of colors for genes, used for coloring tiles in different layers.
-#' @return A ggtree plot object with multiple layers added for comprehensive visualization.
+#' @return A `ggtree` plot object with multiple layers added for comprehensive visualization.
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' # Assuming 'p' is an already created ggtree plot and 'data' structures are prepared
-#' gene_colors <- c("#491588", "#301b8d", "#1a237a", "#11479c", "#0a5797","#0b5f63",
-#'                  "#074d41","#1f5e27","#366928","#827729")
-#' final_plot <- circos_fruits(p,
-#'                             long_format_HeatdataDeseq,
-#'                             ssgsea_kegg_HeatdataDeseq,
-#'                             gsva_kegg_HeatdataDeseq,
-#'                             gene_colors)
-#' print(final_plot)
+#' file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
+#' p <- readRDS(file_path)
+#'
+#' # Create gene expression data frame (long_format_HeatdataDeseq)
+#' long_format_HeatdataDeseq <- data.frame(
+#'   Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 5),
+#'   Genes = rep(paste0("Gene", 1:5), times = 4),
+#'   Value = runif(20, min = 0, max = 1)  # Randomly generate expression values between 0 and 1
+#' )
+#'
+#' # Create SSGSEA analysis results data frame (ssgsea_kegg_HeatdataDeseq)
+#' ssgsea_kegg_HeatdataDeseq <- data.frame(
+#'   Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 3),
+#'   Genes = rep(c("Pathway1", "Pathway2", "Pathway3"), times = 4),
+#'   Value = runif(12, min = 0, max = 1)  # Randomly generate enrichment scores between 0 and 1
+#' )
+#'
+#' # Create GSVA analysis results data frame (gsva_kegg_HeatdataDeseq)
+#' gsva_kegg_HeatdataDeseq <- data.frame(
+#'   Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 4),
+#'   Genes = rep(c("PathwayA", "PathwayB", "PathwayC", "PathwayD"), times = 4),
+#'   Value = runif(16, min = 0, max = 1)  # Randomly generate enrichment scores between 0 and 1
+#' )
+#'
+#' # Define gene and pathway colors (named vector), including all genes and pathways
+#' gene_colors <- c(
+#'   # Genes for gene expression
+#'   Gene1 = "#491588",
+#'   Gene2 = "#301b8d",
+#'   Gene3 = "#1a237a",
+#'   Gene4 = "#11479c",
+#'   Gene5 = "#0a5797",
+#'   # Pathways for SSGSEA
+#'   Pathway1 = "#0b5f63",
+#'   Pathway2 = "#074d41",
+#'   Pathway3 = "#1f5e27",
+#'   # Pathways for GSVA
+#'   PathwayA = "#366928",
+#'   PathwayB = "#827729",
+#'   PathwayC = "#a1d99b",
+#'   PathwayD = "#c7e9c0"
+#' )
+#'
+#' # Call circos_fruits function to add multiple layers
+#' final_plot <- circos_fruits(
+#'   p,
+#'   long_format_HeatdataDeseq,
+#'   ssgsea_kegg_HeatdataDeseq,
+#'   gsva_kegg_HeatdataDeseq,
+#'   gene_colors
+#' )
 #' }
 circos_fruits <- function(p, long_format_HeatdataDeseq, ssgsea_kegg_HeatdataDeseq, gsva_kegg_HeatdataDeseq, gene_colors) {
+  if (!requireNamespace("ggtreeExtra", quietly = TRUE)) {
+    stop("ggtreeExtra is required for using create_base_plot. Please install it.", call. = FALSE)
+  }
+
+  if (!requireNamespace("ggplot2", quietly = TRUE)) {
+    stop("ggplot2 is required to use geom_tile. Please install it.", call. = FALSE)
+  }
   # Create the base plot with gene expression data
   p1 <- create_base_plot(p, long_format_HeatdataDeseq, gene_colors)
 

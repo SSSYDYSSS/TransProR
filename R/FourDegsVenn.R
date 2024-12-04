@@ -6,14 +6,9 @@
 #' @param df A data frame containing gene expression data.
 #' @return A vector of gene names that are differentially expressed.
 #' @examples
-#' \dontrun{
-#' all_degs_venn11 <- list(
-#' DESeq2 = deg_filter(DEG_deseq2),
-#' edgeR = deg_filter(DEG_edgeR),
-#' limma = deg_filter(DEG_limma_voom),
-#' Wilcoxon_test = deg_filter(outRst)
-#' )
-#' }
+#' DEG_deseq2_file <- system.file("extdata", "DEG_deseq2.rds", package = "TransProR")
+#' DEG_deseq2 <- readRDS(DEG_deseq2_file)
+#' DEG_deseq2_test <- deg_filter(DEG_deseq2)
 #' @export
 
 deg_filter <- function(df){
@@ -30,9 +25,8 @@ deg_filter <- function(df){
 #' @param degs_list A list of DEG sets for Venn Diagram creation.
 #' @return A ggplot object representing the Venn Diagram.
 #' @examples
-#' \dontrun{
-#' four_degs_venn(all_degs_venn11)
-#' }
+#' data("all_degs_venn", package = "TransProR")
+#' four_degs_venn <- four_degs_venn(all_degs_venn)
 #' @export
 
 four_degs_venn <- function(degs_list){
@@ -41,7 +35,7 @@ four_degs_venn <- function(degs_list){
                    ggplot2::alpha("#337c3a", 0.5), ggplot2::alpha("#9e9d39", 0.5))
   edge_color <- ggplot2::alpha(c("#1b64bb","#13828e","#337c3a","#9e9d39"), 0.8)
 
-  # Creating a Venn Diagram using ggVennDiagram
+  # Creating a Venn Diagram using 'ggVennDiagram'
   ggVennDiagram::ggVennDiagram(
     degs_list,
     set_size = 5,  # Font size for group names

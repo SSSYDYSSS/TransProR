@@ -1,6 +1,6 @@
 #' Enrichment Polar Bubble Plot
 #'
-#' This function creates a polar bubble plot using ggplot2. It is designed to visually represent data with methods and positional metrics integrated, highlighting specific IDs if necessary.
+#' This function creates a polar bubble plot using 'ggplot2'. It is designed to visually represent data with methods and positional metrics integrated, highlighting specific IDs if necessary.
 #'
 #' @param final_combined_df_with_id_and_position A data frame containing 'id', 'Count', 'method', 'Description', 'point_position', 'test_color'.
 #' @param pal A named vector of colors corresponding to the 'method' values.
@@ -12,9 +12,8 @@
 #' @importFrom geomtextpath geom_textpath
 #' @importFrom ggalt stat_xspline
 #' @importFrom ggnewscale new_scale_fill
-#' @return A ggplot object representing the enriched polar bubble plot.
+#' @return A `ggplot` object representing the enriched polar bubble plot.
 #' @examples
-#' \dontrun{
 #'   final_df <- data.frame(id = 1:10, Count = c(10, 20, 30, 40, 50, 60, 70, 80, 90, 100),
 #'                          method = rep("Method1", 10),
 #'                          Description = LETTERS[1:10],
@@ -23,7 +22,6 @@
 #'   pal <- c("Method1" = "blue")
 #'   highlight_ids <- c(1, 5, 9)
 #'   enrich_polar_bubble(final_df, pal, highlight_ids)
-#' }
 #' @export
 enrich_polar_bubble <- function(final_combined_df_with_id_and_position, pal, highlight_ids) {
   # Extract unique levels of point_position and prepend 0

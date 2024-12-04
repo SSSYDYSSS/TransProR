@@ -22,7 +22,10 @@
 #' )
 #'
 #' # Example usage
-#' result <- pathway_description(GO, selected_pathways_names="Apoptosis", enrich_data)
+#' result <- pathway_description(GO,
+#'                               selected_pathways_names="Apoptosis",
+#'                               enrich_data)
+#'
 pathway_description <- function(GO, selected_pathways_names, enrich_data) {
   # Filter selected pathways
   selected_pathways <- dplyr::filter(enrich_data, .data$Description %in% selected_pathways_names)

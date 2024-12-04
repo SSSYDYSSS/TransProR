@@ -43,18 +43,22 @@ text aligned to the right of the color block, while the right side legend has te
 to the left of the color block.
 }
 \examples{
-\dontrun{
-  labels <- c("Label1", "Label2", "Label3", "Label4", "Label5", "Label6")
-  colors <- c("#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff")
-  # Example using explicit namespace for grid functions
-  grid::grid.roundrect(x = 0.5,
-                       y = 0.5,
-                       width = 0.1,
-                       height = 0.05,
-                       gp = grid::gpar(fill = "red"),
-                       r = 0.1)
-  drawLegends(labels, colors, grid::unit(2, "cm"), c(0.225, 0.75), 0.5,
-              list(c("left", "center"), c("right", "center")),
-              list("right", "left"), 10)
-}
+labels <- c("Label1", "Label2", "Label3", "Label4", "Label5", "Label6")
+colors <- c("#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff")
+
+# Convert to 'unit' objects for grid
+grid::grid.roundrect(
+  x = grid::unit(0.5, "npc"),  # "npc" stands for normalized parent coordinates
+  y = grid::unit(0.5, "npc"),
+  width = grid::unit(0.1, "npc"),
+  height = grid::unit(0.05, "npc"),
+  gp = grid::gpar(fill = "red"),
+  r = grid::unit(0.1, "npc")  # rounding radius
+)
+
+# Example of drawing legends with specific labels and colors
+drawLegends(labels, colors, grid::unit(2, "cm"), c(0.225, 0.75), 0.5,
+            list(c("left", "center"), c("right", "center")),
+            list("right", "left"), 10)
+
 }

@@ -1,11 +1,11 @@
 Package: TransProR
 Type: Package
 Title: Analysis and Visualization of Multi-Omics Data
-Version: 0.0.3
+Version: 0.0.5
 Authors@R: person("Dongyue", "Yu",     email = "yudongyue@mail.nankai.edu.cn", role = c("aut", "cre", "cph"),
             comment = c(ORCID = "0000-0002-7041-2073"))
 Maintainer: Dongyue Yu <yudongyue@mail.nankai.edu.cn>
-Description: TransProR is an R package designed for comprehensive transcriptomic data analysis, with a focus on transcript-level data preprocessing, expression profiling, differential expression analysis, and functional enrichment. It enables researchers to identify key biological processes, disease biomarkers, and gene regulatory mechanisms. TransproR is aimed at researchers and bioinformaticians working with RNA-Seq data, providing an intuitive framework for in-depth analysis and visualization of transcriptomic datasets. The package includes comprehensive documentation and usage examples to guide users through the entire analysis pipeline. The differential expression analysis methods incorporated in the package include limma (Ritchie et al., 2015, <doi:10.1093/nar/gkv007>; Smyth, 2005, <doi:10.1007/0-387-29362-0_23>), edgeR (Robinson et al., 2010, <doi:10.1093/bioinformatics/btp616>), DESeq2 (Love et al., 2014, <doi:10.1186/s13059-014-0550-8>), and Wilcoxon tests (Li et al., 2022, <doi:10.1186/s13059-022-02648-4>), providing flexible and robust approaches to RNA-Seq data analysis. For more information, refer to the package vignettes and related publications.
+Description: A tool for comprehensive transcriptomic data analysis, with a focus on transcript-level data preprocessing, expression profiling, differential expression analysis, and functional enrichment. It enables researchers to identify key biological processes, disease biomarkers, and gene regulatory mechanisms. 'TransProR' is aimed at researchers and bioinformaticians working with RNA-Seq data, providing an intuitive framework for in-depth analysis and visualization of transcriptomic datasets. The package includes comprehensive documentation and usage examples to guide users through the entire analysis pipeline. The differential expression analysis methods incorporated in the package include 'limma' (Ritchie et al., 2015, <doi:10.1093/nar/gkv007>; Smyth, 2005, <doi:10.1007/0-387-29362-0_23>), 'edgeR' (Robinson et al., 2010, <doi:10.1093/bioinformatics/btp616>), 'DESeq2' (Love et al., 2014, <doi:10.1186/s13059-014-0550-8>), and Wilcoxon tests (Li et al., 2022, <doi:10.1186/s13059-022-02648-4>), providing flexible and robust approaches to RNA-Seq data analysis. For more information, refer to the package vignettes and related publications.
 Imports: 
     magrittr,
     stats,

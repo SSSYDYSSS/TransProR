@@ -36,21 +36,26 @@ Users need to adjust the batch and group vectors based on real-life scenarios.
 }
 \details{
 This function takes a tumor data set, asks the user for specific tumor types to retain,
-and then corrects for batch effects using the ComBat_seq function from the sva package.
+and then corrects for batch effects using the ComBat_seq function from the 'sva' package.
 
 
 The ComBat_seq function from the sva package is used to correct batch effects.
-The function requires the sva package to be installed and loaded externally.
+The function requires the 'sva' package to be installed and loaded externally.
 }
 \examples{
-\dontrun{
-corrected_data <- combat_tumor(
-    "tumor_data_path",
-    "CombatTumor_output_path",
-    auto_mode = FALSE,
-    default_input = "01,06"
-    )
-}
+tumor_file <- system.file("extdata",
+                          "SKCM_Skin_TCGA_exp_tumor_test.rds",
+                          package = "TransProR")
+output_file <- file.path(tempdir(), "SKCM_combat_count.rds")
+
+  SKCM_combat_count <- combat_tumor(
+  tumor_data_path = tumor_file,
+  CombatTumor_output_path = output_file,
+  auto_mode = TRUE,
+  default_input = "01,06"
+)
+
+head(SKCM_combat_count)[1:5, 1:5]
 
 }
 \seealso{

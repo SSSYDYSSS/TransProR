@@ -14,14 +14,24 @@ highlight_genes(ggtree_obj, genes_to_highlight, hilight_extend = 18)
 \item{hilight_extend}{Numeric value indicating the extension length for highlights.}
 }
 \value{
-A ggtree object with added highlights for specified genes.
+A `ggtree` object with added highlights for specified genes.
 }
 \description{
 This function adds highlights for specified genes on a phylogenetic tree object.
 }
 \examples{
-\dontrun{
-# Example usage
-highlighted_tree <- add_gene_highlights(tree, genes_to_highlight, hilight_extend = 18)
-}
+plot_file <- system.file("extdata", "tree_plot.rds", package = "TransProR")
+p2_plot <- readRDS(plot_file)
+
+selected_genes_deseq2_file <- system.file("extdata",
+                                          "selected_genes_deseq2.rds",
+                                          package = "TransProR")
+selected_genes_deseq2 <- readRDS(selected_genes_deseq2_file)
+
+Diff_deseq2_file <- system.file("extdata", "Diff_deseq2.rds", package = "TransProR")
+Diff_deseq2 <- readRDS(Diff_deseq2_file)
+
+result_deseq2 <- gene_color(selected_genes_deseq2, Diff_deseq2, "#0000EE", "#fc4746")
+
+add_gene_highlights_p3 <- highlight_genes(p2_plot, result_deseq2, hilight_extend = 26)
 }

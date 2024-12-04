@@ -2,7 +2,7 @@
 % Please edit documentation in R/CircosFruits.R
 \name{circos_fruits}
 \alias{circos_fruits}
-\title{Add multiple layers to a ggtree plot for visualizing gene expression and enrichment data}
+\title{Add multiple layers to a `ggtree` plot for visualizing gene expression and enrichment data}
 \usage{
 circos_fruits(
   p,
@@ -13,21 +13,21 @@ circos_fruits(
 )
 }
 \arguments{
-\item{p}{A ggtree plot object to which the data and layers will be added.}
+\item{p}{A `ggtree` plot object to which the data and layers will be added.}
 
-\item{long_format_HeatdataDeseq}{A data frame containing gene expression data with columns for Samples, Genes, and Values.}
+\item{long_format_HeatdataDeseq}{A data frame containing gene expression data with columns for `Samples`, `Genes`, and `Values`.}
 
-\item{ssgsea_kegg_HeatdataDeseq}{A data frame containing SSGSEA analysis results with columns for Samples, Genes, and Values.}
+\item{ssgsea_kegg_HeatdataDeseq}{A data frame containing SSGSEA analysis results with columns for `Samples`, `Genes`, and `Values`.}
 
-\item{gsva_kegg_HeatdataDeseq}{A data frame containing GSVA analysis results with columns for Samples, Genes, and Values.}
+\item{gsva_kegg_HeatdataDeseq}{A data frame containing GSVA analysis results with columns for `Samples`, `Genes`, and `Values`.}
 
 \item{gene_colors}{A named vector of colors for genes, used for coloring tiles in different layers.}
 }
 \value{
-A ggtree plot object with multiple layers added for comprehensive visualization.
+A `ggtree` plot object with multiple layers added for comprehensive visualization.
 }
 \description{
-This function sequentially adds multiple layers to a ggtree plot, including gene expression data, boxplots for statistical
+This function sequentially adds multiple layers to a `ggtree` plot, including gene expression data, boxplots for statistical
 summaries, and additional tile layers for pathway enrichment scores from SSGSEA and GSVA analyses. It utilizes separate
 functions for adding each type of layer and allows for the specification of gene colors as well as adjustments in aesthetics
 for each layer. The function is designed to work with specific data structures and assumes all functions for adding layers
@@ -35,14 +35,56 @@ are defined and available.
 }
 \examples{
 \dontrun{
-# Assuming 'p' is an already created ggtree plot and 'data' structures are prepared
-gene_colors <- c("#491588", "#301b8d", "#1a237a", "#11479c", "#0a5797","#0b5f63",
-                 "#074d41","#1f5e27","#366928","#827729")
-final_plot <- circos_fruits(p,
-                            long_format_HeatdataDeseq,
-                            ssgsea_kegg_HeatdataDeseq,
-                            gsva_kegg_HeatdataDeseq,
-                            gene_colors)
-print(final_plot)
+file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
+p <- readRDS(file_path)
+
+# Create gene expression data frame (long_format_HeatdataDeseq)
+long_format_HeatdataDeseq <- data.frame(
+  Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 5),
+  Genes = rep(paste0("Gene", 1:5), times = 4),
+  Value = runif(20, min = 0, max = 1)  # Randomly generate expression values between 0 and 1
+)
+
+# Create SSGSEA analysis results data frame (ssgsea_kegg_HeatdataDeseq)
+ssgsea_kegg_HeatdataDeseq <- data.frame(
+  Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 3),
+  Genes = rep(c("Pathway1", "Pathway2", "Pathway3"), times = 4),
+  Value = runif(12, min = 0, max = 1)  # Randomly generate enrichment scores between 0 and 1
+)
+
+# Create GSVA analysis results data frame (gsva_kegg_HeatdataDeseq)
+gsva_kegg_HeatdataDeseq <- data.frame(
+  Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 4),
+  Genes = rep(c("PathwayA", "PathwayB", "PathwayC", "PathwayD"), times = 4),
+  Value = runif(16, min = 0, max = 1)  # Randomly generate enrichment scores between 0 and 1
+)
+
+# Define gene and pathway colors (named vector), including all genes and pathways
+gene_colors <- c(
+  # Genes for gene expression
+  Gene1 = "#491588",
+  Gene2 = "#301b8d",
+  Gene3 = "#1a237a",
+  Gene4 = "#11479c",
+  Gene5 = "#0a5797",
+  # Pathways for SSGSEA
+  Pathway1 = "#0b5f63",
+  Pathway2 = "#074d41",
+  Pathway3 = "#1f5e27",
+  # Pathways for GSVA
+  PathwayA = "#366928",
+  PathwayB = "#827729",
+  PathwayC = "#a1d99b",
+  PathwayD = "#c7e9c0"
+)
+
+# Call circos_fruits function to add multiple layers
+final_plot <- circos_fruits(
+  p,
+  long_format_HeatdataDeseq,
+  ssgsea_kegg_HeatdataDeseq,
+  gsva_kegg_HeatdataDeseq,
+  gene_colors
+)
 }
 }

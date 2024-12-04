@@ -21,7 +21,9 @@ and transforms P.Value for plotting. The final data frame is returned and
 optionally saved to a new RDS file.
 }
 \examples{
-\dontrun{
-prep_limma("Select DEGs/DEG_limma_voom.Rdata", "Processed_DEG_limma_voom")
-}
+limma_file <- system.file("extdata",
+                          "DEG_limma_voom_test.rds",
+                          package = "TransProR")
+limma <- prep_limma(limma_file)
+
 }

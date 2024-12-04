@@ -2,7 +2,7 @@
 #'
 #' This function merges multiple gene-pathway related dataframes, processes them
 #' for graph creation, and visualizes the relationships in a dendrogram layout using
-#' the provided node and edge gathering functions from the ccgraph package.
+#' the provided node and edge gathering functions from the 'ggraph' package.
 #'
 #' @param BP_dataframe Dataframe for Biological Process.
 #' @param BP_ids IDs for Biological Process.
@@ -19,20 +19,75 @@
 #' @importFrom tidygraph tbl_graph
 #' @importFrom ggraph ggraph geom_edge_diagonal geom_node_point geom_node_text scale_edge_colour_brewer node_angle
 #' @importFrom ggplot2 theme element_rect scale_size scale_color_brewer coord_cartesian
-#' @return A ggraph object representing the pathway gene map visualization.
+#' @return A 'ggraph' object representing the pathway gene map visualization.
 #' @export
 #' @examples
-#' \dontrun{
-#'   new_ggraph(
-#'     BP_dataframe = erich.go.BP.outdata_deseq2, BP_ids = c("GO:0009913", "GO:0031424", "GO:0030216"),
-#'     KEGG_dataframe = kegg.out1.outdata_deseq2, KEGG_ids = c("hsa05150", "hsa04915", "hsa04970"),
-#'     MF_dataframe = erich.go.MF.outdata_deseq2, MF_ids = c("GO:0030280", "GO:0034987"),
-#'     REACTOME_dataframe = erich.go.Reactome.outdata_deseq2, REACTOME_ids = c("R-HSA-6809371"),
-#'     CC_dataframe = erich.go.CC.outdata_deseq2, CC_ids = c("GO:0072562", "GO:0042571", "GO:0071735"),
-#'     DO_dataframe = erich.go.DO.outdata_deseq2, DO_ids = c("DOID:0060121",
-#'     "DOID:3165", "DOID:11132", "DOID:421")
-#'   )
-#' }
+#' # Example Biological Process (BP) DataFrame
+#' BP_dataframe <- data.frame(
+#'   ID = c("BP1", "BP2"),
+#'   Description = c("Biological Process 1", "Biological Process 2"),
+#'   geneID = c("GeneA/GeneB/GeneC", "GeneD/GeneE"),
+#'   stringsAsFactors = FALSE
+#' )
+#'
+#' # Example KEGG DataFrame
+#' KEGG_dataframe <- data.frame(
+#'   ID = c("KEGG1", "KEGG2"),
+#'   Description = c("KEGG Pathway 1", "KEGG Pathway 2"),
+#'   geneID = c("GeneA/GeneD", "GeneB/GeneF"),
+#'   stringsAsFactors = FALSE
+#' )
+#'
+#' # Example Molecular Function (MF) DataFrame
+#' MF_dataframe <- data.frame(
+#'   ID = c("MF1", "MF2"),
+#'   Description = c("Molecular Function 1", "Molecular Function 2"),
+#'   geneID = c("GeneC/GeneE", "GeneF/GeneG"),
+#'   stringsAsFactors = FALSE
+#' )
+#'
+#' # Example Reactome DataFrame
+#' REACTOME_dataframe <- data.frame(
+#'   ID = c("REACTOME1", "REACTOME2"),
+#'   Description = c("Reactome Pathway 1", "Reactome Pathway 2"),
+#'   geneID = c("GeneA/GeneF", "GeneB/GeneG"),
+#'   stringsAsFactors = FALSE
+#' )
+#'
+#' # Example Cellular Component (CC) DataFrame
+#' CC_dataframe <- data.frame(
+#'   ID = c("CC1", "CC2"),
+#'   Description = c("Cellular Component 1", "Cellular Component 2"),
+#'   geneID = c("GeneC/GeneD", "GeneE/GeneH"),
+#'   stringsAsFactors = FALSE
+#' )
+#'
+#' # Example Disease Ontology (DO) DataFrame
+#' DO_dataframe <- data.frame(
+#'   ID = c("DO1", "DO2"),
+#'   Description = c("Disease Ontology 1", "Disease Ontology 2"),
+#'   geneID = c("GeneF/GeneH", "GeneA/GeneI"),
+#'   stringsAsFactors = FALSE
+#' )
+#'
+#' # Example IDs vectors for each category
+#' BP_ids <- c("BP1", "BP2")
+#' KEGG_ids <- c("KEGG1", "KEGG2")
+#' MF_ids <- c("MF1", "MF2")
+#' REACTOME_ids <- c("REACTOME1", "REACTOME2")
+#' CC_ids <- c("CC1", "CC2")
+#' DO_ids <- c("DO1", "DO2")
+#'
+#' # Running the `new_ggraph` function to plot a graph
+#' plot <- new_ggraph(
+#'   BP_dataframe = BP_dataframe, BP_ids = BP_ids,
+#'   KEGG_dataframe = KEGG_dataframe, KEGG_ids = KEGG_ids,
+#'   MF_dataframe = MF_dataframe, MF_ids = MF_ids,
+#'   REACTOME_dataframe = REACTOME_dataframe, REACTOME_ids = REACTOME_ids,
+#'   CC_dataframe = CC_dataframe, CC_ids = CC_ids,
+#'   DO_dataframe = DO_dataframe, DO_ids = DO_ids
+#' )
+#'
 new_ggraph <- function(BP_dataframe, BP_ids, KEGG_dataframe, KEGG_ids,
                        MF_dataframe, MF_ids, REACTOME_dataframe, REACTOME_ids,
                        CC_dataframe, CC_ids, DO_dataframe, DO_ids) {
@@ -41,12 +96,12 @@ new_ggraph <- function(BP_dataframe, BP_ids, KEGG_dataframe, KEGG_ids,
                                     MF_dataframe, MF_ids, REACTOME_dataframe, REACTOME_ids,
                                     CC_dataframe, CC_ids, DO_dataframe, DO_ids)
 
-  # Prepare the data for graph creation using ccgraph
+  # Prepare the data for graph creation using 'ggraph'
   index_ggraph <- c("type", "pathway", "gene")  # columns other than the lowest level
   nodes_ggraph <- gather_graph_node(new_dataframe, index = index_ggraph, root = "combination")
   edges_ggraph <- gather_graph_edge(new_dataframe, index = index_ggraph, root = "combination")
 
-  # Create and plot the graph using tidygraph and ggraph
+  # Create and plot the graph using 'tidygraph' and 'ggraph'
   graph_ggraph <- tidygraph::tbl_graph(nodes = nodes_ggraph, edges = edges_ggraph)
 
   plot <- ggraph::ggraph(graph_ggraph, layout = 'dendrogram', circular = TRUE) +

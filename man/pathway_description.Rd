@@ -31,5 +31,8 @@ enrich_data <- data.frame(
 )
 
 # Example usage
-result <- pathway_description(GO, selected_pathways_names="Apoptosis", enrich_data)
+result <- pathway_description(GO,
+                              selected_pathways_names="Apoptosis",
+                              enrich_data)
+
 }

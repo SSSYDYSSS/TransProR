@@ -17,9 +17,14 @@ This function evaluates the need for a log transformation based on a set of crit
 and applies a log2 transformation if necessary.
 }
 \examples{
-\dontrun{
+file_path <- system.file("extdata",
+                         "all_count_exp_test.csv",
+                         package = "TransProR")
+your_data <- read.csv(file_path,
+                      row.names = 1)  # Assuming first column is row names (e.g., gene names)
+
 TransformedData <- log_transform(data = your_data)
-}
+
 }
 \author{
 Dongyue Yu

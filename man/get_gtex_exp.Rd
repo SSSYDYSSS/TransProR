@@ -48,14 +48,20 @@ CRITICAL: The 'output_path' parameter must end with '.rds' to be properly recogn
       that the path includes specific identifiers related to the target samples. Please structure the 'output_path' following this pattern: './your_directory/your_sample_type.gtex.rds'.
 }
 \examples{
-\dontrun{
-skcm_gtex <- get_gtex_exp(
+counts_file <- system.file("extdata", "gtex_gene_expected_count_test", package = "TransProR")
+probe_map_file <- system.file("extdata",
+                              "gtex_probeMap_gencode.v23.annotation.gene.probemap_test",
+                              package = "TransProR")
+phenotype_file <- system.file("extdata", "GTEX_phenotype_test", package = "TransProR")
+ouput_file <- file.path(tempdir(), "skcm_gtex.rds")
+
+SKCM_gtex <- get_gtex_exp(
   organ_specific = "Skin",
-  file_path = "./download_data/gtex_gene_expected_count",
-  probe_map_path = "./download_data/gtex_probeMap_gencode.v23.annotation.gene.probemap",
-  pheno_path = "./download_data/GTEX_phenotype",
-  output_path = './generated_data1/skcm_gtex.rds'
+  file_path = counts_file,
+  probe_map_path = probe_map_file,
+  pheno_path = phenotype_file,
+  output_path = ouput_file
 )
-}
+head(SKCM_gtex[1:3, 1:3])
 
 }

@@ -18,8 +18,19 @@ and generates legends based on the sample and pathway information in the provide
 It uses 'spiralize' for the spiral plot and 'ComplexHeatmap' for handling legends.
 }
 \examples{
-\dontrun{
-  # Assuming 'results' is already created and contains the necessary columns
-  enrichment_spiral_plots(results)
-}
+# Example: Creating enrichment spiral plots with legends
+
+# Define the results data frame
+results <- data.frame(
+  Pathway = c("Pathway1", "Pathway1", "Pathway2", "Pathway2", "Pathway3"),
+  Sample = c("Sample1", "Sample1", "Sample2", "Sample2", "Sample3"),
+  Value = c(20, 30, 15, 35, 25),
+  PathwayColor = c("red", "red", "blue", "blue", "orange"),
+  SampleColor = c("green", "green", "purple", "purple", "cyan"),
+  stringsAsFactors = FALSE
+)
+
+# Create the enrichment spiral plots with legends
+enrichment_spiral_plots(results)
+
 }

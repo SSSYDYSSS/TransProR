@@ -38,7 +38,41 @@ It adjusts the track height of the chord diagram to optimize space and uses spec
 Legends are drawn at specified positions with configurable text alignments and font sizes.
 }
 \examples{
-\dontrun{
-  enrichment_circlize(df, original_colors, labels, colors, labels2, colors2, font_size = 10)
-}
+# Sample Chord Diagram Matrix
+all_combined_df <- data.frame(
+  A = c(10, 20, 30),
+  B = c(15, 25, 35),
+  C = c(5, 10, 15)
+)
+rownames(all_combined_df) <- c("A", "B", "C")
+
+# Colors for the grid of the chord diagram (corresponding to columns of the matrix)
+original_colors <- c("red", "green", "blue")
+
+# Name the colors according to the sectors (A, B, C)
+names(original_colors) <- colnames(all_combined_df)
+
+# Labels and Colors for the First Legend
+labels <- c("Label 1", "Label 2", "Label 3")
+colors <- c("yellow", "purple", "cyan")
+
+# Labels and Colors for the Second Legend
+labels2 <- c("Label A", "Label B", "Label C")
+colors2 <- c("orange", "pink", "brown")
+
+# Font size for the legend texts (optional, default is 10)
+font_size <- 10
+
+# Call the enrichment_circlize function with the sample data
+# This is just an example; the plot will be rendered in an appropriate graphics context
+# such as RStudio's plot pane or an external plotting window.
+plot1 <- enrichment_circlize(all_combined_df,
+                             original_colors,
+                             labels,
+                             colors,
+                             labels2,
+                             colors2,
+                             font_size
+                             )
+
 }

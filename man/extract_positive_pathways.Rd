@@ -19,11 +19,25 @@ This function processes the results of SSGSEA, specifically focusing on KEGG pat
 It extracts pathways with positive values from each sample and randomly selects a subset of them.
 }
 \examples{
-\dontrun{
-  data <- matrix(rnorm(20), nrow = 5, dimnames = list(
-  c("Path1", "Path2", "Path3", "Path4", "Path5"),
-  c("Sample1", "Sample2")))
-  results <- extract_positive_pathways(data, max_paths_per_sample = 3)
-  print(results)
-}
+# Example: Generating input data for the extract_positive_pathways function
+
+# Define example pathways
+pathways <- c("Pathway_1", "Pathway_2", "Pathway_3", "Pathway_4", "Pathway_5",
+              "Pathway_6", "Pathway_7", "Pathway_8", "Pathway_9", "Pathway_10")
+
+# Define example samples
+samples <- c("Sample_A", "Sample_B", "Sample_C")
+
+# Generate random SSGSEA KEGG scores including both positive and negative values
+set.seed(456)  # For reproducibility
+ssgsea_scores <- matrix(rnorm(length(pathways) * length(samples), mean = 0, sd = 1),
+                        nrow = length(pathways), ncol = length(samples),
+                        dimnames = list(pathways, samples))
+
+# Convert to a data frame
+ssgsea_kegg <- as.data.frame(ssgsea_scores)
+
+# Use the extract_positive_pathways function to extract up to 3 positive pathways per sample
+selected_positive_pathways <- extract_positive_pathways(ssgsea_kegg, max_paths_per_sample = 3)
+
 }

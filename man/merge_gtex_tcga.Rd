@@ -36,12 +36,16 @@ CRITICAL: The 'output_path' parameter must end with '.rds' to be properly recogn
       that the path includes specific identifiers related to the target samples. Please structure the 'output_path' following this pattern: './your_directory/merged.your_sample_type.gtex.tcga.data.rds'.
 }
 \examples{
-\dontrun{
-merge_gtex_tcga(
-  gtex_data_path = "./generated_data1/skcm_gtex.rds",
-  tcga_exp_path = "./generated_data1/skcm.exp_normal.rds",
-  output_path = "./generated_data1/merged_kscm_gtex_tcga_data.rds"
-)
-}
+tumor_file <- system.file("extdata",
+                          "removebatch_SKCM_Skin_TCGA_exp_tumor_test.rds",
+                          package = "TransProR")
+Normal_file <- system.file("extdata",
+                           "removebatch_SKCM_Skin_Normal_TCGA_GTEX_count_test.rds",
+                           package = "TransProR")
+ouput_file <- file.path(tempdir(), "all_data.rds")
+
+all_data <- merge_gtex_tcga(gtex_data_path = tumor_file,
+                            tcga_exp_path = Normal_file,
+                            output_path = ouput_file)
 
 }

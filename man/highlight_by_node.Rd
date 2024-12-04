@@ -31,15 +31,26 @@ This function adds highlights to specific nodes in a phylogenetic tree represent
 Users can specify the nodes to highlight along with custom fill colors, transparency, and extension options.
 }
 \examples{
-\dontrun{
-# Load required libraries and example tree data
-library(ggtree)
-library(dplyr)
-tree <- read.tree(text = "((A:1, B:1):1, (C:1, D:1):1);")
-ggtree_object <- ggtree(tree)
+plot_file <- system.file("extdata", "tree_plot.rds", package = "TransProR")
+p2_plot <- readRDS(plot_file)
 
-# Highlight nodes with custom fill colors and transparency
-highlight_by_node(ggtree_object, nodes = c("A", "C"), fill_colors = c("red", "blue"),
-                  alpha_values = c(0.5, 0.7), extend_values = c(TRUE, FALSE))
-}
+# Please replace the following vectors with your specific values
+nodes <- c(117, 129, 125, 127, 119,
+           123, 139, 166, 124, 131, 217) # x-values of the nodes you want to highlight
+fill_colors <- c("#CD6600", "#CD6600", "#CD6600",
+                 "#CD6600", "#009933", "#009933",
+                 "#009933", "#009933", "#9B30FF",
+                 "#9B30FF", "#9B30FF") # Fill colors
+alpha_values <- c(0.3, 0.3, 0.3, 0.3, 0.2, 0.3,
+                  0.3, 0.3, 0.3, 0.3, 0.3) # Transparency values
+extend_values <- c(25, 24, 24, 25, 25, 25,
+                   24, 24, 25, 24, 24) # Values for the 'extend' parameter
+
+p2 <- highlight_by_node(
+  p2_plot,
+  nodes,
+  fill_colors,
+  alpha_values,
+  extend_values
+)
 }

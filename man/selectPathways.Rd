@@ -20,12 +20,10 @@ A character vector of selected pathways.
 This function randomly selects a specified number of pathways from a given list, ensuring that each selected pathway name does not exceed a specified number of words. It filters out pathways with names longer than the specified word limit before making the selection.
 }
 \examples{
-\dontrun{
-  pathway_list <- c("pathway_one response to stimulus",
-                    "pathway_two cell growth and death",
-                    "pathway_three regulation of cellular process",
-                    "pathway_four metabolic process")
-  selected_pathways <- selectPathways(pathway_list, max_words = 5, num_select = 2)
-  print(selected_pathways)
-}
+pathway_list <- c("pathway_one response to stimulus",
+                  "pathway_two cell growth and death",
+                  "pathway_three regulation of cellular process",
+                  "pathway_four metabolic process")
+selected_pathways <- selectPathways(pathway_list, max_words = 5, num_select = 2)
+
 }

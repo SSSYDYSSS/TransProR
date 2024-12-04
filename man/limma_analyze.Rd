@@ -27,21 +27,31 @@ limma_analyze(
 A data frame of differential expression results.
 }
 \description{
-This function performs differential gene expression analysis using the limma package with voom normalization.
+This function performs differential gene expression analysis using the 'limma' package with voom normalization.
 It reads tumor and normal expression data, merges them, filters low-expressed genes,
 normalizes the data, performs limma analysis, and outputs the results along with information
 on gene expression changes.
 }
 \examples{
-\dontrun{
-limma_analyze(
-"path/to/tumor_file.rds",
-"path/to/normal_file.rds",
-"path/to/output_file",
-2.5,
-0.01
+# Define file paths for tumor and normal data from the data folder
+tumor_file <- system.file("extdata",
+                          "removebatch_SKCM_Skin_TCGA_exp_tumor_test.rds",
+                          package = "TransProR")
+normal_file <- system.file("extdata",
+                           "removebatch_SKCM_Skin_Normal_TCGA_GTEX_count_test.rds",
+                           package = "TransProR")
+output_file <- file.path(tempdir(), "DEG_limma_voom.rds")
+
+DEG_limma_voom <- limma_analyze(
+  tumor_file = tumor_file,
+  normal_file = normal_file,
+  output_file = output_file,
+  logFC_threshold = 2.5,
+  p_value_threshold = 0.01
 )
-}
+
+# View the top 5 rows of the result
+head(DEG_limma_voom, 5)
 }
 \references{
 limma:Linear Models for Microarray and RNA-Seq Data User’s Guide.

@@ -22,7 +22,9 @@ and transforms pValues for plotting. The final data frame is returned and
 optionally saved to a new RDS file.
 }
 \examples{
-\dontrun{
-prep_wilcoxon("Select DEGs/Wilcoxon_rank_sum_testoutRst.Rdata", "Processed_DEG_Wilcoxon")
-}
+wilcoxon_file <- system.file("extdata",
+                             "Wilcoxon_rank_sum_testoutRst_test.rds",
+                             package = "TransProR")
+Wilcoxon <- prep_wilcoxon(wilcoxon_file)
+
 }

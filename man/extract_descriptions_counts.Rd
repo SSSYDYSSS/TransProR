@@ -21,12 +21,44 @@ This function filters a data frame for specified descriptions, selects the 'Desc
 and adds a new column with a specified color.
 }
 \examples{
-\dontrun{
+# Generate Sample Input Data for extract_descriptions_counts Function
+
+# Create a sample data frame with 'Description' and 'Count' columns
+data <- data.frame(
+  Description = c(
+    "immunoglobulin production",
+    "B cell mediated immunity",
+    "T cell activation",
+    "antigen processing and presentation",
+    "cytokine signaling",
+    "natural killer cell activity",
+    "phagocytosis",
+    "complement activation",
+    "antibody-dependent cellular cytotoxicity",
+    "regulatory T cell function"
+  ),
+  Count = c(
+    150,  # immunoglobulin production
+    200,  # B cell mediated immunity
+    175,  # T cell activation
+    125,  # antigen processing and presentation
+    190,  # cytokine signaling
+    160,  # natural killer cell activity
+    140,  # phagocytosis
+    180,  # complement activation
+    130,  # antibody-dependent cellular cytotoxicity
+    170   # regulatory T cell function
+  ),
+  stringsAsFactors = FALSE  # Ensure that strings are not converted to factors
+)
+
+
+
 descriptions_to_filter <- c("immunoglobulin production", "B cell mediated immunity")
 specified_color <- "red"  # You can specify any color you desire
 filtered_data_with_color <- extract_descriptions_counts(
-data, descriptions_to_filter,
-specified_color)
+  data, descriptions_to_filter,
+  specified_color)
 print(filtered_data_with_color)
-}
+
 }

@@ -25,11 +25,23 @@ This function creates a spiral plot for visualizing sequential data in a compact
 It uses run-length encoding to represent the lengths and colors of sequences in the spiral.
 }
 \examples{
-\dontrun{
-  spiral_newrle(x = c("A", "A", "B", "C"),
-             samples = c("Sample1", "Sample1", "Sample2", "Sample2"),
-             values = c(20, 30, 15, 35),
-             colors = c("red", "blue", "green", "purple"),
-             labels = TRUE)
-}
+# Example: Creating a spiral plot using the spiral_newrle function
+
+# Define example data
+x <- c("A", "A", "B", "C")
+samples <- c("Sample1", "Sample1", "Sample2", "Sample2")
+values <- c(20, 30, 15, 35)
+colors <- c("red", "blue", "green", "purple")
+labels <- TRUE
+
+# Initialize the spiral plot, setting the x-axis range and scaling
+spiralize::spiral_initialize(xlim = c(0, sum(values)), scale_by = "curve_length",
+                 vp_param = list(x = grid::unit(0, "npc"), just = "left"))
+
+# Create a track for the spiral plot
+spiralize::spiral_track(height = 0.5)
+
+# Add segments to the spiral plot using run-length encoding
+spiral_newrle(x, samples, values, colors, labels)
+
 }

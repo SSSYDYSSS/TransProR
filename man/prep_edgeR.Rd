@@ -21,7 +21,9 @@ and transforms PValue for plotting. The final data frame is returned and
 optionally saved to a new RDS file.
 }
 \examples{
-\dontrun{
-prep_edgeR("Select DEGs/DEG_edgeR.Rdata", "Processed_DEG_edgeR")
-}
+edgeR_file <- system.file("extdata",
+                          "DEG_edgeR_test.rds",
+                          package = "TransProR")
+edgeR <- prep_edgeR(edgeR_file)
+
 }

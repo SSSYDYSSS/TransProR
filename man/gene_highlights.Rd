@@ -17,14 +17,11 @@ gene_highlights(ggtree_obj, genes_to_highlight, hilight_extend = 18)
 A ggtree object with added gene highlights.
 }
 \description{
-This function enhances a ggtree plot by adding highlights for specific genes. It adds both a semi-transparent fan-shaped
+This function enhances a `ggtree` plot by adding highlights for specific genes. It adds both a semi-transparent fan-shaped
 highlight and a point at the node corresponding to each gene. Colors for each gene can be customized.
 }
 \examples{
-\dontrun{
-# Create a sample tree
-tree <- rtree(10)
-gtree <- ggtree(tree)
+data("gtree", package = "TransProR")
 
 # Define genes and their colors
 genes_df <- data.frame(Symble = c("t5", "t9"),
@@ -32,6 +29,5 @@ genes_df <- data.frame(Symble = c("t5", "t9"),
 
 # Add highlights
 gtree <- gene_highlights(gtree, genes_to_highlight = genes_df)
-gtree
-}
+
 }

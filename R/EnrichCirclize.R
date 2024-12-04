@@ -11,15 +11,25 @@
 #' @importFrom Hmisc capitalize
 #' @export
 #' @examples
-#' \dontrun{
-#'   top_pathways <- adjust_export_pathway(fgseaRes = deseq2_hallmarks_fgseaRes, nTop = 10)
-#'   print(top_pathways)
-#' }
+#' # Create a synthetic fgseaRes dataframe
+#'fgseaRes <- data.frame(
+#'  pathway = c("KEGG_APOPTOSIS",
+#'              "GO_CELL_CYCLE",
+#'              "REACTOME_DNA_REPAIR",
+#'              "KEGG_METABOLISM",
+#'              "GO_TRANSPORT"),
+#'  ES = c(0.45, -0.22, 0.56, -0.35, 0.33),
+#'  pval = c(0.001, 0.02, 0.0003, 0.05, 0.01)
+#')
+#'
+#' # Run the function to get top pathways
+#'result <- adjust_export_pathway(fgseaRes = fgseaRes, nTop = 2)
+#'
 adjust_export_pathway <- function(fgseaRes, nTop = 10) {
   # Adjust pathway names
   fgseaRes$pathway <- as.character(fgseaRes$pathway)
   for(i in 1:nrow(fgseaRes)){
-    print(i)
+    message("Processing row ", i)
     term = fgseaRes$pathway[i]
     ### 1. Split the string
     term = unlist(strsplit(term, split="_", fixed=TRUE))[-1]
@@ -58,14 +68,12 @@ adjust_export_pathway <- function(fgseaRes, nTop = 10) {
 #' @return A character vector of selected pathways.
 #' @export
 #' @examples
-#' \dontrun{
-#'   pathway_list <- c("pathway_one response to stimulus",
-#'                     "pathway_two cell growth and death",
-#'                     "pathway_three regulation of cellular process",
-#'                     "pathway_four metabolic process")
-#'   selected_pathways <- selectPathways(pathway_list, max_words = 5, num_select = 2)
-#'   print(selected_pathways)
-#' }
+#' pathway_list <- c("pathway_one response to stimulus",
+#'                   "pathway_two cell growth and death",
+#'                   "pathway_three regulation of cellular process",
+#'                   "pathway_four metabolic process")
+#' selected_pathways <- selectPathways(pathway_list, max_words = 5, num_select = 2)
+#'
 selectPathways <- function(pathways, max_words = 10, num_select = 10) {
   # Check input
   if (!is.character(pathways)) {
@@ -109,20 +117,24 @@ selectPathways <- function(pathways, max_words = 10, num_select = 10) {
 #' @importFrom grid pushViewport viewport grid.roundrect grid.text upViewport unit
 #' @export
 #' @examples
-#' \dontrun{
-#'   labels <- c("Label1", "Label2", "Label3", "Label4", "Label5", "Label6")
-#'   colors <- c("#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff")
-#'   # Example using explicit namespace for grid functions
-#'   grid::grid.roundrect(x = 0.5,
-#'                        y = 0.5,
-#'                        width = 0.1,
-#'                        height = 0.05,
-#'                        gp = grid::gpar(fill = "red"),
-#'                        r = 0.1)
-#'   drawLegends(labels, colors, grid::unit(2, "cm"), c(0.225, 0.75), 0.5,
-#'               list(c("left", "center"), c("right", "center")),
-#'               list("right", "left"), 10)
-#' }
+#' labels <- c("Label1", "Label2", "Label3", "Label4", "Label5", "Label6")
+#' colors <- c("#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff")
+#'
+#' # Convert to 'unit' objects for grid
+#' grid::grid.roundrect(
+#'   x = grid::unit(0.5, "npc"),  # "npc" stands for normalized parent coordinates
+#'   y = grid::unit(0.5, "npc"),
+#'   width = grid::unit(0.1, "npc"),
+#'   height = grid::unit(0.05, "npc"),
+#'   gp = grid::gpar(fill = "red"),
+#'   r = grid::unit(0.1, "npc")  # rounding radius
+#' )
+#'
+#' # Example of drawing legends with specific labels and colors
+#' drawLegends(labels, colors, grid::unit(2, "cm"), c(0.225, 0.75), 0.5,
+#'             list(c("left", "center"), c("right", "center")),
+#'             list("right", "left"), 10)
+#'
 drawLegends <- function(labels, colors, legend_width, x_positions, y_position, just_positions, text_alignments, font_size) {
   half_length <- length(labels) / 2
   legend_height <- grid::unit(1, "lines") * half_length
@@ -202,9 +214,43 @@ drawLegends <- function(labels, colors, legend_width, x_positions, y_position, j
 #' @importFrom graphics strwidth
 #' @export
 #' @examples
-#' \dontrun{
-#'   enrichment_circlize(df, original_colors, labels, colors, labels2, colors2, font_size = 10)
-#' }
+#' # Sample Chord Diagram Matrix
+#' all_combined_df <- data.frame(
+#'   A = c(10, 20, 30),
+#'   B = c(15, 25, 35),
+#'   C = c(5, 10, 15)
+#' )
+#' rownames(all_combined_df) <- c("A", "B", "C")
+#'
+#' # Colors for the grid of the chord diagram (corresponding to columns of the matrix)
+#' original_colors <- c("red", "green", "blue")
+#'
+#' # Name the colors according to the sectors (A, B, C)
+#' names(original_colors) <- colnames(all_combined_df)
+#'
+#' # Labels and Colors for the First Legend
+#' labels <- c("Label 1", "Label 2", "Label 3")
+#' colors <- c("yellow", "purple", "cyan")
+#'
+#' # Labels and Colors for the Second Legend
+#' labels2 <- c("Label A", "Label B", "Label C")
+#' colors2 <- c("orange", "pink", "brown")
+#'
+#' # Font size for the legend texts (optional, default is 10)
+#' font_size <- 10
+#'
+#' # Call the enrichment_circlize function with the sample data
+#' # This is just an example; the plot will be rendered in an appropriate graphics context
+#' # such as RStudio's plot pane or an external plotting window.
+#' plot1 <- enrichment_circlize(all_combined_df,
+#'                              original_colors,
+#'                              labels,
+#'                              colors,
+#'                              labels2,
+#'                              colors2,
+#'                              font_size
+#'                              )
+#'
 enrichment_circlize <- function(all_combined_df, original_colors, labels, colors,
                                        labels2, colors2, font_size = 10) {
 

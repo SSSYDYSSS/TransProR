@@ -21,8 +21,18 @@ and joining the components with spaces. It selects and merges the top upregulate
 and downregulated pathways based on enrichment score (ES) and p-value.
 }
 \examples{
-\dontrun{
-  top_pathways <- adjust_export_pathway(fgseaRes = deseq2_hallmarks_fgseaRes, nTop = 10)
-  print(top_pathways)
-}
+# Create a synthetic fgseaRes dataframe
+fgseaRes <- data.frame(
+ pathway = c("KEGG_APOPTOSIS",
+             "GO_CELL_CYCLE",
+             "REACTOME_DNA_REPAIR",
+             "KEGG_METABOLISM",
+             "GO_TRANSPORT"),
+ ES = c(0.45, -0.22, 0.56, -0.35, 0.33),
+ pval = c(0.001, 0.02, 0.0003, 0.05, 0.01)
+)
+
+# Run the function to get top pathways
+result <- adjust_export_pathway(fgseaRes = fgseaRes, nTop = 2)
+
 }

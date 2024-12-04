@@ -10,9 +10,11 @@
 #' @return A data frame with processed DESeq2 DEG data.
 #' @export
 #' @examples
-#' \dontrun{
-#' prep_deseq2("Select DEGs/DEG_deseq2.Rdata", "Processed_DEG_deseq2")
-#' }
+#' deseq2_file <- system.file("extdata",
+#'                            "DEG_deseq2_test.rds",
+#'                            package = "TransProR")
+#' deseq2 <- prep_deseq2(deseq2_file)
+#'
 prep_deseq2 <- function(input_path, output_name = NULL) {
   # Read the DESeq2 DEG data frame from an RDS file
   DEG_deseq2 <- readRDS(input_path)

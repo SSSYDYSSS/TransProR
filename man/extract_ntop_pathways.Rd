@@ -20,8 +20,25 @@ of top pathways to extract for each sample based on their scores, and stores the
 with sample names and pathway scores.
 }
 \examples{
-\dontrun{
-  results <- extract_ntop_pathways(ssgsea_kegg = kegg_data, nTop = 5)
-  print(results)
-}
+# Example: Generating input data for the extract_ntop_pathways function
+
+# Define example pathways
+pathways <- c("Pathway_A", "Pathway_B", "Pathway_C", "Pathway_D", "Pathway_E",
+              "Pathway_F", "Pathway_G", "Pathway_H", "Pathway_I", "Pathway_J")
+
+# Define example samples
+samples <- c("Sample_1", "Sample_2", "Sample_3")
+
+# Generate random SSGSEA KEGG scores between 0 and 1
+set.seed(123)  # For reproducibility
+ssgsea_scores <- matrix(runif(length(pathways) * length(samples), min = 0, max = 1),
+                        nrow = length(pathways), ncol = length(samples),
+                        dimnames = list(pathways, samples))
+
+# Convert to a data frame
+ssgsea_kegg <- as.data.frame(ssgsea_scores)
+
+# Extract the top 3 pathways for each sample
+top_pathways <- extract_ntop_pathways(ssgsea_kegg, nTop = 3)
+
 }

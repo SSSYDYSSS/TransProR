@@ -1,6 +1,6 @@
 #' Function to Create a Venn Diagram of DEGs with Custom Colors
 #'
-#' This function creates a Venn Diagram using the ggVennDiagram package.
+#' This function creates a Venn Diagram using the 'ggVennDiagram' package.
 #' It allows customization of various aesthetic elements of the diagram, including colors.
 #'
 #' @importFrom ggplot2 scale_fill_gradient scale_color_manual scale_x_continuous expansion
@@ -11,27 +11,16 @@
 #' @param fill_colors A vector of two colors for the gradient fill of the Venn Diagram.
 #' @param label_size The size of the labels showing the number of elements in each set (default is 4).
 #' @param edge_size The size of the edges of the Venn Diagram sets (default is 3).
-#' @return A ggplot object representing the Venn Diagram.
+#' @return A `ggplot` object representing the Venn Diagram.
 #' @examples
-#' \dontrun{
-#' all_degs_venn112 <- list(
-#' DESeq2 = deg_filter(DEG_deseq2),
-#' edgeR = deg_filter(DEG_edgeR),
-#' limma = deg_filter(DEG_limma_voom),
-#' Wilcoxon_test = deg_filter(outRst),
-#' AutoFeatureSelection = AutoFeatureSelection
-#' )
-#' edge_colors <- c(
-#' alpha("#1b64bb", 0.5),
-#' alpha("#13828e", 0.5),
-#' alpha("#337c3a", 0.5),
-#' alpha("#9e9d39", 0.5),
-#' alpha("#0288d1", 0.5)
-#' )
-#' name_color <- alpha(c("#1b64bb","#13828e","#337c3a","#9e9d39","#0288d1"), 0.8)
+#'
+#' data("all_degs_venn", package = "TransProR")
+#'
+#' edge_colors <- c("#1b62bb","#13822e","#332c3a","#9e2d39")
+#' name_color <- c("#1b64bb","#13828e","#337c3a","#9e9d39")
 #' fill_colors <- c("#e3f2fa", "#0288d1")
-#' Contrast_Venn(all_degs_venn, edge_colors, name_color, fill_colors)
-#' }
+#'
+#' Contrast_degs_venn <- Contrast_Venn(all_degs_venn, edge_colors, name_color, fill_colors)
 #' @export
 #'
 Contrast_Venn <- function(all_degs_venn,

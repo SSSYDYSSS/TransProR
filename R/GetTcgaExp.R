@@ -25,14 +25,21 @@
 #' @author Dongyue Yu
 #'
 #' @examples
-#' \dontrun{
-#' result_exp1 <- get_tcga_exp(
-#'   counts_file_path = "./download_data/TCGA-SKCM.htseq_counts.tsv",
-#'   gene_probes_file_path = "./download_data/TCGA_gencode.v22.annotation.gene.probeMap",
-#'   phenotype_file_path = "./download_data/TCGA-skcm.GDC_phenotype.tsv",
-#'   output_file_path = './generated_data1/skcm.exp.rds'
+#' counts_file <- system.file("extdata", "TCGA-SKCM.htseq_counts_test.tsv", package = "TransProR")
+#' gene_probes_file <- system.file("extdata",
+#'                                 "TCGA_gencode.v22.annotation.gene.probeMap_test",
+#'                                 package = "TransProR")
+#' phenotype_file <- system.file("extdata", "TCGA-SKCM.GDC_phenotype_test.tsv", package = "TransProR")
+#' ouput_file <- file.path(tempdir(), "SKCM_Skin_TCGA_exp_test.rds")
+#'
+#' SKCM_exp <- get_tcga_exp(
+#'   counts_file_path = counts_file,
+#'   gene_probes_file_path = gene_probes_file,
+#'   phenotype_file_path = phenotype_file,
+#'   output_file_path = ouput_file
 #' )
-#' }
+#' head(SKCM_exp[["tumor_tcga_data"]])[1:5, 1:5]
+#' head(SKCM_exp[["normal_tcga_data"]], n = 10) # Because there is only one column.
 get_tcga_exp <- function(counts_file_path,
                          gene_probes_file_path,
                          phenotype_file_path,

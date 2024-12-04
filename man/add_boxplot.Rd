@@ -2,7 +2,7 @@
 % Please edit documentation in R/CircosFruits.R
 \name{add_boxplot}
 \alias{add_boxplot}
-\title{Add a boxplot layer to a ggtree plot}
+\title{Add a boxplot layer to a `ggtree` plot}
 \usage{
 add_boxplot(
   p,
@@ -27,17 +27,29 @@ add_boxplot(
 \item{pwidth}{Numeric value, the width of the boxplot. Default is 0.5.}
 }
 \value{
-A ggtree plot object with the added boxplot layer.
+A `ggtree` plot object with the added boxplot layer.
 }
 \description{
-This function adds a boxplot layer to an existing ggtree plot object using ggtreeExtra's geom_fruit for boxplots.
+This function adds a boxplot layer to an existing `ggtree` plot object using ggtreeExtra's geom_fruit for boxplots.
 It is primarily used to display statistical summaries of the data related to gene expressions or other metrics.
 }
 \examples{
 \dontrun{
-# Assuming 'p' is an already created ggtree plot and 'data' is a dataframe
-# with required columns 'Sample' and 'value'
-p <- add_boxplot(p, data)
-print(p)
+file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
+p <- readRDS(file_path)
+
+# Create boxplot data frame
+boxplot_data <- data.frame(
+  Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 30),
+  value = c(
+    rnorm(30, mean = 5, sd = 1),   # Data for Species_A
+    rnorm(30, mean = 7, sd = 1.5), # Data for Species_B
+    rnorm(30, mean = 6, sd = 1.2), # Data for Species_C
+    rnorm(30, mean = 8, sd = 1.3)  # Data for Species_D
+  )
+)
+
+# Call add_boxplot function to add boxplot layer
+p_with_boxplot <- add_boxplot(p, boxplot_data)
 }
 }

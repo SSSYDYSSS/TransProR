@@ -1,7 +1,7 @@
-#' Differential Gene Expression Analysis using DESeq2
+#' Differential Gene Expression Analysis using 'DESeq2'
 #'
-#' DESeq2: Differential gene expression analysis based on the negative binomial distribution.
-#' This function utilizes the DESeq2 package to conduct differential gene expression analysis.
+#' 'DESeq2': Differential gene expression analysis based on the negative binomial distribution.
+#' This function utilizes the 'DESeq2' package to conduct differential gene expression analysis.
 #' It processes tumor and normal expression data, applies DESeq2 analysis,
 #' and outputs the results along with information on gene expression changes.
 #'
@@ -20,10 +20,26 @@
 #' @param p_value Threshold for p-value.
 #' @return A data frame of differential expression results.
 #' @examples
-#' \dontrun{
-#' # Call the DESeq2_analyze function
-#' result_df <- DESeq2_analyze(tumor_file, normal_file, output_file = tempfile(fileext = ".rds"))
-#' }
+#' # Define file paths for tumor and normal data from the data folder
+#' tumor_file <- system.file("extdata",
+#'                           "removebatch_SKCM_Skin_TCGA_exp_tumor_test.rds",
+#'                           package = "TransProR")
+#' normal_file <- system.file("extdata",
+#'                            "removebatch_SKCM_Skin_Normal_TCGA_GTEX_count_test.rds",
+#'                            package = "TransProR")
+#' output_file <- file.path(tempdir(), "DEG_DESeq2.rds")
+#'
+#' DEG_DESeq2 <- DESeq2_analyze(
+#'   tumor_file = tumor_file,
+#'   normal_file = normal_file,
+#'   output_file = output_file,
+#'   2.5,
+#'   0.01
+#' )
+#'
+#' # View the top 5 rows of the result
+#' head(DEG_DESeq2, 5)
+#'
 #' @references
 #' DESeq2:Differential gene expression analysis based on the negative binomial distribution.
 #' For more information, visit the page:
@@ -39,8 +55,11 @@ DESeq2_analyze <- function(tumor_file, normal_file, output_file, logFC = 2.5, p_
   # Create group factor
   group <- factor(c(rep('tumor', ncol(tumor)), rep('normal', ncol(normal))), levels = c("normal", "tumor"))
   group_table <- table(group)
-  message("Group Table:\n")
-  print(group_table)
+
+  message("Group Table:")
+  message(paste(names(group_table), group_table, sep = ": ", collapse = "\n"))
+  # Add a space after the output for separation
+  message(" ")
 
   # Prepare DESeq2 dataset
   colData <- data.frame(row.names = colnames(all_count_exp), group = group) # Create a dataframe to store the grouping information of samples, with the row names as sample names and the column names as group information.
@@ -66,8 +85,12 @@ DESeq2_analyze <- function(tumor_file, normal_file, output_file, logFC = 2.5, p_
 
   # Output table of gene expression changes
   change_table <- table(DEG$change)
-  message("Change Table:\n")
-  print(change_table)
+
+  message(" ")
+  message("Change Table:")
+  message(paste(names(change_table), change_table, sep = ": ", collapse = "\n"))
+  # Add a space after the output for separation
+  message(" ")
 
   # Save results
   #save(DEG, file = output_file)

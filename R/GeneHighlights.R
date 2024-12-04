@@ -1,6 +1,6 @@
 #' Add gene highlights to a ggtree object
 #'
-#' This function enhances a ggtree plot by adding highlights for specific genes. It adds both a semi-transparent fan-shaped
+#' This function enhances a `ggtree` plot by adding highlights for specific genes. It adds both a semi-transparent fan-shaped
 #' highlight and a point at the node corresponding to each gene. Colors for each gene can be customized.
 #'
 #' @param ggtree_obj A ggtree object to which the highlights will be added.
@@ -10,10 +10,7 @@
 #' @importFrom ggtree geom_hilight geom_point2
 #' @importFrom dplyr filter select pull
 #' @examples
-#' \dontrun{
-#' # Create a sample tree
-#' tree <- rtree(10)
-#' gtree <- ggtree(tree)
+#' data("gtree", package = "TransProR")
 #'
 #' # Define genes and their colors
 #' genes_df <- data.frame(Symble = c("t5", "t9"),
@@ -21,11 +18,10 @@
 #'
 #' # Add highlights
 #' gtree <- gene_highlights(gtree, genes_to_highlight = genes_df)
-#' gtree
-#' }
+#'
 #' @export
 gene_highlights <- function(ggtree_obj, genes_to_highlight, hilight_extend = 18) {
-  # Ensure the input is a ggtree object
+  # Ensure the input is a `ggtree` object
   if (!inherits(ggtree_obj, "ggtree")) {
     stop("The first argument must be a ggtree object.")
   }
@@ -59,7 +55,7 @@ gene_highlights <- function(ggtree_obj, genes_to_highlight, hilight_extend = 18)
   # Remove NULL elements from the list of commands
   highlight_commands <- Filter(Negate(is.null), highlight_commands)
 
-  # Flatten the list of commands and apply them to the ggtree object
+  # Flatten the list of commands and apply them to the `ggtree` object
   ggtree_obj <- ggtree_obj + do.call(c, highlight_commands)
 
   return(ggtree_obj)

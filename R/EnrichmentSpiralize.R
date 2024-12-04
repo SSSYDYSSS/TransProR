@@ -10,10 +10,27 @@
 #' @importFrom utils head
 #' @export
 #' @examples
-#' \dontrun{
-#'   results <- extract_ntop_pathways(ssgsea_kegg = kegg_data, nTop = 5)
-#'   print(results)
-#' }
+#' # Example: Generating input data for the extract_ntop_pathways function
+#'
+#' # Define example pathways
+#' pathways <- c("Pathway_A", "Pathway_B", "Pathway_C", "Pathway_D", "Pathway_E",
+#'               "Pathway_F", "Pathway_G", "Pathway_H", "Pathway_I", "Pathway_J")
+#'
+#' # Define example samples
+#' samples <- c("Sample_1", "Sample_2", "Sample_3")
+#'
+#' # Generate random SSGSEA KEGG scores between 0 and 1
+#' set.seed(123)  # For reproducibility
+#' ssgsea_scores <- matrix(runif(length(pathways) * length(samples), min = 0, max = 1),
+#'                         nrow = length(pathways), ncol = length(samples),
+#'                         dimnames = list(pathways, samples))
+#'
+#' # Convert to a data frame
+#' ssgsea_kegg <- as.data.frame(ssgsea_scores)
+#'
+#' # Extract the top 3 pathways for each sample
+#' top_pathways <- extract_ntop_pathways(ssgsea_kegg, nTop = 3)
+#'
 extract_ntop_pathways <- function(ssgsea_kegg, nTop = 5) {
   # Initialize an empty data frame to store the results
   results <- data.frame(Pathway = character(), Sample = character(), Value = numeric(), stringsAsFactors = FALSE)
@@ -51,13 +68,27 @@ extract_ntop_pathways <- function(ssgsea_kegg, nTop = 5) {
 #' @return A data frame with selected pathways, samples, and their corresponding values.
 #' @export
 #' @examples
-#' \dontrun{
-#'   data <- matrix(rnorm(20), nrow = 5, dimnames = list(
-#'   c("Path1", "Path2", "Path3", "Path4", "Path5"),
-#'   c("Sample1", "Sample2")))
-#'   results <- extract_positive_pathways(data, max_paths_per_sample = 3)
-#'   print(results)
-#' }
+#' # Example: Generating input data for the extract_positive_pathways function
+#'
+#' # Define example pathways
+#' pathways <- c("Pathway_1", "Pathway_2", "Pathway_3", "Pathway_4", "Pathway_5",
+#'               "Pathway_6", "Pathway_7", "Pathway_8", "Pathway_9", "Pathway_10")
+#'
+#' # Define example samples
+#' samples <- c("Sample_A", "Sample_B", "Sample_C")
+#'
+#' # Generate random SSGSEA KEGG scores including both positive and negative values
+#' set.seed(456)  # For reproducibility
+#' ssgsea_scores <- matrix(rnorm(length(pathways) * length(samples), mean = 0, sd = 1),
+#'                         nrow = length(pathways), ncol = length(samples),
+#'                         dimnames = list(pathways, samples))
+#'
+#' # Convert to a data frame
+#' ssgsea_kegg <- as.data.frame(ssgsea_scores)
+#'
+#' # Use the extract_positive_pathways function to extract up to 3 positive pathways per sample
+#' selected_positive_pathways <- extract_positive_pathways(ssgsea_kegg, max_paths_per_sample = 3)
+#'
 extract_positive_pathways <- function(ssgsea_kegg, max_paths_per_sample = 5) {
   # Initialize an empty data frame to store the results
   results <- data.frame(Pathway = character(), Sample = character(), Value = numeric(), stringsAsFactors = FALSE)
@@ -102,10 +133,9 @@ extract_positive_pathways <- function(ssgsea_kegg, max_paths_per_sample = 5) {
 #' @importFrom grDevices convertColor col2rgb rgb
 #' @export
 #' @examples
-#' \dontrun{
 #'   adjusted_color <- adjust_color_tone("#FF0000", saturation_scale = 0.8, luminance_scale = 1.2)
 #'   print(adjusted_color)
-#' }
+#'
 adjust_color_tone <- function(color, saturation_scale, luminance_scale) {
   # Convert the input color to RGB, then to Luv color space
   rgb <- t(grDevices::col2rgb(color) / 255)
@@ -142,18 +172,30 @@ adjust_color_tone <- function(color, saturation_scale, luminance_scale) {
 #' @param values Numeric vector indicating the lengths of each segment.
 #' @param colors Character vector specifying the colors for each segment.
 #' @param labels Logical, whether to add labels to each segment.
-#' @importFrom grid gpar
-#' @importFrom spiralize spiral_rect spiral_text
+#' @importFrom grid gpar unit
+#' @importFrom spiralize spiral_rect spiral_text spiral_initialize spiral_track
 #' @export
 #' @return No return value, called for side effects. This function generates a spiral plot and optionally adds labels.
 #' @examples
-#' \dontrun{
-#'   spiral_newrle(x = c("A", "A", "B", "C"),
-#'              samples = c("Sample1", "Sample1", "Sample2", "Sample2"),
-#'              values = c(20, 30, 15, 35),
-#'              colors = c("red", "blue", "green", "purple"),
-#'              labels = TRUE)
-#' }
+#' # Example: Creating a spiral plot using the spiral_newrle function
+#'
+#' # Define example data
+#' x <- c("A", "A", "B", "C")
+#' samples <- c("Sample1", "Sample1", "Sample2", "Sample2")
+#' values <- c(20, 30, 15, 35)
+#' colors <- c("red", "blue", "green", "purple")
+#' labels <- TRUE
+#'
+#' # Initialize the spiral plot, setting the x-axis range and scaling
+#' spiralize::spiral_initialize(xlim = c(0, sum(values)), scale_by = "curve_length",
+#'                  vp_param = list(x = grid::unit(0, "npc"), just = "left"))
+#'
+#' # Create a track for the spiral plot
+#' spiralize::spiral_track(height = 0.5)
+#'
+#' # Add segments to the spiral plot using run-length encoding
+#' spiral_newrle(x, samples, values, colors, labels)
+#'
 spiral_newrle <- function(x, samples, values, colors, labels = FALSE) {
   x <- as.vector(x)  # Ensure x is a vector
   samples <- as.vector(samples)  # Ensure samples is a vector
@@ -207,10 +249,21 @@ spiral_newrle <- function(x, samples, values, colors, labels = FALSE) {
 #' @export
 #' @return No return value, called for side effects. This function generates spiral plots and adds legends based on sample and pathway information.
 #' @examples
-#' \dontrun{
-#'   # Assuming 'results' is already created and contains the necessary columns
-#'   enrichment_spiral_plots(results)
-#' }
+#' # Example: Creating enrichment spiral plots with legends
+#'
+#' # Define the results data frame
+#' results <- data.frame(
+#'   Pathway = c("Pathway1", "Pathway1", "Pathway2", "Pathway2", "Pathway3"),
+#'   Sample = c("Sample1", "Sample1", "Sample2", "Sample2", "Sample3"),
+#'   Value = c(20, 30, 15, 35, 25),
+#'   PathwayColor = c("red", "red", "blue", "blue", "orange"),
+#'   SampleColor = c("green", "green", "purple", "purple", "cyan"),
+#'   stringsAsFactors = FALSE
+#' )
+#'
+#' # Create the enrichment spiral plots with legends
+#' enrichment_spiral_plots(results)
+#'
 enrichment_spiral_plots <- function(results) {
   # Calculate the total value for setting the x-axis range
   n <- sum(results$Value)

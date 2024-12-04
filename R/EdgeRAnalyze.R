@@ -1,6 +1,6 @@
-#' Differential Gene Expression Analysis using edgeR
+#' Differential Gene Expression Analysis using 'edgeR'
 #'
-#' This function performs differential gene expression analysis using the edgeR package.
+#' This function performs differential gene expression analysis using the 'edgeR' package.
 #' It reads tumor and normal expression data, merges them, filters low-expressed genes,
 #' normalizes the data, performs edgeR analysis, and outputs the results along with information
 #' on gene expression changes.
@@ -22,15 +22,26 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' edgeR_analyze(
-#'   "path/to/tumor_file.rds",
-#'   "path/to/normal_file.rds",
-#'   "path/to/output_file",
+#' # Define file paths for tumor and normal data from the data folder
+#' tumor_file <- system.file("extdata",
+#'                          "removebatch_SKCM_Skin_TCGA_exp_tumor_test.rds",
+#'                          package = "TransProR")
+#' normal_file <- system.file("extdata",
+#'                            "removebatch_SKCM_Skin_Normal_TCGA_GTEX_count_test.rds",
+#'                            package = "TransProR")
+#' output_file <- file.path(tempdir(), "DEG_edgeR.rds")
+#'
+#' DEG_edgeR <- edgeR_analyze(
+#'   tumor_file = tumor_file,
+#'   normal_file = normal_file,
+#'   output_file = output_file,
 #'   2.5,
 #'   0.01
 #' )
-#' }
+#'
+#' # View the top 5 rows of the result
+#' head(DEG_edgeR, 5)
+#'
 edgeR_analyze <- function(tumor_file, normal_file, output_file, logFC_threshold = 2.5, p_value_threshold = 0.01) {
   tumor <- readRDS(tumor_file)
   normal <- readRDS(normal_file)
@@ -43,8 +54,11 @@ edgeR_analyze <- function(tumor_file, normal_file, output_file, logFC_threshold 
   group <- c(rep('tumor', ncol(tumor)), rep('normal', ncol(normal)))
   group <- factor(group, levels = c("normal", "tumor"))
   group_table <- table(group)
-  message("Group Table:\n")
-  print(group_table)
+
+  message("Group Table:")
+  message(paste(names(group_table), group_table, sep = ": ", collapse = "\n"))
+  # Add a space after the output for separation
+  message(" ")
 
   # Create DGEList object for gene expression data and group information
   d <- edgeR::DGEList(counts = all_count_exp, group = group)
@@ -73,7 +87,7 @@ edgeR_analyze <- function(tumor_file, normal_file, output_file, logFC_threshold 
   fit <- edgeR::glmFit(d, design)
 
   # Perform differential expression analysis using Likelihood Ratio Test (LRT)
-  lrt <- edgeR::glmLRT(fit, contrast = c(-1, 1)) # Note that the 'contrast' here is different from DESeq2. Here, we only need to input c(-1, 1): -1 corresponds to normal, 1 corresponds to tumor.
+  lrt <- edgeR::glmLRT(fit, contrast = c(-1, 1)) # Note that the 'contrast' here is different from 'DESeq2'. Here, we only need to input c(-1, 1): -1 corresponds to normal, 1 corresponds to tumor.
 
   # Retrieve top differentially expressed genes
   nrDEG <- edgeR::topTags(lrt, n = nrow(d))
@@ -85,8 +99,11 @@ edgeR_analyze <- function(tumor_file, normal_file, output_file, logFC_threshold 
   DEG_edgeR <- dplyr::mutate(DEG_edgeR, change = ifelse(k1, "down", ifelse(k2, "up", "stable")))
 
   change_table <- table(DEG_edgeR$change)
-  message("Change Table:\n")
-  print(change_table)
+
+  message("Change Table:")
+  message(paste(names(change_table), change_table, sep = ": ", collapse = "\n"))
+  # Add a space after the output for separation
+  message(" ")
 
   # Save results to the specified output file
   saveRDS(DEG_edgeR, file = output_file)

@@ -1,0 +1,45 @@
+Sample	body_site_detail (SMTSD)	_primary_site	_gender	_patient	_cohort
+GTEX-1117F-0226-SM-5GZZ7	Adipose - Subcutaneous	Adipose Tissue	female	GTEX-1117F	GTEX
+GTEX-1117F-0426-SM-5EGHI	Muscle - Skeletal	Muscle	female	GTEX-1117F	GTEX
+GTEX-1117F-0526-SM-5EGHJ	Artery - Tibial	Blood Vessel	female	GTEX-1117F	GTEX
+GTEX-1117F-0626-SM-5N9CS	Artery - Coronary	Blood Vessel	female	GTEX-1117F	GTEX
+GTEX-1117F-0726-SM-5GIEN	Heart - Atrial Appendage	Heart	female	GTEX-1117F	GTEX
+GTEX-1117F-1326-SM-5EGHH	Adipose - Visceral (Omentum)	Adipose Tissue	female	GTEX-1117F	GTEX
+GTEX-1117F-2226-SM-5N9CH	Ovary	Ovary	female	GTEX-1117F	GTEX
+GTEX-1117F-2426-SM-5EGGH	Uterus	Uterus	female	GTEX-1117F	GTEX
+GTEX-1117F-2526-SM-5GZY6	Vagina	Vagina	female	GTEX-1117F	GTEX
+GTEX-1117F-2826-SM-5GZXL	Breast - Mammary Tissue	Breast	female	GTEX-1117F	GTEX
+GTEX-1117F-2926-SM-5GZYI	Skin - Not Sun Exposed (Suprapubic)	Skin	female	GTEX-1117F	GTEX
+GTEX-1117F-3026-SM-5GZYU	Minor Salivary Gland	Salivary Gland	female	GTEX-1117F	GTEX
+GTEX-1117F-3226-SM-5N9CT	Brain - Cortex	Brain	female	GTEX-1117F	GTEX
+GTEX-111CU-0126-SM-5GZWZ	Adrenal Gland	Adrenal Gland	male	GTEX-111CU	GTEX
+GTEX-111CU-0226-SM-5GZXC	Thyroid	Thyroid	male	GTEX-111CU	GTEX
+GTEX-111CU-0326-SM-5GZXO	Lung	Lung	male	GTEX-111CU	GTEX
+GTEX-111CU-0426-SM-5GZY1	Spleen	Spleen	male	GTEX-111CU	GTEX
+GTEX-111CU-0526-SM-5EGHK	Pancreas	Pancreas	male	GTEX-111CU	GTEX
+GTEX-111CU-0626-SM-5EGHL	Esophagus - Muscularis	Esophagus	male	GTEX-111CU	GTEX
+GTEX-111CU-0726-SM-5GZYD	Esophagus - Mucosa	Esophagus	male	GTEX-111CU	GTEX
+GTEX-111CU-0826-SM-5EGIJ	Esophagus - Gastroesophageal Junction	Esophagus	male	GTEX-111CU	GTEX
+GTEX-111CU-0926-SM-5EGIK	Stomach	Stomach	male	GTEX-111CU	GTEX
+GTEX-111CU-1026-SM-5EGIL	Adipose - Visceral (Omentum)	Adipose Tissue	male	GTEX-111CU	GTEX
+GTEX-111CU-1126-SM-5EGIM	Skin - Not Sun Exposed (Suprapubic)	Skin	male	GTEX-111CU	GTEX
+GTEX-111CU-1226-SM-5EGIN	Colon - Sigmoid	Colon	male	GTEX-111CU	GTEX
+GTEX-111CU-1326-SM-5NQ8L	Small Intestine - Terminal Ileum	Small Intestine	male	GTEX-111CU	GTEX
+GTEX-111CU-1426-SM-5GZYP	Colon - Transverse	Colon	male	GTEX-111CU	GTEX
+GTEX-111CU-1526-SM-5N9FS	Prostate	Prostate	male	GTEX-111CU	GTEX
+GTEX-111CU-1726-SM-5EGHM	Testis	Testis	male	GTEX-111CU	GTEX
+GTEX-111CU-1826-SM-5GZYN	Adipose - Subcutaneous	Adipose Tissue	male	GTEX-111CU	GTEX
+GTEX-111CU-1926-SM-5GZYZ	Skin - Sun Exposed (Lower leg)	Skin	male	GTEX-111CU	GTEX
+GTEX-111CU-2026-SM-5GZZC	Muscle - Skeletal	Muscle	male	GTEX-111CU	GTEX
+GTEX-111CU-2226-SM-5N9G5	Nerve - Tibial	Nerve	male	GTEX-111CU	GTEX
+GTEX-111FC-0126-SM-5N9DL	Skin - Sun Exposed (Lower leg)	Skin	male	GTEX-111FC	GTEX
+GTEX-111FC-0226-SM-5N9B8	Adipose - Subcutaneous	Adipose Tissue	male	GTEX-111FC	GTEX
+GTEX-111FC-0326-SM-5GZZ1	Muscle - Skeletal	Muscle	male	GTEX-111FC	GTEX
+GTEX-111FC-0426-SM-5N9CV	Artery - Tibial	Blood Vessel	male	GTEX-111FC	GTEX
+GTEX-111FC-0526-SM-5GZZ8	Nerve - Tibial	Nerve	male	GTEX-111FC	GTEX
+GTEX-111FC-0626-SM-5N9CU	Heart - Atrial Appendage	Heart	male	GTEX-111FC	GTEX
+GTEX-111FC-0826-SM-5GZWO	Heart - Left Ventricle	Heart	male	GTEX-111FC	GTEX
+GTEX-111FC-1026-SM-5GZX1	Thyroid	Thyroid	male	GTEX-111FC	GTEX
+GTEX-111FC-1126-SM-5GZWU	Lung	Lung	male	GTEX-111FC	GTEX
+GTEX-111FC-1326-SM-5N9D9	Spleen	Spleen	male	GTEX-111FC	GTEX
+GTEX-111FC-1426-SM-5N9C7	Adipose - Subcutaneous	Adipose Tissue	male	GTEX-111FC	GTEX

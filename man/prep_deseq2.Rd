@@ -21,7 +21,9 @@ and transforms pvalues for plotting. The final data frame is returned and
 optionally saved to a new RDS file.
 }
 \examples{
-\dontrun{
-prep_deseq2("Select DEGs/DEG_deseq2.Rdata", "Processed_DEG_deseq2")
-}
+deseq2_file <- system.file("extdata",
+                           "DEG_deseq2_test.rds",
+                           package = "TransProR")
+deseq2 <- prep_deseq2(deseq2_file)
+
 }

@@ -17,16 +17,71 @@
 #' @return A new data frame that includes pathways, gene, type, and value columns
 #' @export
 #' @examples
-#' \dontrun{
-#' new_dataframe <- gene_map_pathway(
-#'   BP_dataframe = BP_df, BP_ids = c("GO:0002376", "GO:0019724"),
-#'   KEGG_dataframe = KEGG_df, KEGG_ids = c("12345", "67890"),
-#'   MF_dataframe = MF_df, MF_ids = c("ABC123", "DEF456"),  # Assuming MF_df is defined
-#'   REACTOME_dataframe = REACTOME_df, REACTOME_ids = c("R-HSA-12345", "R-HSA-67890"),
-#'   CC_dataframe = CC_df, CC_ids = c("GO:0005575", "GO:0005634"),
-#'   DO_dataframe = DO_df, DO_ids = c("DOID:123", "DOID:456")
+#' # Simulating data for different analysis types
+#'
+#' # Simulate Biological Process (BP) data frame
+#' BP_df <- data.frame(
+#'   ID = c("GO:0002376", "GO:0019724"),
+#'   geneID = c("GENE1/GENE2", "GENE3/GENE4"),
+#'   Description = c("Immune response", "Glycosylation process")
 #' )
-#' }
+#'
+#' # Simulate KEGG data frame
+#' KEGG_df <- data.frame(
+#'   ID = c("12345", "67890"),
+#'   geneID = c("GENE5/GENE6", "GENE7/GENE8"),
+#'   Description = c("Pathway 1", "Pathway 2")
+#' )
+#'
+#' # Simulate Molecular Function (MF) data frame
+#' MF_df <- data.frame(
+#'   ID = c("ABC123", "DEF456"),
+#'   geneID = c("GENE9/GENE10", "GENE11/GENE12"),
+#'   Description = c("Molecular function A", "Molecular function B")
+#' )
+#'
+#' # Simulate REACTOME data frame
+#' REACTOME_df <- data.frame(
+#'   ID = c("R-HSA-12345", "R-HSA-67890"),
+#'   geneID = c("GENE13/GENE14", "GENE15/GENE16"),
+#'   Description = c("Pathway in Reactome 1", "Pathway in Reactome 2")
+#' )
+#'
+#' # Simulate Cellular Component (CC) data frame
+#' CC_df <- data.frame(
+#'   ID = c("GO:0005575", "GO:0005634"),
+#'   geneID = c("GENE17/GENE18", "GENE19/GENE20"),
+#'   Description = c("Cellular component A", "Cellular component B")
+#' )
+#'
+#' # Simulate Disease Ontology (DO) data frame
+#' DO_df <- data.frame(
+#'   ID = c("DOID:123", "DOID:456"),
+#'   geneID = c("GENE21/GENE22", "GENE23/GENE24"),
+#'   Description = c("Disease A", "Disease B")
+#' )
+#'
+#' # Example pathway IDs for each analysis
+#' BP_ids <- c("GO:0002376", "GO:0019724")
+#' KEGG_ids <- c("12345", "67890")
+#' MF_ids <- c("ABC123", "DEF456")
+#' REACTOME_ids <- c("R-HSA-12345", "R-HSA-67890")
+#' CC_ids <- c("GO:0005575", "GO:0005634")
+#' DO_ids <- c("DOID:123", "DOID:456")
+#'
+#' # Generate the pathway-gene map using the gene_map_pathway function
+#' pathway_gene_map <- gene_map_pathway(
+#'   BP_dataframe = BP_df, BP_ids = BP_ids,
+#'   KEGG_dataframe = KEGG_df, KEGG_ids = KEGG_ids,
+#'   MF_dataframe = MF_df, MF_ids = MF_ids,
+#'   REACTOME_dataframe = REACTOME_df, REACTOME_ids = REACTOME_ids,
+#'   CC_dataframe = CC_df, CC_ids = CC_ids,
+#'   DO_dataframe = DO_df, DO_ids = DO_ids
+#' )
+#'
+#' # Display the resulting pathway-gene mapping data frame
+#' print(pathway_gene_map)
+#'
 gene_map_pathway <- function(BP_dataframe, BP_ids, KEGG_dataframe, KEGG_ids, MF_dataframe, MF_ids, REACTOME_dataframe, REACTOME_ids, CC_dataframe, CC_ids, DO_dataframe, DO_ids) {
 
   # Create an empty data frame

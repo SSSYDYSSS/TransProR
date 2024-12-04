@@ -23,12 +23,10 @@ It modifies the transparency scale based on the range of values present in the d
 ensuring that the visualization accurately reflects variations within the data.
 }
 \examples{
-\dontrun{
 # Assuming 'data' is a DataFrame with a 'value' column
 plot_data <- data.frame(value = c(10, 20, 30, 40, 50))
-ggplot(plot_data, aes(x = 1:nrow(plot_data), y = value)) +
-  geom_point(aes(alpha = value)) +
+ggplot2::ggplot(plot_data, ggplot2::aes(x = 1:nrow(plot_data), y = value)) +
+  ggplot2::geom_point(ggplot2::aes(alpha = value)) +
   adjust_alpha_scale(plot_data, "Transparency Scale")
-}
 
 }

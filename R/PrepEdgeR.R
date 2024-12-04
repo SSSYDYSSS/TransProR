@@ -10,9 +10,11 @@
 #' @return A data frame with processed edgeR DEG data.
 #' @export
 #' @examples
-#' \dontrun{
-#' prep_edgeR("Select DEGs/DEG_edgeR.Rdata", "Processed_DEG_edgeR")
-#' }
+#' edgeR_file <- system.file("extdata",
+#'                           "DEG_edgeR_test.rds",
+#'                           package = "TransProR")
+#' edgeR <- prep_edgeR(edgeR_file)
+#'
 prep_edgeR <- function(input_path, output_name = NULL) {
   # Read the edgeR DEG data frame from an RDS file
   DEG_edgeR <- readRDS(input_path)

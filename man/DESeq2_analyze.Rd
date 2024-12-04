@@ -2,7 +2,7 @@
 % Please edit documentation in R/DESeq2Analyze.R
 \name{DESeq2_analyze}
 \alias{DESeq2_analyze}
-\title{Differential Gene Expression Analysis using DESeq2}
+\title{Differential Gene Expression Analysis using 'DESeq2'}
 \usage{
 DESeq2_analyze(
   tumor_file,
@@ -27,8 +27,8 @@ DESeq2_analyze(
 A data frame of differential expression results.
 }
 \description{
-DESeq2: Differential gene expression analysis based on the negative binomial distribution.
-This function utilizes the DESeq2 package to conduct differential gene expression analysis.
+'DESeq2': Differential gene expression analysis based on the negative binomial distribution.
+This function utilizes the 'DESeq2' package to conduct differential gene expression analysis.
 It processes tumor and normal expression data, applies DESeq2 analysis,
 and outputs the results along with information on gene expression changes.
 }
@@ -38,10 +38,26 @@ which allows for handling the variability observed in gene expression data, espe
 small sample sizes. This approach is well-suited for RNA-Seq data analysis.
 }
 \examples{
-\dontrun{
-# Call the DESeq2_analyze function
-result_df <- DESeq2_analyze(tumor_file, normal_file, output_file = tempfile(fileext = ".rds"))
-}
+# Define file paths for tumor and normal data from the data folder
+tumor_file <- system.file("extdata",
+                          "removebatch_SKCM_Skin_TCGA_exp_tumor_test.rds",
+                          package = "TransProR")
+normal_file <- system.file("extdata",
+                           "removebatch_SKCM_Skin_Normal_TCGA_GTEX_count_test.rds",
+                           package = "TransProR")
+output_file <- file.path(tempdir(), "DEG_DESeq2.rds")
+
+DEG_DESeq2 <- DESeq2_analyze(
+  tumor_file = tumor_file,
+  normal_file = normal_file,
+  output_file = output_file,
+  2.5,
+  0.01
+)
+
+# View the top 5 rows of the result
+head(DEG_DESeq2, 5)
+
 }
 \references{
 DESeq2:Differential gene expression analysis based on the negative binomial distribution.

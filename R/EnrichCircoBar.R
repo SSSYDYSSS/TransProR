@@ -10,14 +10,46 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' # Generate Sample Input Data for extract_descriptions_counts Function
+#'
+#' # Create a sample data frame with 'Description' and 'Count' columns
+#' data <- data.frame(
+#'   Description = c(
+#'     "immunoglobulin production",
+#'     "B cell mediated immunity",
+#'     "T cell activation",
+#'     "antigen processing and presentation",
+#'     "cytokine signaling",
+#'     "natural killer cell activity",
+#'     "phagocytosis",
+#'     "complement activation",
+#'     "antibody-dependent cellular cytotoxicity",
+#'     "regulatory T cell function"
+#'   ),
+#'   Count = c(
+#'     150,  # immunoglobulin production
+#'     200,  # B cell mediated immunity
+#'     175,  # T cell activation
+#'     125,  # antigen processing and presentation
+#'     190,  # cytokine signaling
+#'     160,  # natural killer cell activity
+#'     140,  # phagocytosis
+#'     180,  # complement activation
+#'     130,  # antibody-dependent cellular cytotoxicity
+#'     170   # regulatory T cell function
+#'   ),
+#'   stringsAsFactors = FALSE  # Ensure that strings are not converted to factors
+#' )
+#'
+#'
+#'
 #' descriptions_to_filter <- c("immunoglobulin production", "B cell mediated immunity")
 #' specified_color <- "red"  # You can specify any color you desire
 #' filtered_data_with_color <- extract_descriptions_counts(
-#' data, descriptions_to_filter,
-#' specified_color)
+#'   data, descriptions_to_filter,
+#'   specified_color)
 #' print(filtered_data_with_color)
-#' }
+#'
 extract_descriptions_counts <- function(df, descriptions, color) {
   # Filter rows where the Description column values are in the descriptions vector
   result_df <- df[df$Description %in% descriptions, ]
@@ -41,22 +73,151 @@ extract_descriptions_counts <- function(df, descriptions, color) {
 #' Combine and Visualize Data with Circular Bar Chart
 #'
 #' This function combines multiple data frames, arranges them, and visualizes the combined data
-#' in a Circular Bar Chart using the ggplot2 and ggalluvial packages.
+#' in a Circular Bar Chart using the 'ggplot2' and 'ggalluvial' packages.
 #'
 #' @importFrom dplyr bind_rows arrange desc row_number mutate
 #' @importFrom ggplot2 ggplot geom_bar geom_text scale_fill_manual scale_y_continuous scale_x_continuous coord_polar labs theme_minimal theme element_rect element_blank
 #' @importFrom rlang .data
 #' @param data_list A list of data frames to be combined.
-#' @return A ggplot object representing the Circular Bar Chart.
+#' @return A `ggplot` object representing the Circular Bar Chart.
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' data_list <- list(filtered_data_BP, filtered_data_CC, filtered_data_DO,
-#'                   filtered_data_MF, filtered_data_Reactome, filtered_data_kegg)
+#' # Create sample data frames for each enrichment category
+#'
+#' # 1. Biological Process (BP)
+#' filtered_data_BP <- data.frame(
+#'   Description = c(
+#'     "immune response",
+#'     "cell proliferation",
+#'     "signal transduction",
+#'     "apoptotic process",
+#'     "metabolic process"
+#'   ),
+#'   Count = c(120, 85, 150, 60, 95),
+#'   color = c(
+#'     "#1f77b4",  # blue
+#'     "#ff7f0e",  # orange
+#'     "#2ca02c",  # green
+#'     "#d62728",  # red
+#'     "#9467bd"   # purple
+#'   ),
+#'   stringsAsFactors = FALSE
+#' )
+#'
+#' # 2. Cellular Component (CC)
+#' filtered_data_CC <- data.frame(
+#'   Description = c(
+#'     "nucleus",
+#'     "cytoplasm",
+#'     "membrane",
+#'     "mitochondrion",
+#'     "extracellular space"
+#'   ),
+#'   Count = c(90, 110, 75, 65, 80),
+#'   color = c(
+#'     "#1f77b4",
+#'     "#ff7f0e",
+#'     "#2ca02c",
+#'     "#d62728",
+#'     "#9467bd"
+#'   ),
+#'   stringsAsFactors = FALSE
+#' )
+#'
+#' # 3. Molecular Function (MF)
+#' filtered_data_MF <- data.frame(
+#'   Description = c(
+#'     "protein binding",
+#'     "DNA binding",
+#'     "enzyme activity",
+#'     "transporter activity",
+#'     "receptor activity"
+#'   ),
+#'   Count = c(140, 130, 100, 70, 90),
+#'   color = c(
+#'     "#1f77b4",
+#'     "#ff7f0e",
+#'     "#2ca02c",
+#'     "#d62728",
+#'     "#9467bd"
+#'   ),
+#'   stringsAsFactors = FALSE
+#' )
+#'
+#' # 4. Disease Ontology (DO)
+#' filtered_data_DO <- data.frame(
+#'   Description = c(
+#'     "cancer",
+#'     "cardiovascular disease",
+#'     "neurological disorder",
+#'     "metabolic disease",
+#'     "infectious disease"
+#'   ),
+#'   Count = c(200, 150, 120, 90, 160),
+#'   color = c(
+#'     "#1f77b4",
+#'     "#ff7f0e",
+#'     "#2ca02c",
+#'     "#d62728",
+#'     "#9467bd"
+#'   ),
+#'   stringsAsFactors = FALSE
+#' )
+#'
+#' # 5. Reactome Pathways
+#' filtered_data_Reactome <- data.frame(
+#'   Description = c(
+#'     "Cell Cycle",
+#'     "Apoptosis",
+#'     "DNA Repair",
+#'     "Signal Transduction",
+#'     "Metabolism of Proteins"
+#'   ),
+#'   Count = c(110, 95, 80, 130, 85),
+#'   color = c(
+#'     "#1f77b4",
+#'     "#ff7f0e",
+#'     "#2ca02c",
+#'     "#d62728",
+#'     "#9467bd"
+#'   ),
+#'   stringsAsFactors = FALSE
+#' )
+#'
+#' # 6. KEGG Pathways
+#' filtered_data_kegg <- data.frame(
+#'   Description = c(
+#'     "PI3K-Akt signaling pathway",
+#'     "MAPK signaling pathway",
+#'     "NF-kappa B signaling pathway",
+#'     "JAK-STAT signaling pathway",
+#'     "Toll-like receptor signaling pathway"
+#'   ),
+#'   Count = c(175, 160, 145, 130, 155),
+#'   color = c(
+#'     "#1f77b4",
+#'     "#ff7f0e",
+#'     "#2ca02c",
+#'     "#d62728",
+#'     "#9467bd"
+#'   ),
+#'   stringsAsFactors = FALSE
+#' )
+#'
+#' # Combine all filtered data frames into a list
+#' data_list <- list(
+#'   BP = filtered_data_BP,
+#'   CC = filtered_data_CC,
+#'   MF = filtered_data_MF,
+#'   DO = filtered_data_DO,
+#'   Reactome = filtered_data_Reactome,
+#'   KEGG = filtered_data_kegg
+#' )
+#'
+#' # Create the Circular Bar Chart
 #' combined_and_visualized_data <- enrich_circo_bar(data_list)
-#' print(combined_and_visualized_data)
-#' }
+#'
 enrich_circo_bar <- function(data_list) {
   # Combine data frames
   combined_data <- dplyr::bind_rows(data_list)

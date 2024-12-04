@@ -9,9 +9,14 @@
 #' @importFrom stats quantile
 #' @export
 #' @examples
-#' \dontrun{
+#' file_path <- system.file("extdata",
+#'                          "all_count_exp_test.csv",
+#'                          package = "TransProR")
+#' your_data <- read.csv(file_path,
+#'                       row.names = 1)  # Assuming first column is row names (e.g., gene names)
+#'
 #' TransformedData <- log_transform(data = your_data)
-#' }
+#'
 log_transform <- function(data) {
   # Calculate quantiles
   qx <- as.numeric(quantile(data, c(0., 0.25, 0.5, 0.75, 0.99, 1.0), na.rm=TRUE))
@@ -25,10 +30,10 @@ log_transform <- function(data) {
   if (LogC) {
     # Apply +1 to all values before log2 transformation
     result <- log2(data + 1)
-    print("log2 transform finished")
+    message("log2 transform finished")
   } else {
     result <- data
-    print("log2 transform not needed")
+    message("log2 transform not needed")
   }
 
   return(result)

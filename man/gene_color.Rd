@@ -22,8 +22,12 @@ A data frame containing merged genes with an additional color column.
 This function merges selected genes with differential expression data and adds a color column based on up/down regulation.
 }
 \examples{
-\dontrun{
-# Example usage
-merged_result <- gene_color(selected_genes, DEG_deseq2, up_color = "red", down_color = "blue")
-}
+selected_genes_deseq2_file <- system.file("extdata",
+                                          "selected_genes_deseq2.rds",
+                                          package = "TransProR")
+selected_genes_deseq2 <- readRDS(selected_genes_deseq2_file)
+Diff_deseq2_file <- system.file("extdata", "Diff_deseq2.rds", package = "TransProR")
+Diff_deseq2 <- readRDS(Diff_deseq2_file)
+
+result_deseq2 <- gene_color(selected_genes_deseq2, Diff_deseq2, "#0000EE", "#fc4746")
 }

@@ -17,7 +17,6 @@ This function creates a Venn Diagram using the ggVennDiagram package.
 It allows customization of various aesthetic elements of the diagram.
 }
 \examples{
-\dontrun{
-four_degs_venn(all_degs_venn11)
-}
+data("all_degs_venn", package = "TransProR")
+four_degs_venn <- four_degs_venn(all_degs_venn)
 }

@@ -13,9 +13,38 @@
 #' @param df_name Name to assign to the resulting data frame for identification.
 #' @return A data frame with processed columns.
 #' @examples
-#' \dontrun{
-#' compare_merge(DEG_deseq2, DEG_edgeR, "Gene", "change", c("_1", "_2"), "deseq2_edgeR")
-#' }
+#' # Create simulated DESeq2 data
+#' DEG_deseq2 <- data.frame(
+#'   Gene = c("Gene1", "Gene2", "Gene3", "Gene4", "Gene5"),
+#'   change = c("up", "down", "no_change", "up", "down"),
+#'   log2FoldChange = c(2.5, -3.2, 0.1, 1.8, -2.5),
+#'   pvalue = c(0.01, 0.05, 0.9, 0.02, 0.03)
+#' )
+#'
+#' # Display the first 5 rows of the DESeq2 data
+#' head(DEG_deseq2, 5)
+#'
+#' # Create simulated edgeR data
+#' DEG_edgeR <- data.frame(
+#'   Gene = c("Gene1", "Gene2", "Gene3", "Gene4", "Gene5"),
+#'   change = c("up", "down", "no_change", "no_change", "up"),
+#'   log2FoldChange = c(2.3, -3.1, 0.2, 0.1, 2.7),
+#'   pvalue = c(0.02, 0.04, 0.8, 0.6, 0.01)
+#' )
+#'
+#' # Display the first 5 rows of the edgeR data
+#' head(DEG_edgeR, 5)
+#'
+#' # Merge the DESeq2 and edgeR data
+#' deseq2_edgeR <- compare_merge(
+#'   df1 = DEG_deseq2,
+#'   df2 = DEG_edgeR,
+#'   by_gene = "Gene",
+#'   compare_col = "change",
+#'   suffixes = c("_1", "_2"),
+#'   df_name = "deseq2_edgeR"
+#' )
+#'
 #' @export
 compare_merge <- function(df1, df2, by_gene, compare_col, suffixes, df_name) {
   # Perform an inner join on the 'Gene' column

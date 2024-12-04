@@ -22,8 +22,7 @@ the color from RGB to Luv color space, applying the scaling factors to the satur
 and then converting it back to RGB.
 }
 \examples{
-\dontrun{
   adjusted_color <- adjust_color_tone("#FF0000", saturation_scale = 0.8, luminance_scale = 1.2)
   print(adjusted_color)
-}
+
 }

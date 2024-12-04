@@ -40,11 +40,11 @@ Note: This function assumes that TCGA's normal samples and GTEX samples represen
 \details{
 This function takes a TCGA's normal tissue data set and a pre-saved GTEX data set, asks the user
 for specific TCGA's normal tissue types to retain, then merges the two datasets. The merged dataset
-is then corrected for batch effects using the ComBat_seq function from the sva package.
+is then corrected for batch effects using the ComBat_seq function from the 'sva' package.
 
 
-The ComBat_seq function from the sva package is used to correct batch effects.
-The function requires the sva package to be installed and loaded externally.
+The ComBat_seq function from the 'sva' package is used to correct batch effects.
+The function requires the 'sva' package to be installed and loaded externally.
 
 The example code uses `tempfile()` to generate temporary paths dynamically during execution.
 These paths are valid during the `R CMD check` process, even if no actual files exist,
@@ -54,14 +54,21 @@ avoids errors during `R CMD check`. CRAN review checks for documentation correct
 and syntax parsing, not the existence of actual files, as long as the example code is syntactically valid.
 }
 \examples{
-\dontrun{
-corrected_data <- Combat_Normal(
-    "TCGA_normal_data_path",
-    "gtex_data_path",
-    "CombatNormal_output_path",
-    auto_mode = T,
-    default_input = "11,12")
-}
+TCGA_normal_file <- system.file("extdata",
+                                "SKCM_Skin_TCGA_exp_normal_test.rds",
+                                package = "TransProR")
+gtex_file <- system.file("extdata", "Skin_SKCM_Gtex_test.rds", package = "TransProR")
+output_file <- file.path(tempdir(), "SKCM_Skin_Combat_Normal_TCGA_GTEX_count.rds")
+
+SKCM_Skin_Combat_Normal_TCGA_GTEX_count <- Combat_Normal(
+  TCGA_normal_data_path = TCGA_normal_file,
+  gtex_data_path = gtex_file,
+  CombatNormal_output_path = output_file,
+  auto_mode = TRUE,
+  default_input = "skip"
+)
+head(SKCM_Skin_Combat_Normal_TCGA_GTEX_count)[1:5, 1:5]
+
 }
 \seealso{
 \code{\link[sva]{ComBat_seq}}

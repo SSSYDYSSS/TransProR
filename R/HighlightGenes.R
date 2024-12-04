@@ -8,16 +8,26 @@
 #' @param ggtree_obj A ggtree object representing the phylogenetic tree.
 #' @param genes_to_highlight A data frame containing gene names and corresponding colors to highlight.
 #' @param hilight_extend Numeric value indicating the extension length for highlights.
-#' @return A ggtree object with added highlights for specified genes.
+#' @return A `ggtree` object with added highlights for specified genes.
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' # Example usage
-#' highlighted_tree <- add_gene_highlights(tree, genes_to_highlight, hilight_extend = 18)
-#' }
+#' plot_file <- system.file("extdata", "tree_plot.rds", package = "TransProR")
+#' p2_plot <- readRDS(plot_file)
+#'
+#' selected_genes_deseq2_file <- system.file("extdata",
+#'                                           "selected_genes_deseq2.rds",
+#'                                           package = "TransProR")
+#' selected_genes_deseq2 <- readRDS(selected_genes_deseq2_file)
+#'
+#' Diff_deseq2_file <- system.file("extdata", "Diff_deseq2.rds", package = "TransProR")
+#' Diff_deseq2 <- readRDS(Diff_deseq2_file)
+#'
+#' result_deseq2 <- gene_color(selected_genes_deseq2, Diff_deseq2, "#0000EE", "#fc4746")
+#'
+#' add_gene_highlights_p3 <- highlight_genes(p2_plot, result_deseq2, hilight_extend = 26)
 highlight_genes <- function(ggtree_obj, genes_to_highlight, hilight_extend = 18) {
-  # Ensure that the first argument is a ggtree object
+  # Ensure that the first argument is a `ggtree` object
   if (!inherits(ggtree_obj, "ggtree")) {
     stop("The first argument must be a ggtree object.")
   }
@@ -48,10 +58,10 @@ highlight_genes <- function(ggtree_obj, genes_to_highlight, hilight_extend = 18)
     }
   })
 
-  # Remove NULL elements from highlight_commands since they may exist
+  # Remove NULL elements from `highlight_commands` since they may exist
   highlight_commands <- Filter(Negate(is.null), highlight_commands)
 
-  # Apply the commands to the ggtree object
+  # Apply the commands to the `ggtree object`
   ggtree_obj <- ggtree_obj + do.call(c, highlight_commands)
 
   return(ggtree_obj)

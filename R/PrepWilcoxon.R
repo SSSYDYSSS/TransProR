@@ -11,9 +11,11 @@
 #' @return A data frame with processed Wilcoxon DEG data.
 #' @export
 #' @examples
-#' \dontrun{
-#' prep_wilcoxon("Select DEGs/Wilcoxon_rank_sum_testoutRst.Rdata", "Processed_DEG_Wilcoxon")
-#' }
+#' wilcoxon_file <- system.file("extdata",
+#'                              "Wilcoxon_rank_sum_testoutRst_test.rds",
+#'                              package = "TransProR")
+#' Wilcoxon <- prep_wilcoxon(wilcoxon_file)
+#'
 prep_wilcoxon <- function(input_path, output_name = NULL) {
   # Read the Wilcoxon DEG data frame from an RDS file
   Wilcoxon <- readRDS(input_path)

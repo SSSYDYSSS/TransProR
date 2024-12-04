@@ -6,10 +6,11 @@
 #' @return A single data frame merged from the list, with additional 'id' and 'point_position' columns.
 #' @importFrom dplyr arrange
 #' @examples
-#'   df1 <- data.frame(Description = c("DataA", "DataB"), Count = c(10, 20), row.names = c("R1", "R2"))
-#'   df2 <- data.frame(Description = c("DataC", "DataD"), Count = c(30, 40), row.names = c("R1", "R3"))
-#'   df_list <- list(df1, df2)
-#'   combined_df_test <- merge_id_position(df_list)
+#' df1 <- data.frame(Description = c("DataA", "DataB"), Count = c(10, 20), row.names = c("R1", "R2"))
+#' df2 <- data.frame(Description = c("DataC", "DataD"), Count = c(30, 40), row.names = c("R1", "R3"))
+#' df_list <- list(df1, df2)
+#' combined_df_test <- merge_id_position(df_list)
+#'
 #' @export
 merge_id_position <- function(df_list) {
   # Find common row names across all data frames

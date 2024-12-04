@@ -17,12 +17,7 @@ This function filters out genes based on their expression change status.
 It returns the names of genes which are not "stable".
 }
 \examples{
-\dontrun{
-all_degs_venn11 <- list(
-DESeq2 = deg_filter(DEG_deseq2),
-edgeR = deg_filter(DEG_edgeR),
-limma = deg_filter(DEG_limma_voom),
-Wilcoxon_test = deg_filter(outRst)
-)
-}
+DEG_deseq2_file <- system.file("extdata", "DEG_deseq2.rds", package = "TransProR")
+DEG_deseq2 <- readRDS(DEG_deseq2_file)
+DEG_deseq2_test <- deg_filter(DEG_deseq2)
 }

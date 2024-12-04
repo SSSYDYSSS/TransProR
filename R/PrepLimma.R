@@ -10,9 +10,11 @@
 #' @return A data frame with processed limma-voom DEG data.
 #' @export
 #' @examples
-#' \dontrun{
-#' prep_limma("Select DEGs/DEG_limma_voom.Rdata", "Processed_DEG_limma_voom")
-#' }
+#' limma_file <- system.file("extdata",
+#'                           "DEG_limma_voom_test.rds",
+#'                           package = "TransProR")
+#' limma <- prep_limma(limma_file)
+#'
 prep_limma <- function(input_path, output_name = NULL) {
   # Read the limma-voom DEG data frame from an RDS file
   limma <- readRDS(input_path)

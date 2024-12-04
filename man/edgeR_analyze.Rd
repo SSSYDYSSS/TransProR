@@ -2,7 +2,7 @@
 % Please edit documentation in R/EdgeRAnalyze.R
 \name{edgeR_analyze}
 \alias{edgeR_analyze}
-\title{Differential Gene Expression Analysis using edgeR}
+\title{Differential Gene Expression Analysis using 'edgeR'}
 \usage{
 edgeR_analyze(
   tumor_file,
@@ -27,21 +27,32 @@ edgeR_analyze(
 A data frame of differential expression results.
 }
 \description{
-This function performs differential gene expression analysis using the edgeR package.
+This function performs differential gene expression analysis using the 'edgeR' package.
 It reads tumor and normal expression data, merges them, filters low-expressed genes,
 normalizes the data, performs edgeR analysis, and outputs the results along with information
 on gene expression changes.
 }
 \examples{
-\dontrun{
-edgeR_analyze(
-  "path/to/tumor_file.rds",
-  "path/to/normal_file.rds",
-  "path/to/output_file",
+# Define file paths for tumor and normal data from the data folder
+tumor_file <- system.file("extdata",
+                         "removebatch_SKCM_Skin_TCGA_exp_tumor_test.rds",
+                         package = "TransProR")
+normal_file <- system.file("extdata",
+                           "removebatch_SKCM_Skin_Normal_TCGA_GTEX_count_test.rds",
+                           package = "TransProR")
+output_file <- file.path(tempdir(), "DEG_edgeR.rds")
+
+DEG_edgeR <- edgeR_analyze(
+  tumor_file = tumor_file,
+  normal_file = normal_file,
+  output_file = output_file,
   2.5,
   0.01
 )
-}
+
+# View the top 5 rows of the result
+head(DEG_edgeR, 5)
+
 }
 \references{
 edgeR: Differential analysis of sequence read count data.

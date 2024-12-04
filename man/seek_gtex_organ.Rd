@@ -17,9 +17,9 @@ This function reads the GTEX phenotype data from a specified path, renames its c
 and then returns a table of primary site counts.
 }
 \examples{
-\dontrun{
-  primary_site_counts <- seek_gtex_organ("./path_to_data/GTEX_phenotype")
-  print(primary_site_counts)
-}
+# Get the file path to the example data in the package
+path <- system.file("extdata", "GTEX_phenotype_test", package = "TransProR")
+# Call the `seek_gtex_organ` function with the path and print the result
+SeekGtexOrgan <- seek_gtex_organ(path = path)
 
 }
