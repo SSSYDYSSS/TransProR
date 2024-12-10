@@ -38,37 +38,49 @@ and alpha transparency. This is useful when you want to add additional data laye
 the existing scales in the plot. It utilizes the 'ggnewscale' package to reset scales for new layers.
 }
 \examples{
-\dontrun{
-file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
-p <- readRDS(file_path)
+\donttest{
+# Check and load required packages
+if (requireNamespace("ggtreeExtra", quietly = TRUE) &&
+ requireNamespace("ggplot2", quietly = TRUE) &&
+  requireNamespace("ggnewscale", quietly = TRUE)) {
+  library(ggtreeExtra)
+  library(ggplot2)
+  library(ggnewscale)
 
-# Create new expression data
-new_expression_data <- data.frame(
-  Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 3),
-  Gene = rep(c("Gene6", "Gene7", "Gene8"), times = 4),
-  Value = runif(12, min = 0, max = 1)  # Randomly generate expression values between 0 and 1
-)
+  file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
+  p <- readRDS(file_path)
 
-# Define new gene colors
-new_gene_colors <- c(
-  Gene6 = "#0b5f63",
-  Gene7 = "#074d41",
-  Gene8 = "#1f5e27"
-)
+  # Create new expression data
+  new_expression_data <- data.frame(
+    Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 3),
+    Gene = rep(c("Gene6", "Gene7", "Gene8"), times = 4),
+    Value = runif(12, min = 0, max = 1)  # Randomly generate expression values between 0 and 1
+  )
 
-# Define gene label and alpha values
-gene_label <- "New Genes"
-alpha_value <- c(0.3, 0.9)
+  # Define new gene colors
+  new_gene_colors <- c(
+    Gene6 = "#0b5f63",
+    Gene7 = "#074d41",
+    Gene8 = "#1f5e27"
+  )
 
-# Add new tile layer
-p_with_new_layer <- add_new_tile_layer(
-  p,
-  new_expression_data,
-  new_gene_colors,
-  gene_label,
-  alpha_value,
-  offset = 0.02,
-  pwidth = 2
-)
+  # Define gene label and alpha values
+  gene_label <- "New Genes"
+  alpha_value <- c(0.3, 0.9)
+
+  # Add new tile layer
+  p_with_new_layer <- add_new_tile_layer(
+    p,
+    new_expression_data,
+    new_gene_colors,
+    gene_label,
+    alpha_value,
+    offset = 0.02,
+    pwidth = 2
+  )
+} else {
+  message("Required packages 'ggtreeExtra', 'ggplot2', and 'ggnewscale' are not installed.")
 }
+}
+
 }

@@ -24,27 +24,37 @@ data as colored tiles to the plot. It allows for dynamic coloring of the genes a
 adjustments for alpha transparency based on the expression value.
 }
 \examples{
-\dontrun{
-file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
-p <- readRDS(file_path)
+\donttest{
+# Check and load required packages
+if (requireNamespace("ggtreeExtra", quietly = TRUE) &&
+ requireNamespace("ggplot2", quietly = TRUE)) {
+  library(ggtreeExtra)
+  library(ggplot2)
 
-# Create gene expression data frame
-expression_data <- data.frame(
-  Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 5),
-  Gene = rep(paste0("Gene", 1:5), times = 4),
-  Value = runif(20, min = 0, max = 1)  # Randomly generate expression values between 0 and 1
-)
+  file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
+  p <- readRDS(file_path)
 
-# Define gene colors (named vector)
-gene_colors <- c(
-  Gene1 = "#491588",
-  Gene2 = "#301b8d",
-  Gene3 = "#1a237a",
-  Gene4 = "#11479c",
-  Gene5 = "#0a5797"
-)
+  # Create gene expression data frame
+  expression_data <- data.frame(
+    Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 5),
+    Gene = rep(paste0("Gene", 1:5), times = 4),
+    Value = runif(20, min = 0, max = 1)  # Randomly generate expression values between 0 and 1
+  )
 
-# Call create_base_plot function to add gene expression data
-p <- create_base_plot(p, expression_data, gene_colors)
+  # Define gene colors (named vector)
+  gene_colors <- c(
+    Gene1 = "#491588",
+    Gene2 = "#301b8d",
+    Gene3 = "#1a237a",
+    Gene4 = "#11479c",
+    Gene5 = "#0a5797"
+  )
+
+  # Call create_base_plot function to add gene expression data
+  p <- create_base_plot(p, expression_data, gene_colors)
+} else {
+  message("Required packages 'ggtreeExtra' and 'ggplot2' are not installed.")
 }
+}
+
 }

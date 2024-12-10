@@ -14,29 +14,39 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
-#' p <- readRDS(file_path)
+#' \donttest{
+#' # Check and load required packages
+#' if (requireNamespace("ggtreeExtra", quietly = TRUE) &&
+#'  requireNamespace("ggplot2", quietly = TRUE)) {
+#'   library(ggtreeExtra)
+#'   library(ggplot2)
 #'
-#' # Create gene expression data frame
-#' expression_data <- data.frame(
-#'   Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 5),
-#'   Gene = rep(paste0("Gene", 1:5), times = 4),
-#'   Value = runif(20, min = 0, max = 1)  # Randomly generate expression values between 0 and 1
-#' )
+#'   file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
+#'   p <- readRDS(file_path)
 #'
-#' # Define gene colors (named vector)
-#' gene_colors <- c(
-#'   Gene1 = "#491588",
-#'   Gene2 = "#301b8d",
-#'   Gene3 = "#1a237a",
-#'   Gene4 = "#11479c",
-#'   Gene5 = "#0a5797"
-#' )
+#'   # Create gene expression data frame
+#'   expression_data <- data.frame(
+#'     Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 5),
+#'     Gene = rep(paste0("Gene", 1:5), times = 4),
+#'     Value = runif(20, min = 0, max = 1)  # Randomly generate expression values between 0 and 1
+#'   )
 #'
-#' # Call create_base_plot function to add gene expression data
-#' p <- create_base_plot(p, expression_data, gene_colors)
+#'   # Define gene colors (named vector)
+#'   gene_colors <- c(
+#'     Gene1 = "#491588",
+#'     Gene2 = "#301b8d",
+#'     Gene3 = "#1a237a",
+#'     Gene4 = "#11479c",
+#'     Gene5 = "#0a5797"
+#'   )
+#'
+#'   # Call create_base_plot function to add gene expression data
+#'   p <- create_base_plot(p, expression_data, gene_colors)
+#' } else {
+#'   message("Required packages 'ggtreeExtra' and 'ggplot2' are not installed.")
 #' }
+#' }
+#'
 create_base_plot <- function(p, data, gene_colors, gene_label="Gene") {
   # Define local variables
   Sample <- data$Sample
@@ -87,24 +97,34 @@ create_base_plot <- function(p, data, gene_colors, gene_label="Gene") {
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
-#' p <- readRDS(file_path)
+#' \donttest{
+#' # Check and load required packages
+#' if (requireNamespace("ggtreeExtra", quietly = TRUE) &&
+#'  requireNamespace("ggplot2", quietly = TRUE)) {
+#'   library(ggtreeExtra)
+#'   library(ggplot2)
 #'
-#' # Create boxplot data frame
-#' boxplot_data <- data.frame(
-#'   Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 30),
-#'   value = c(
-#'     rnorm(30, mean = 5, sd = 1),   # Data for Species_A
-#'     rnorm(30, mean = 7, sd = 1.5), # Data for Species_B
-#'     rnorm(30, mean = 6, sd = 1.2), # Data for Species_C
-#'     rnorm(30, mean = 8, sd = 1.3)  # Data for Species_D
+#'   file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
+#'   p <- readRDS(file_path)
+#'
+#'   # Create boxplot data frame
+#'   boxplot_data <- data.frame(
+#'     Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 30),
+#'     value = c(
+#'       rnorm(30, mean = 5, sd = 1),   # Data for Species_A
+#'       rnorm(30, mean = 7, sd = 1.5), # Data for Species_B
+#'       rnorm(30, mean = 6, sd = 1.2), # Data for Species_C
+#'       rnorm(30, mean = 8, sd = 1.3)  # Data for Species_D
+#'     )
 #'   )
-#' )
 #'
-#' # Call add_boxplot function to add boxplot layer
-#' p_with_boxplot <- add_boxplot(p, boxplot_data)
+#'   # Call add_boxplot function to add boxplot layer
+#'   p_with_boxplot <- add_boxplot(p, boxplot_data)
+#' } else {
+#'   message("Required packages 'ggtreeExtra' and 'ggplot2' are not installed.")
 #' }
+#' }
+#'
 add_boxplot <- function(p, data, fill_color="#f28131", alpha=0.6, offset=0.22, pwidth=0.5) {
   # Define local variables
   Sample <- data$Sample
@@ -156,39 +176,51 @@ add_boxplot <- function(p, data, fill_color="#f28131", alpha=0.6, offset=0.22, p
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
-#' p <- readRDS(file_path)
+#' \donttest{
+#' # Check and load required packages
+#' if (requireNamespace("ggtreeExtra", quietly = TRUE) &&
+#'  requireNamespace("ggplot2", quietly = TRUE) &&
+#'   requireNamespace("ggnewscale", quietly = TRUE)) {
+#'   library(ggtreeExtra)
+#'   library(ggplot2)
+#'   library(ggnewscale)
 #'
-#' # Create new expression data
-#' new_expression_data <- data.frame(
-#'   Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 3),
-#'   Gene = rep(c("Gene6", "Gene7", "Gene8"), times = 4),
-#'   Value = runif(12, min = 0, max = 1)  # Randomly generate expression values between 0 and 1
-#' )
+#'   file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
+#'   p <- readRDS(file_path)
 #'
-#' # Define new gene colors
-#' new_gene_colors <- c(
-#'   Gene6 = "#0b5f63",
-#'   Gene7 = "#074d41",
-#'   Gene8 = "#1f5e27"
-#' )
+#'   # Create new expression data
+#'   new_expression_data <- data.frame(
+#'     Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 3),
+#'     Gene = rep(c("Gene6", "Gene7", "Gene8"), times = 4),
+#'     Value = runif(12, min = 0, max = 1)  # Randomly generate expression values between 0 and 1
+#'   )
 #'
-#' # Define gene label and alpha values
-#' gene_label <- "New Genes"
-#' alpha_value <- c(0.3, 0.9)
+#'   # Define new gene colors
+#'   new_gene_colors <- c(
+#'     Gene6 = "#0b5f63",
+#'     Gene7 = "#074d41",
+#'     Gene8 = "#1f5e27"
+#'   )
 #'
-#' # Add new tile layer
-#' p_with_new_layer <- add_new_tile_layer(
-#'   p,
-#'   new_expression_data,
-#'   new_gene_colors,
-#'   gene_label,
-#'   alpha_value,
-#'   offset = 0.02,
-#'   pwidth = 2
-#' )
+#'   # Define gene label and alpha values
+#'   gene_label <- "New Genes"
+#'   alpha_value <- c(0.3, 0.9)
+#'
+#'   # Add new tile layer
+#'   p_with_new_layer <- add_new_tile_layer(
+#'     p,
+#'     new_expression_data,
+#'     new_gene_colors,
+#'     gene_label,
+#'     alpha_value,
+#'     offset = 0.02,
+#'     pwidth = 2
+#'   )
+#' } else {
+#'   message("Required packages 'ggtreeExtra', 'ggplot2', and 'ggnewscale' are not installed.")
 #' }
+#' }
+#'
 add_new_tile_layer <- function(p, data, gene_colors, gene_label, alpha_value=c(0.3, 0.9), offset=0.02, pwidth=2) {
   # Define local variables
   Sample <- data$Sample
@@ -238,59 +270,70 @@ add_new_tile_layer <- function(p, data, gene_colors, gene_label, alpha_value=c(0
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
-#' p <- readRDS(file_path)
+#' \donttest{
+#' # Check and load required packages
+#' if (requireNamespace("ggtreeExtra", quietly = TRUE) &&
+#'  requireNamespace("ggplot2", quietly = TRUE)) {
+#'   library(ggtreeExtra)
+#'   library(ggplot2)
 #'
-#' # Create gene expression data frame (long_format_HeatdataDeseq)
-#' long_format_HeatdataDeseq <- data.frame(
-#'   Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 5),
-#'   Genes = rep(paste0("Gene", 1:5), times = 4),
-#'   Value = runif(20, min = 0, max = 1)  # Randomly generate expression values between 0 and 1
-#' )
+#'   # Example data for gene expression, SSGSEA, and GSVA
+#'   file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
+#'   p <- readRDS(file_path)
 #'
-#' # Create SSGSEA analysis results data frame (ssgsea_kegg_HeatdataDeseq)
-#' ssgsea_kegg_HeatdataDeseq <- data.frame(
-#'   Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 3),
-#'   Genes = rep(c("Pathway1", "Pathway2", "Pathway3"), times = 4),
-#'   Value = runif(12, min = 0, max = 1)  # Randomly generate enrichment scores between 0 and 1
-#' )
+#'   # Create gene expression data frame (long_format_HeatdataDeseq)
+#'   long_format_HeatdataDeseq <- data.frame(
+#'     Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 5),
+#'     Genes = rep(paste0("Gene", 1:5), times = 4),
+#'     Value = runif(20, min = 0, max = 1)  # Randomly generate expression values between 0 and 1
+#'   )
 #'
-#' # Create GSVA analysis results data frame (gsva_kegg_HeatdataDeseq)
-#' gsva_kegg_HeatdataDeseq <- data.frame(
-#'   Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 4),
-#'   Genes = rep(c("PathwayA", "PathwayB", "PathwayC", "PathwayD"), times = 4),
-#'   Value = runif(16, min = 0, max = 1)  # Randomly generate enrichment scores between 0 and 1
-#' )
+#'   # Create SSGSEA analysis results data frame (ssgsea_kegg_HeatdataDeseq)
+#'   ssgsea_kegg_HeatdataDeseq <- data.frame(
+#'     Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 3),
+#'     Genes = rep(c("Pathway1", "Pathway2", "Pathway3"), times = 4),
+#'     Value = runif(12, min = 0, max = 1)  # Randomly generate enrichment scores between 0 and 1
+#'   )
 #'
-#' # Define gene and pathway colors (named vector), including all genes and pathways
-#' gene_colors <- c(
-#'   # Genes for gene expression
-#'   Gene1 = "#491588",
-#'   Gene2 = "#301b8d",
-#'   Gene3 = "#1a237a",
-#'   Gene4 = "#11479c",
-#'   Gene5 = "#0a5797",
-#'   # Pathways for SSGSEA
-#'   Pathway1 = "#0b5f63",
-#'   Pathway2 = "#074d41",
-#'   Pathway3 = "#1f5e27",
-#'   # Pathways for GSVA
-#'   PathwayA = "#366928",
-#'   PathwayB = "#827729",
-#'   PathwayC = "#a1d99b",
-#'   PathwayD = "#c7e9c0"
-#' )
+#'   # Create GSVA analysis results data frame (gsva_kegg_HeatdataDeseq)
+#'   gsva_kegg_HeatdataDeseq <- data.frame(
+#'     Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 4),
+#'     Genes = rep(c("PathwayA", "PathwayB", "PathwayC", "PathwayD"), times = 4),
+#'     Value = runif(16, min = 0, max = 1)  # Randomly generate enrichment scores between 0 and 1
+#'   )
 #'
-#' # Call circos_fruits function to add multiple layers
-#' final_plot <- circos_fruits(
-#'   p,
-#'   long_format_HeatdataDeseq,
-#'   ssgsea_kegg_HeatdataDeseq,
-#'   gsva_kegg_HeatdataDeseq,
-#'   gene_colors
-#' )
+#'   # Define gene and pathway colors (named vector), including all genes and pathways
+#'   gene_colors <- c(
+#'     # Genes for gene expression
+#'     Gene1 = "#491588",
+#'     Gene2 = "#301b8d",
+#'     Gene3 = "#1a237a",
+#'     Gene4 = "#11479c",
+#'     Gene5 = "#0a5797",
+#'     # Pathways for SSGSEA
+#'     Pathway1 = "#0b5f63",
+#'     Pathway2 = "#074d41",
+#'     Pathway3 = "#1f5e27",
+#'     # Pathways for GSVA
+#'     PathwayA = "#366928",
+#'     PathwayB = "#827729",
+#'     PathwayC = "#a1d99b",
+#'     PathwayD = "#c7e9c0"
+#'   )
+#'
+#'   # Call circos_fruits function to add multiple layers
+#'   final_plot <- circos_fruits(
+#'     p,
+#'     long_format_HeatdataDeseq,
+#'     ssgsea_kegg_HeatdataDeseq,
+#'     gsva_kegg_HeatdataDeseq,
+#'     gene_colors
+#'   )
+#' } else {
+#'   message("Required packages 'ggtreeExtra' and 'ggplot2' are not installed.")
 #' }
+#' }
+#'
 circos_fruits <- function(p, long_format_HeatdataDeseq, ssgsea_kegg_HeatdataDeseq, gsva_kegg_HeatdataDeseq, gene_colors) {
   if (!requireNamespace("ggtreeExtra", quietly = TRUE)) {
     stop("ggtreeExtra is required for using create_base_plot. Please install it.", call. = FALSE)

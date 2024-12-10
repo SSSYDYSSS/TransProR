@@ -34,22 +34,32 @@ This function adds a boxplot layer to an existing `ggtree` plot object using ggt
 It is primarily used to display statistical summaries of the data related to gene expressions or other metrics.
 }
 \examples{
-\dontrun{
-file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
-p <- readRDS(file_path)
+\donttest{
+# Check and load required packages
+if (requireNamespace("ggtreeExtra", quietly = TRUE) &&
+ requireNamespace("ggplot2", quietly = TRUE)) {
+  library(ggtreeExtra)
+  library(ggplot2)
 
-# Create boxplot data frame
-boxplot_data <- data.frame(
-  Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 30),
-  value = c(
-    rnorm(30, mean = 5, sd = 1),   # Data for Species_A
-    rnorm(30, mean = 7, sd = 1.5), # Data for Species_B
-    rnorm(30, mean = 6, sd = 1.2), # Data for Species_C
-    rnorm(30, mean = 8, sd = 1.3)  # Data for Species_D
+  file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
+  p <- readRDS(file_path)
+
+  # Create boxplot data frame
+  boxplot_data <- data.frame(
+    Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 30),
+    value = c(
+      rnorm(30, mean = 5, sd = 1),   # Data for Species_A
+      rnorm(30, mean = 7, sd = 1.5), # Data for Species_B
+      rnorm(30, mean = 6, sd = 1.2), # Data for Species_C
+      rnorm(30, mean = 8, sd = 1.3)  # Data for Species_D
+    )
   )
-)
 
-# Call add_boxplot function to add boxplot layer
-p_with_boxplot <- add_boxplot(p, boxplot_data)
+  # Call add_boxplot function to add boxplot layer
+  p_with_boxplot <- add_boxplot(p, boxplot_data)
+} else {
+  message("Required packages 'ggtreeExtra' and 'ggplot2' are not installed.")
 }
+}
+
 }

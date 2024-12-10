@@ -34,57 +34,68 @@ for each layer. The function is designed to work with specific data structures a
 are defined and available.
 }
 \examples{
-\dontrun{
-file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
-p <- readRDS(file_path)
+\donttest{
+# Check and load required packages
+if (requireNamespace("ggtreeExtra", quietly = TRUE) &&
+ requireNamespace("ggplot2", quietly = TRUE)) {
+  library(ggtreeExtra)
+  library(ggplot2)
 
-# Create gene expression data frame (long_format_HeatdataDeseq)
-long_format_HeatdataDeseq <- data.frame(
-  Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 5),
-  Genes = rep(paste0("Gene", 1:5), times = 4),
-  Value = runif(20, min = 0, max = 1)  # Randomly generate expression values between 0 and 1
-)
+  # Example data for gene expression, SSGSEA, and GSVA
+  file_path <- system.file("extdata", "p_tree_test.rds", package = "TransProR")
+  p <- readRDS(file_path)
 
-# Create SSGSEA analysis results data frame (ssgsea_kegg_HeatdataDeseq)
-ssgsea_kegg_HeatdataDeseq <- data.frame(
-  Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 3),
-  Genes = rep(c("Pathway1", "Pathway2", "Pathway3"), times = 4),
-  Value = runif(12, min = 0, max = 1)  # Randomly generate enrichment scores between 0 and 1
-)
+  # Create gene expression data frame (long_format_HeatdataDeseq)
+  long_format_HeatdataDeseq <- data.frame(
+    Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 5),
+    Genes = rep(paste0("Gene", 1:5), times = 4),
+    Value = runif(20, min = 0, max = 1)  # Randomly generate expression values between 0 and 1
+  )
 
-# Create GSVA analysis results data frame (gsva_kegg_HeatdataDeseq)
-gsva_kegg_HeatdataDeseq <- data.frame(
-  Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 4),
-  Genes = rep(c("PathwayA", "PathwayB", "PathwayC", "PathwayD"), times = 4),
-  Value = runif(16, min = 0, max = 1)  # Randomly generate enrichment scores between 0 and 1
-)
+  # Create SSGSEA analysis results data frame (ssgsea_kegg_HeatdataDeseq)
+  ssgsea_kegg_HeatdataDeseq <- data.frame(
+    Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 3),
+    Genes = rep(c("Pathway1", "Pathway2", "Pathway3"), times = 4),
+    Value = runif(12, min = 0, max = 1)  # Randomly generate enrichment scores between 0 and 1
+  )
 
-# Define gene and pathway colors (named vector), including all genes and pathways
-gene_colors <- c(
-  # Genes for gene expression
-  Gene1 = "#491588",
-  Gene2 = "#301b8d",
-  Gene3 = "#1a237a",
-  Gene4 = "#11479c",
-  Gene5 = "#0a5797",
-  # Pathways for SSGSEA
-  Pathway1 = "#0b5f63",
-  Pathway2 = "#074d41",
-  Pathway3 = "#1f5e27",
-  # Pathways for GSVA
-  PathwayA = "#366928",
-  PathwayB = "#827729",
-  PathwayC = "#a1d99b",
-  PathwayD = "#c7e9c0"
-)
+  # Create GSVA analysis results data frame (gsva_kegg_HeatdataDeseq)
+  gsva_kegg_HeatdataDeseq <- data.frame(
+    Sample = rep(c("Species_A", "Species_B", "Species_C", "Species_D"), each = 4),
+    Genes = rep(c("PathwayA", "PathwayB", "PathwayC", "PathwayD"), times = 4),
+    Value = runif(16, min = 0, max = 1)  # Randomly generate enrichment scores between 0 and 1
+  )
 
-# Call circos_fruits function to add multiple layers
-final_plot <- circos_fruits(
-  p,
-  long_format_HeatdataDeseq,
-  ssgsea_kegg_HeatdataDeseq,
-  gsva_kegg_HeatdataDeseq,
-  gene_colors
-)
+  # Define gene and pathway colors (named vector), including all genes and pathways
+  gene_colors <- c(
+    # Genes for gene expression
+    Gene1 = "#491588",
+    Gene2 = "#301b8d",
+    Gene3 = "#1a237a",
+    Gene4 = "#11479c",
+    Gene5 = "#0a5797",
+    # Pathways for SSGSEA
+    Pathway1 = "#0b5f63",
+    Pathway2 = "#074d41",
+    Pathway3 = "#1f5e27",
+    # Pathways for GSVA
+    PathwayA = "#366928",
+    PathwayB = "#827729",
+    PathwayC = "#a1d99b",
+    PathwayD = "#c7e9c0"
+  )
+
+  # Call circos_fruits function to add multiple layers
+  final_plot <- circos_fruits(
+    p,
+    long_format_HeatdataDeseq,
+    ssgsea_kegg_HeatdataDeseq,
+    gsva_kegg_HeatdataDeseq,
+    gene_colors
+  )
+} else {
+  message("Required packages 'ggtreeExtra' and 'ggplot2' are not installed.")
 }
+}
+
 }
