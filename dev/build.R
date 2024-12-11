@@ -11,6 +11,11 @@ devtools::document()
 devtools::check()
 
 
+#BiocManager::install("BiocCheck")
+#BiocCheck::BiocCheck()
+
+
+
 # Ensure that all dependencies are correctly installed, and generate the pak lock file.
 pak::pak()
 pak::pak("github::xiangpin/ggtreeExtra")
