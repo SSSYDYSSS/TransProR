@@ -12,15 +12,9 @@ Analysis and visualization of transcriptomic data are currently in progress. Fut
 
 You can install the released version of TransProR from CRAN with:
 
-## More examples see
-
-TransProR Manual：https://sssydysss.github.io/TransProRBook/
-
-
 ``` r
 install.packages("TransProR")
 ```
-
 You can install the development version of TransProR like so:
 
 ``` r
@@ -30,6 +24,9 @@ devtools::install_github("SSSYDYSSS/TransProR", build_vignettes = TRUE)
 install.packages("remotes")
 remotes::install_github("SSSYDYSSS/TransProR", build_vignettes = TRUE)
 ```
+## More examples see
+
+TransProR Manual：https://sssydysss.github.io/TransProRBook/
 
 ## System Requirements
 
