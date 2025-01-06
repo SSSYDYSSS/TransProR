@@ -48,9 +48,9 @@ jobs:
       # Manually install Bioconductor and other missing dependencies
       - name: Install dependencies
         run: |
-          if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
-          BiocManager::install()
-          remotes::install_deps(dependencies = TRUE)
+          Rscript -e "if (!requireNamespace('BiocManager', quietly = TRUE)) install.packages('BiocManager')"
+          Rscript -e "BiocManager::install()"
+          Rscript -e "remotes::install_deps(dependencies = TRUE)"
 
       # Run R CMD check
       - uses: r-lib/actions/check-r-package@v2
