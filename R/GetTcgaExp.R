@@ -18,8 +18,8 @@
 #' that the path includes specific identifiers related to the target samples, as the function will create further subdivisions in the specified
 #' path for tumor or normal tissues. Please structure the 'output_file_path' following this pattern: './your_directory/your_sample_type.exp.rds'.
 #'
-#' @importFrom data.table fread
 #' @importFrom dplyr distinct filter
+#' @importFrom utils read.table
 #' @importFrom rlang .data
 #' @export
 #' @author Dongyue Yu
@@ -41,14 +41,24 @@
 #' head(SKCM_exp[["tumor_tcga_data"]])[1:5, 1:5]
 #' head(SKCM_exp[["normal_tcga_data"]], n = 10) # Because there is only one column.
 get_tcga_exp <- function(counts_file_path,
-                         gene_probes_file_path,
-                         phenotype_file_path,
-                         output_file_path) {
+                          gene_probes_file_path,
+                          phenotype_file_path,
+                          output_file_path) {
   # Load expression matrix
-  count_data <- data.table::fread(counts_file_path, header = TRUE, sep = '\t', data.table = FALSE)
+  # count_data <- data.table::fread(counts_file_path, header = TRUE, sep = '\t', data.table = FALSE)
+  count_data <- utils::read.table(counts_file_path,
+                          header = TRUE,
+                          sep = '\t',
+                          stringsAsFactors = FALSE,
+                          check.names = FALSE)
 
   # Load gene ID conversion information
-  gene_probes <- data.table::fread(gene_probes_file_path, header = TRUE, sep = '\t', data.table = FALSE)
+  # gene_probes <- data.table::fread(gene_probes_file_path, header = TRUE, sep = '\t', data.table = FALSE)
+  gene_probes <- utils::read.table(gene_probes_file_path,
+                            header = TRUE,
+                            sep = '\t',
+                            stringsAsFactors = FALSE,
+                            check.names = FALSE)
 
   # Keep only necessary columns
   gene_probes <- gene_probes[, c(1, 2)]
@@ -64,7 +74,19 @@ get_tcga_exp <- function(counts_file_path,
   count_data_final <- count_data_unique[, -c(1,2)]  # Remove extra columns
 
   # Load clinical information
-  phenotype_data <- data.table::fread(phenotype_file_path, header = TRUE, sep = '\t', data.table = FALSE)
+  # phenotype_data <- data.table::fread(phenotype_file_path, header = TRUE, sep = '\t', data.table = FALSE)
+  # Load clinical information with proper column types
+  phenotype_data <- utils::read.table(phenotype_file_path,
+                              header = TRUE,
+                              sep = '\t',
+                              stringsAsFactors = FALSE,
+                              check.names = FALSE,
+                              colClasses = list(
+                                withdrawn = "logical",
+                                releasable.project = "logical",
+                                is_ffpe.samples = "logical",
+                                oct_embedded.samples = "logical"
+                              ))
   rownames(phenotype_data) <- phenotype_data$submitter_id.samples  # Set sample names as row names
 
 

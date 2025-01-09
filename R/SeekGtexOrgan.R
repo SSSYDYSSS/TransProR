@@ -6,19 +6,25 @@
 #' @param path The path to the GTEX phenotype data file. Default is "./download_data/GTEX_phenotype".
 #'
 #' @return A table representing the count of samples per primary site.
-#'
+#' @importFrom utils read.table
 #' @examples
 #' # Get the file path to the example data in the package
 #' path <- system.file("extdata", "GTEX_phenotype_test", package = "TransProR")
 #' # Call the `seek_gtex_organ` function with the path and print the result
 #' SeekGtexOrgan <- seek_gtex_organ(path = path)
 #'
-#' @importFrom data.table fread
 #' @export
 
 seek_gtex_organ <- function(path = "./download_data/GTEX_phenotype") {
   # Read GTEX phenotype data
-  gtex.phe <- data.table::fread(path, header = TRUE, sep = '\t', data.table = FALSE)
+  # gtex.phe <- data.table::fread(path, header = TRUE, sep = '\t', data.table = FALSE)
+
+  gtex.phe <- utils::read.table(path,
+                        header = TRUE,
+                        sep = '\t',
+                        stringsAsFactors = FALSE,
+                        check.names = FALSE)
+
   rownames(gtex.phe) <- gtex.phe$Sample
 
   # Rename columns

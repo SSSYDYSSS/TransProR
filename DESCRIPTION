@@ -9,12 +9,12 @@ Description: A tool for comprehensive transcriptomic data analysis, with a focus
 Imports: 
     magrittr,
     stats,
-    data.table,
     dplyr,
     rlang,
     tibble,
     sva,
     DESeq2,
+    utils,
     edgeR,
     limma,
     ggplot2,
