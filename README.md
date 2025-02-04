@@ -1,5 +1,5 @@
 # TransProR
-[![R-CMD-check](https://github.com/SSSYDYSSS/TransProR/workflows/R-CMD-check/badge.svg)](https://github.com/SSSYDYSSS/TransProR/actions) [![CRAN status](https://www.r-pkg.org/badges/version/TransProR)](https://CRAN.R-project.org/package=TransProR)
+[![R-CMD-check](https://github.com/SSSYDYSSS/TransProR/workflows/R-CMD-check/badge.svg)](https://github.com/SSSYDYSSS/TransProR/actions) 
 
 <!-- badges: start -->
 
@@ -10,11 +10,6 @@ Analysis and visualization of transcriptomic data are currently in progress. Fut
 
 ## Installation
 
-You can install the released version of TransProR from CRAN with:
-
-``` r
-install.packages("TransProR")
-```
 You can install the development version of TransProR like so:
 
 ``` r
