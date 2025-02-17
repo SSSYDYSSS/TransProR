@@ -10,21 +10,6 @@
 #' @param root Root name for the root node connections, optional
 #' @return A tibble of graph edges
 #' @export
-#' @examples
-#' # Example taxonomic hierarchy data frame
-#' OTU <- tibble::tibble(
-#'   p = c("Firmicutes", "Firmicutes", "Bacteroidetes", "Bacteroidetes", "Proteobacteria"),
-#'   c = c("Bacilli", "Clostridia", "Bacteroidia", "Bacteroidia", "Gammaproteobacteria"),
-#'   o = c("Lactobacillales", "Clostridiales", "Bacteroidales", "Bacteroidales", "Enterobacterales"),
-#'   abundance = c(100, 150, 200, 50, 300) # Abundance or some other metric
-#' )
-#'
-#' # Gathering graph edges by specifying hierarchical taxonomic levels
-#' edges <- gather_graph_edge(OTU, index = c("p", "c", "o"))
-#'
-#' # Adding a root node to the graph
-#' edges_with_root <- gather_graph_edge(OTU, index = c("p", "c", "o"), root = "Root")
-#'
 #' @importFrom dplyr mutate select group_by summarise bind_rows all_of across
 #' @importFrom tidyr unite
 #' @importFrom tibble as_tibble

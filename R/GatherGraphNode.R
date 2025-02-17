@@ -9,18 +9,6 @@
 #' @param value Column name used for summarizing node size, defaults to the last column
 #' @return a tibble of graph nodes
 #' @export
-#' @examples
-#' # Example taxonomic hierarchy data frame (OTU table)
-#' OTU <- tibble::tibble(
-#'   p = c("Firmicutes", "Firmicutes", "Bacteroidetes", "Bacteroidetes", "Proteobacteria"),
-#'   c = c("Bacilli", "Clostridia", "Bacteroidia", "Bacteroidia", "Gammaproteobacteria"),
-#'   o = c("Lactobacillales", "Clostridiales", "Bacteroidales", "Bacteroidales", "Enterobacterales"),
-#'   abundance = c(100, 150, 200, 50, 300) # Numeric values for node size
-#' )
-#'
-#' # Gathering graph nodes by specifying hierarchical taxonomic levels
-#' nodes <- gather_graph_node(OTU, index = c("p", "c", "o"))
-#'
 #' @importFrom dplyr group_by summarise mutate bind_rows n all_of across
 #' @importFrom tidyr unite
 #' @importFrom tibble as_tibble

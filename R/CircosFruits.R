@@ -5,7 +5,6 @@
 #' adjustments for alpha transparency based on the expression value.
 #'
 #' @importFrom ggplot2 aes scale_fill_manual scale_alpha_continuous guide_legend
-#' @importFrom ggtreeExtra geom_fruit
 #' @param p A ggtree plot object to which the data will be added.
 #' @param data A data frame containing gene expression data with columns for Samples, Genes, and Values.
 #' @param gene_colors A named vector of colors for genes.
@@ -86,7 +85,6 @@ create_base_plot <- function(p, data, gene_colors, gene_label="Gene") {
 #' It is primarily used to display statistical summaries of the data related to gene expressions or other metrics.
 #'
 #' @importFrom ggplot2 aes
-#' @importFrom ggtreeExtra geom_fruit
 #' @param p An existing ggtree plot object.
 #' @param data A data frame containing the data to be plotted. Expected to have columns for 'Sample' and 'value'.
 #' @param fill_color A character string specifying the fill color for the boxplots. Default is "#f28131".
@@ -164,7 +162,6 @@ add_boxplot <- function(p, data, fill_color="#f28131", alpha=0.6, offset=0.22, p
 #'
 #' @importFrom ggplot2 aes scale_fill_manual guide_legend
 #' @importFrom ggnewscale new_scale
-#' @importFrom ggtreeExtra geom_fruit
 #' @param p An existing ggtree plot object.
 #' @param data A data frame containing the data to be plotted. Expected to have columns for 'Sample', 'Gene', and 'value'.
 #' @param gene_colors A named vector of colors for genes.

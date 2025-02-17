@@ -20,23 +20,6 @@
 #'         Rows represent genes, and columns represent samples. Note that this function also saves the
 #'         organ-specific GTEx data as an RDS file at the specified output path.
 #'
-#' @examples
-#' counts_file <- system.file("extdata", "gtex_gene_expected_count_test", package = "TransProR")
-#' probe_map_file <- system.file("extdata",
-#'                               "gtex_probeMap_gencode.v23.annotation.gene.probemap_test",
-#'                               package = "TransProR")
-#' phenotype_file <- system.file("extdata", "GTEX_phenotype_test", package = "TransProR")
-#' ouput_file <- file.path(tempdir(), "skcm_gtex.rds")
-#'
-#' SKCM_gtex <- get_gtex_exp(
-#'   organ_specific = "Skin",
-#'   file_path = counts_file,
-#'   probe_map_path = probe_map_file,
-#'   pheno_path = phenotype_file,
-#'   output_path = ouput_file
-#' )
-#' head(SKCM_gtex[1:3, 1:3])
-#'
 #' @note The function will stop and throw an error if the input files do not exist, or if no samples are found
 #'       for the specified organ.
 #'

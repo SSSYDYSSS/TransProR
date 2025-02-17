@@ -38,16 +38,3 @@ However, since 'ggraph' caused frequent GitHub Action errors during the creation
 the author directly referenced the involved functions in 'TransProR'.
 This is not the author's original creation. All users please be aware!
 }
-\examples{
-# Example taxonomic hierarchy data frame (OTU table)
-OTU <- tibble::tibble(
-  p = c("Firmicutes", "Firmicutes", "Bacteroidetes", "Bacteroidetes", "Proteobacteria"),
-  c = c("Bacilli", "Clostridia", "Bacteroidia", "Bacteroidia", "Gammaproteobacteria"),
-  o = c("Lactobacillales", "Clostridiales", "Bacteroidales", "Bacteroidales", "Enterobacterales"),
-  abundance = c(100, 150, 200, 50, 300) # Numeric values for node size
-)
-
-# Gathering graph nodes by specifying hierarchical taxonomic levels
-nodes <- gather_graph_node(OTU, index = c("p", "c", "o"))
-
-}

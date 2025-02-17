@@ -1,7 +1,7 @@
 Package: TransProR
 Type: Package
 Title: Analysis and Visualization of Multi-Omics Data
-Version: 1.0.1
+Version: 1.0.3
 Authors@R: person("Dongyue", "Yu",     email = "yudongyue@mail.nankai.edu.cn", role = c("aut", "cre", "cph"),
             comment = c(ORCID = "0000-0002-7041-2073"))
 Maintainer: Dongyue Yu <yudongyue@mail.nankai.edu.cn>
@@ -31,7 +31,6 @@ Imports:
     geomtextpath,
     ggalt,
     ggnewscale,
-    ggtreeExtra,
     Hmisc,
     circlize,
     graphics,
@@ -41,6 +40,7 @@ Imports:
 Suggests:
     prettydoc,
     knitr,
+    ggtreeExtra,
     rmarkdown
 VignetteBuilder: knitr
 License: MIT + file LICENSE
