@@ -265,6 +265,11 @@ spiral_newrle <- function(x, samples, values, colors, labels = FALSE) {
 #' enrichment_spiral_plots(results)
 #'
 enrichment_spiral_plots <- function(results) {
+  
+  if (!requireNamespace("systemfonts", quietly = TRUE)) {
+    stop("ggplot2 is required to use the function. Please install it.", call. = FALSE)
+  }
+
   # Calculate the total value for setting the x-axis range
   n <- sum(results$Value)
 

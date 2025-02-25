@@ -37,6 +37,10 @@ highlight_genes <- function(ggtree_obj, genes_to_highlight, hilight_extend = 18)
     stop("The second argument must be a data frame.")
   }
 
+  if (!requireNamespace("systemfonts", quietly = TRUE)) {
+    stop("ggplot2 is required to use the function. Please install it.", call. = FALSE)
+  }
+
   # Extract the data from the tree object and ensure it is a data frame
   tree_data <- as.data.frame(ggtree_obj$data)
 

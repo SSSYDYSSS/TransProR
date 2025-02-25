@@ -1,5 +1,6 @@
 # TransProR
-[![R-CMD-check](https://github.com/SSSYDYSSS/TransProR/workflows/R-CMD-check/badge.svg)](https://github.com/SSSYDYSSS/TransProR/actions) 
+[![R-CMD-check](https://github.com/SSSYDYSSS/TransProR/workflows/R-CMD-check/badge.svg)](https://github.com/SSSYDYSSS/TransProR/actions) [![CRAN status](https://www.r-pkg.org/badges/version/TransProR)](https://cran.r-project.org/package=TransProR)
+
 
 <!-- badges: start -->
 

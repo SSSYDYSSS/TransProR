@@ -45,6 +45,10 @@ highlight_by_node <- function(ggtree_object,
     stop("Length of nodes, fill_colors, alpha_values, and extend_values must be the same.")
   }
 
+  if (!requireNamespace("systemfonts", quietly = TRUE)) {
+    stop("ggplot2 is required to use the function. Please install it.", call. = FALSE)
+  }
+
   # For each node, add the corresponding geom_hilight layer
   layers <- lapply(seq_along(nodes), function(i) {
     node <- nodes[i]
