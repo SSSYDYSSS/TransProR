@@ -36,11 +36,18 @@ This is a basic example which shows you how to solve a common problem:
 library(TransProR)
 ## basic example code
 ```
+
 ## Citation
 
-Yu Dongyue (2023). TransProR: Analysis and visualization of transcriptomic data are currently in progress. Future directions include multi-modal fusion, sparse learning, and the investigation of spatio-temporal effects.
-<https://github.com/SSSYDYSSS/TransProR>, 
-<https://sssydysss.github.io/TransProRBook/>.
+If you use TransPro in your research, please cite:
+
+Dongyue Yu; Chen Li; Shuo Yan; Lujiale Guo; Jingyu Liang; Shengquan Chen*; Wenjun Bu* (2026). Comparative Evaluation of Differential Gene Selection Methods in Transcriptomics: Bias Correction and Visualization with TransPro. Manuscript in preparation.
+
+**Correspondence:**  
+
+Shengquan Chen — School of Mathematical Sciences and LPMC, Nankai University, Tianjin 300071, China. 
+
+Wenjun Bu — Institute of Entomology, College of Life Sciences, Nankai University, Tianjin 300071, China.
 
 
 ## Code of Conduct
